@@ -1,0 +1,548 @@
+{% if request.host contains "suscripcion.vogue.es" %}
+<style>
+    /* Fonts */
+    @font-face {
+    font-family: 'VogueAvantGarde-Heavy';
+    src: url({{ 'VogueAvantGarde-Heavy.eot' | asset_url }});
+    src: url({{ 'VogueAvantGarde-Heavy.eot?#iefix' | asset_url }}) format('embedded-opentype'),
+        url({{ 'VogueAvantGarde-Heavy.woff2' | asset_url }}) format('woff2'),
+        url({{ 'VogueAvantGarde-Heavy.woff' | asset_url }}) format('woff'),
+        url({{ 'VogueAvantGarde-Heavy.ttf' | asset_url }}) format('truetype'),
+        url({{ 'VogueAvantGarde-Heavy.svg#VogueAvantGarde-Heavy' | asset_url }}) format('svg');
+    font-weight: normal;
+    font-style: normal;
+    font-display: swap;
+    }
+
+    @font-face {
+        font-family: 'VogueAvantGarde-DemiBold';
+        src: url({{ 'VogueAvantGarde-DemiBold.eot' | asset_url }});
+        src: url({{ 'VogueAvantGarde-DemiBold.eot?#iefix' | asset_url }}) format('embedded-opentype'),
+            url({{ 'VogueAvantGarde-DemiBold.woff2' | asset_url }}) format('woff2'),
+            url({{ 'VogueAvantGarde-DemiBold.woff' | asset_url }}) format('woff'),
+            url({{ 'VogueAvantGarde-DemiBold.ttf' | asset_url }}) format('truetype'),
+            url({{ 'VogueAvantGarde-DemiBold.svg#VogueAvantGarde-DemiBold' | asset_url }}) format('svg');
+        font-weight: normal;
+        font-style: normal;
+        font-display: swap;
+    }
+
+    @font-face {
+        font-family: 'VogueAvantGarde-ExtraLight';
+        src: url({{ 'VogueAvantGarde-ExtraLight.eot' | asset_url }});
+        src: url({{ 'VogueAvantGarde-ExtraLight.eot?#iefix' | asset_url }}) format('embedded-opentype'),
+            url({{ 'VogueAvantGarde-ExtraLight.woff2' | asset_url }}) format('woff2'),
+            url({{ 'VogueAvantGarde-ExtraLight.woff' | asset_url }}) format('woff'),
+            url({{ 'VogueAvantGarde-ExtraLight.ttf' | asset_url }}) format('truetype'),
+            url({{ 'VogueAvantGarde-ExtraLight.svg#VogueAvantGarde-ExtraLight' | asset_url }}) format('svg');
+        font-weight: normal;
+        font-style: normal;
+        font-display: swap;
+    }
+
+    @font-face {
+        font-family: 'VogueAvantGarde-Light';
+        src: url({{ 'VogueAvantGarde-Light.eot' | asset_url }});
+        src: url({{ 'VogueAvantGarde-Light.eot?#iefix' | asset_url }}) format('embedded-opentype'),
+            url({{ 'VogueAvantGarde-Light.woff2' | asset_url }}) format('woff2'),
+            url({{ 'VogueAvantGarde-Light.woff' | asset_url }}) format('woff'),
+            url({{ 'VogueAvantGarde-Light.ttf' | asset_url }}) format('truetype'),
+            url({{ 'VogueAvantGarde-Light.svg#VogueAvantGarde-Light' | asset_url }}) format('svg');
+        font-weight: normal;
+        font-style: normal;
+        font-display: swap;
+    }
+
+    @font-face {
+        font-family: 'VogueAvantGarde-Book';
+        src: url({{ 'VogueAvantGarde-Book.eot' | asset_url }});
+        src: url({{ 'VogueAvantGarde-Book.eot?#iefix' | asset_url }}) format('embedded-opentype'),
+            url({{ 'VogueAvantGarde-Book.woff2' | asset_url }}) format('woff2'),
+            url({{ 'VogueAvantGarde-Book.woff' | asset_url }}) format('woff'),
+            url({{ 'VogueAvantGarde-Book.ttf' | asset_url }}) format('truetype'),
+            url({{ 'VogueAvantGarde-Book.svg#VogueAvantGarde-Book' | asset_url }}) format('svg');
+        font-weight: normal;
+        font-style: normal;
+        font-display: swap;
+    }
+
+    @font-face {
+        font-family: 'VogueAvantGarde-Bold';
+        src: url({{ 'VogueAvantGarde-Bold.eot' | asset_url }});
+        src: url({{ 'VogueAvantGarde-Bold.eot?#iefix' | asset_url }}) format('embedded-opentype'),
+            url({{ 'VogueAvantGarde-Bold.woff2' | asset_url }}) format('woff2'),
+            url({{ 'VogueAvantGarde-Bold.woff' | asset_url }}) format('woff'),
+            url({{ 'VogueAvantGarde-Bold.ttf' | asset_url }}) format('truetype'),
+            url({{ 'VogueAvantGarde-Bold.svg#VogueAvantGarde-Bold' | asset_url }}) format('svg');
+        font-weight: normal;
+        font-style: normal;
+        font-display: swap;
+    }
+
+    @font-face {
+        font-family: 'VogueAvantGarde-Medium';
+        src: url({{ 'VogueAvantGarde-Medium.eot' | asset_url }});
+        src: url({{ 'VogueAvantGarde-Medium.eot?#iefix' | asset_url }}) format('embedded-opentype'),
+            url({{ 'VogueAvantGarde-Medium.woff2' | asset_url }}) format('woff2'),
+            url({{ 'VogueAvantGarde-Medium.woff' | asset_url }}) format('woff'),
+            url({{ 'VogueAvantGarde-Medium.ttf' | asset_url }}) format('truetype'),
+            url({{ 'VogueAvantGarde-Medium.svg#VogueAvantGarde-Medium' | asset_url }}) format('svg');
+        font-weight: normal;
+        font-style: normal;
+        font-display: swap;
+    }
+
+    @font-face {
+        font-family: 'VogueAvantGarde-ExtraBold';
+        src: url({{ 'VogueAvantGarde-ExtraBold.eot' | asset_url }});
+        src: url({{ 'VogueAvantGarde-ExtraBold.eot?#iefix' | asset_url }}) format('embedded-opentype'),
+            url({{ 'VogueAvantGarde-ExtraBold.woff2' | asset_url }}) format('woff2'),
+            url({{ 'VogueAvantGarde-ExtraBold.woff' | asset_url }}) format('woff'),
+            url({{ 'VogueAvantGarde-ExtraBold.ttf' | asset_url }}) format('truetype'),
+            url({{ 'VogueAvantGarde-ExtraBold.svg#VogueAvantGarde-ExtraBold' | asset_url }}) format('svg');
+        font-weight: normal;
+        font-style: normal;
+        font-display: swap;
+    }
+
+    @font-face {
+        font-family: 'VogueAvantGarde-Black';
+        src: url({{ 'VogueAvantGarde-Black.eot' | asset_url }});
+        src: url({{ 'VogueAvantGarde-Black.eot?#iefix' | asset_url }}) format('embedded-opentype'),
+            url({{ 'VogueAvantGarde-Black.woff2' | asset_url }}) format('woff2'),
+            url({{ 'VogueAvantGarde-Black.woff' | asset_url }}) format('woff'),
+            url({{ 'VogueAvantGarde-Black.ttf' | asset_url }}) format('truetype'),
+            url({{ 'VogueAvantGarde-Black.svg#VogueAvantGarde-Black' | asset_url }}) format('svg');
+        font-weight: normal;
+        font-style: normal;
+        font-display: swap;
+    }
+
+    @font-face {
+        font-family: 'chamberiblack';
+        src: url({{ 'chamberi-black-webfont.woff2' | asset_url }}) format('woff2'),
+            url({{ 'chamberi-black-webfont.woff' | asset_url }}) format('woff');
+        font-weight: normal;
+        font-style: normal;
+
+    }
+
+    @font-face {
+        font-family: 'chamberibold';
+        src: url({{ 'chamberi-bold-webfont.woff2' | asset_url }}) format('woff2'),
+            url({{ 'chamberi-bold-webfont.woff' | asset_url }}) format('woff');
+        font-weight: normal;
+        font-style: normal;
+
+    }
+
+    @font-face {
+        font-family: 'chamberibold_display';
+        src: url({{ 'chamberi-bolddisplay-webfont.woff2' | asset_url }}) format('woff2'),
+            url({{ 'chamberi-bolddisplay-webfont.woff' | asset_url }}) format('woff');
+        font-weight: normal;
+        font-style: normal;
+
+    }
+
+    @font-face {
+        font-family: 'chamberiextralight';
+        src: url({{ 'chamberi-extralight-webfont.woff2' | asset_url }}) format('woff2'),
+            url({{ 'chamberi-extralight-webfont.woff' | asset_url }}) format('woff');
+        font-weight: normal;
+        font-style: normal;
+
+    }
+
+    @font-face {
+        font-family: 'chamberiregular';
+        src: url({{ 'chamberi-regular-webfont.woff2' | asset_url }}) format('woff2'),
+            url({{ 'chamberi-regular-webfont.woff' | asset_url }}) format('woff');
+        font-weight: normal;
+        font-style: normal;
+
+    }
+
+    :root {
+        --font-heading-family: 'VogueAvantGarde-Bold', {{ settings.type_header_font.fallback_families }};
+        --font-body-family: 'VogueAvantGarde-Medium', {{ settings.type_body_font.fallback_families }}
+    }
+
+    .header__icons * {
+        font-family: 'VogueAvantGarde-Medium'!important;
+    }
+
+    .magazines__gift-cards--heading,
+    .magazines__plans--heading,
+    .magazines__confirmation--heading,
+    .section__heading,
+    .recipient-checkbox  {
+        font-family: 'VogueAvantGarde-Light'!important;
+    }
+
+    .magazines__text {
+        font-family: 'VogueAvantGarde-Light'!important;
+    }
+
+    .button__gift { 
+        font-family: 'VogueAvantGarde-Light'!important;
+    }
+
+    b {
+        font-family: 'VogueAvantGarde-Bold';
+    }
+
+    .button, button {
+        font-family: 'VogueAvantGarde-Light'!important;
+    }
+
+    .footer-block * {
+        font-family: 'VogueAvantGarde-Light', {{ settings.type_body_font.family }}, {{ settings.type_body_font.fallback_families }}
+    }
+</style>
+{% elsif request.host contains "suscripcion.revistagq.com" %}
+<style>
+    /* Fonts */
+    @font-face {
+        font-family: 'GQ Sans Light';
+        src: url({{ 'GQSans-Light.woff2' | asset_url }}) format('woff2'),
+            url({{ 'GQSans-Light.woff' | asset_url }}) format('woff');
+        font-weight: 300;
+        font-style: normal;
+        font-display: swap;
+    }
+
+    @font-face {
+        font-family: 'GQ Sans Bold';
+        src: url({{ 'GQSans-Bold.woff2' | asset_url }}) format('woff2'),
+            url({{ 'GQSans-Bold.woff' | asset_url }}) format('woff');
+        font-weight: bold;
+        font-style: normal;
+        font-display: swap;
+    }
+
+    @font-face {
+        font-family: 'GQ Sans Thin';
+        src: url({{ 'GQSans-Thin.woff2' | asset_url }}) format('woff2'),
+            url({{ 'GQSans-Thin.woff' | asset_url }}) format('woff');
+        font-weight: 100;
+        font-style: normal;
+        font-display: swap;
+    }
+
+    @font-face {
+        font-family: 'GQ Sans Medium';
+        src: url({{ 'GQSans-Medium.woff2' | asset_url }}) format('woff2'),
+            url({{ 'GQSans-Medium.woff' | asset_url }}) format('woff');
+        font-weight: 500;
+        font-style: normal;
+        font-display: swap;
+    }
+
+    :root {
+        --font-heading-family: 'GQ Sans Thin', {{ settings.type_header_font.fallback_families }};
+        --font-body-family: 'GQ Sans Thin', {{ settings.type_body_font.fallback_families }}
+    }
+
+    .header__icons * {
+        font-family: 'GQ Sans'!important;
+    }
+
+    .magazines__gift-cards--heading,
+    .magazines__plans--heading,
+    .magazines__confirmation--heading,
+    .section__heading,
+    .recipient-checkbox  {
+        font-family: 'GQ Sans Bold'!important;
+    }
+
+    .magazines__text {
+        font-family: 'GQ Sans Thin'!important;
+    }
+
+    .button__gift { 
+        font-family: 'GQ Sans Thin'!important;
+    }
+
+    b {
+        font-family: 'GQ Sans Bold';
+    }
+
+    .button, button {
+        font-family: 'GQ Sans Medium'!important;
+    }
+
+    .footer-block * {
+        font-family: {{ settings.type_body_font.family }}, {{ settings.type_body_font.fallback_families }}
+    }
+
+</style>
+{% elsif request.host contains "suscripcion.revistaad.es" %}
+<style>
+    /* Fonts */
+
+    @font-face {
+        font-family: 'Lato-Regular';
+        src: url({{ 'Lato-Regular.eot' | asset_url }});
+        src: url({{ 'Lato-Regular.eot?#iefix' | asset_url }}) format('embedded-opentype'),
+            url({{ 'Lato-Regular.woff2' | asset_url }}) format('woff2'),
+            url({{ 'Lato-Regular.woff' | asset_url }}) format('woff'),
+            url({{ 'Lato-Regular.ttf' | asset_url }}) format('truetype'),
+            url({{ 'Lato-Regular.svg#Lato-Regular' | asset_url }}) format('svg');
+        font-weight: normal;
+        font-style: normal;
+        font-display: swap;
+    }
+    
+    @font-face {
+        font-family: 'Platform Regular';
+        src: url({{ 'Platform-Regular.woff2' | asset_url }}) format('woff2'),
+            url({{ 'Platform-Regular.woff' | asset_url }}) format('woff');
+        font-weight: normal;
+        font-style: normal;
+        font-display: swap;
+    }
+    
+    @font-face {
+        font-family: 'Platform LightItalic';
+        src: url({{ 'Platform-LightItalic.woff2' | asset_url }}) format('woff2'),
+            url({{ 'Platform-LightItalic.woff' | asset_url }}) format('woff');
+        font-weight: 300;
+        font-style: italic;
+        font-display: swap;
+    }
+    
+    @font-face {
+        font-family: 'Platform Light';
+        src: url({{ 'Platform-Light.woff2' | asset_url }}) format('woff2'),
+            url({{ 'Platform-Light.woff' | asset_url }}) format('woff');
+        font-weight: 300;
+        font-style: normal;
+        font-display: swap;
+    }
+    
+    @font-face {
+        font-family: 'Platform Bold';
+        src: url({{ 'Platform-Bold.woff2' | asset_url }}) format('woff2'),
+            url({{ 'Platform-Bold.woff' | asset_url }}) format('woff');
+        font-weight: bold;
+        font-style: normal;
+        font-display: swap;
+    }
+
+    @font-face {
+        font-family: 'SangBleu OG Sans Bold';
+        src: url({{ 'SangBleuOGSans-Bold.woff2' | asset_url }}) format('woff2'),
+            url({{ 'SangBleuOGSans-Bold.woff' | asset_url }}) format('woff');
+        font-weight: bold;
+        font-style: normal;
+        font-display: swap;
+    }
+    
+    @font-face {
+        font-family: 'SangBleu OG Sans Light';
+        src: url({{ 'SangBleuOGSans-Light.woff2' | asset_url }}) format('woff2'),
+            url({{ 'SangBleuOGSans-Light.woff' | asset_url }}) format('woff');
+        font-weight: 300;
+        font-style: normal;
+        font-display: swap;
+    }
+    
+    
+    
+
+    :root {
+        --font-heading-family: 'Lato-Regular', {{ settings.type_header_font.fallback_families }};
+        --font-body-family: 'Lato-Regular', {{ settings.type_body_font.fallback_families }}
+    }
+
+    .header__icons * {
+        font-family: 'Lato-Regular'!important;
+    }
+
+    .magazines__gift-cards--heading,
+    .magazines__plans--heading,
+    .magazines__confirmation--heading, 
+    .section__heading,
+    .recipient-checkbox  {
+        font-family: 'Lato-Regular'!important;
+    }
+
+    .magazines__text {
+        font-family: 'Lato-Regular'!important;
+    }
+
+    .button__gift { 
+        font-family: 'Lato-Regular'!important;
+    }
+
+    b {
+        font-family: 'Lato-Regular';
+    }
+
+    .button, button {
+        font-family: 'Lato-Regular'!important;
+    }
+
+    .footer-block * {
+        font-family: 'Lato-Regular', {{ settings.type_body_font.family }}, {{ settings.type_body_font.fallback_families }}
+    }
+
+</style>
+{% elsif request.host contains "suscripcion.revistavanityfair.es" %}
+<style>
+    /* Fonts */
+    @font-face {
+        font-family: 'VFSans Bold';
+        src: url({{ 'VFSans-Bold.woff2' | asset_url }}) format('woff2'),
+            url({{ 'VFSans-Bold.woff' | asset_url }}) format('woff');
+        font-weight: bold;
+        font-style: normal;
+        font-display: swap;
+    }
+    
+    @font-face {
+        font-family: 'VFSans ExtraLight';
+        src: url({{ 'VFSans-ExtraLight.woff2' | asset_url }}) format('woff2'),
+            url({{ 'VFSans-ExtraLight.woff' | asset_url }}) format('woff');
+        font-weight: 200;
+        font-style: normal;
+        font-display: swap;
+    }
+    
+    @font-face {
+        font-family: 'VFSans Light';
+        src: url({{ 'VFSans-Light.woff2' | asset_url }}) format('woff2'),
+            url({{ 'VFSans-Light.woff' | asset_url }}) format('woff');
+        font-weight: 300;
+        font-style: normal;
+        font-display: swap;
+    }
+    
+    @font-face {
+        font-family: 'VFSans Medium';
+        src: url({{ 'VFSans-Medium.woff2' | asset_url }}) format('woff2'),
+            url({{ 'VFSans-Medium.woff' | asset_url }}) format('woff');
+        font-weight: 500;
+        font-style: normal;
+        font-display: swap;
+    }
+        
+
+    :root {
+        --font-heading-family: 'VFSans Bold', {{ settings.type_header_font.fallback_families }};
+        --font-body-family: 'VFSans Medium', {{ settings.type_body_font.fallback_families }}
+    }
+
+    .header__icons * {
+        font-family: 'VFSans Light'!important;
+    }
+
+    .magazines__gift-cards--heading,
+    .magazines__plans--heading,
+    .magazines__confirmation--heading, 
+    .section__heading,
+    .recipient-checkbox  {
+        font-family: 'VFSans Bold'!important;
+    }
+
+    .button {
+        padding: 8px 4px 4px!important;
+    }
+
+    .magazines__plan--header {
+        padding: 10px 10px 5px!important;
+    }
+
+    .magazines__text {
+        font-family: 'VFSans Bold'!important;
+    }
+
+    .button__gift { 
+        font-family: 'VFSans ExtraLight'!important;
+    }
+
+    b {
+        font-family: 'VFSans Bold';
+    }
+
+    .button, button {
+        font-family: 'VFSans Light'!important;
+    }
+
+    .footer-block * {
+        font-family: {{ settings.type_body_font.family }}, {{ settings.type_body_font.fallback_families }}
+    }
+
+</style>
+{% elsif request.host contains "suscripcion.traveler.es" %}
+<style>
+    /* Fonts */
+    @font-face {
+        font-family: 'Canela Medium';
+        src: url({{ 'Canela-Medium.woff2' | asset_url }}) format('woff2'),
+            url({{ 'Canela-Medium.woff' | asset_url }}) format('woff');
+        font-weight: 500;
+        font-style: normal;
+        font-display: swap;
+    }
+    
+    @font-face {
+        font-family: 'Canela Light';
+        src: url({{ 'Canela-Light.woff2' | asset_url }}) format('woff2'),
+            url({{ 'Canela-Light.woff' | asset_url }}) format('woff');
+        font-weight: 300;
+        font-style: normal;
+        font-display: swap;
+    }
+    
+    @font-face {
+        font-family: 'Canela Bold';
+        src: url({{ 'Canela-Bold.woff2' | asset_url }}) format('woff2'),
+            url({{ 'Canela-Bold.woff' | asset_url }}) format('woff');
+        font-weight: bold;
+        font-style: normal;
+        font-display: swap;
+    }
+    
+     
+
+    :root {
+        --font-heading-family: 'Canela Bold', {{ settings.type_header_font.fallback_families }};
+        --font-body-family: 'Canela Medium', {{ settings.type_body_font.fallback_families }}
+    }
+
+    .header__icons * {
+        font-family: 'Canela Light'!important;
+    }
+
+    .magazines__gift-cards--heading,
+    .magazines__plans--heading,
+    .magazines__confirmation--heading, 
+    .section__heading,
+    .recipient-checkbox  {
+        font-family: 'Canela Bold'!important;
+    }
+
+    .magazines__text {
+        font-family: 'Canela Bold'!important;
+    }
+
+    .button__gift { 
+        font-family: 'Canela Light'!important;
+    }
+
+    b {
+        font-family: 'Canela Bold';
+    }
+
+    .button, button {
+        font-family: 'Canela Medium'!important;
+    }
+
+    .footer-block * {
+        font-family: {{ settings.type_body_font.family }}, {{ settings.type_body_font.fallback_families }}
+    }
+
+</style>
+{% endif %}   

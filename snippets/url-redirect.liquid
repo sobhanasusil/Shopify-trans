@@ -1,0 +1,126 @@
+{% comment %}
+  <script>
+      function normalizeUrl(url) {
+          return url.endsWith('/') ? url.slice(0, -1) : url;
+      }
+
+      function getParameterByName(name, url = window.location.href) {
+          name = name.replace(/[\[\]]/g, '\\$&');
+          var regex = new RegExp('[?&]' + name + '(=([^&#]*)|&|#|$)'),
+              results = regex.exec(url);
+          if (!results) return null;
+          if (!results[2]) return '';
+          return decodeURIComponent(results[2].replace(/\+/g, ' '));
+      }
+
+      console.log(normalizeUrl(document.referrer));
+      console.log("redirect");
+      // Only run the script if on the homepage
+      if (window.location.pathname === '/' || window.location.pathname === '/cart' ) {
+          const referrer = normalizeUrl(document.referrer);
+          const currentUrl = normalizeUrl(window.location.href);
+
+          const referrerMap = {
+              "https://suscripcion.vogue.es": "https://suscripcion.vogue.es",
+              "https://suscripcion.revistaad.es": "https://suscripcion.revistaad.es",
+              "https://suscripcion.revistagq.com": "https://suscripcion.revistagq.com",
+              "https://suscripcion.traveler.es": "https://suscripcion.traveler.es",
+              "https://suscripcion.vanity-fair.es": "https://suscripcion.vanity-fair.es"
+          };
+
+          for (let key in referrerMap) {
+              if (referrer.startsWith(key) && currentUrl !== referrerMap[key]) {
+                  window.location.href = referrerMap[key];
+                  break;
+              }
+          }
+      } else if (getParameterByName('checkout_url')) {
+          const currentBaseUrl = new URL(window.location.href).origin;
+          let redirectUrl = '';
+
+          const referrerMap = {
+              "https://suscripcion.vogue.es": "https://suscripcion.vogue.es",
+              "https://suscripcion.revistaad.es": "https://suscripcion.revistaad.es",
+              "https://suscripcion.revistagq.com": "https://suscripcion.revistagq.com",
+              "https://suscripcion.traveler.es": "https://suscripcion.traveler.es",
+              "https://suscripcion.vanity-fair.es": "https://suscripcion.vanity-fair.es"
+          };
+
+          for (let key in referrerMap) {
+              if (currentBaseUrl === new URL(key).origin) {
+                  redirectUrl = referrerMap[key] + '/account/login';
+                  break;
+              }
+          }
+
+          if (redirectUrl) {
+              window.location.href = redirectUrl;
+          }
+      }
+  </script>
+{% endcomment %}
+
+<script>
+  function normalizeUrl(url) {
+    return url.endsWith('/') ? url.slice(0, -1) : url;
+  }
+
+  function getParameterByName(name, url = window.location.href) {
+    name = name.replace(/[\[\]]/g, '\\$&');
+    var regex = new RegExp('[?&]' + name + '(=([^&#]*)|&|#|$)'),
+      results = regex.exec(url);
+    if (!results) return null;
+    if (!results[2]) return '';
+    return decodeURIComponent(results[2].replace(/\+/g, ' '));
+  }
+
+  // console.log(normalizeUrl(document.referrer));
+  // console.log("redirect");
+  // Only run the script if on the homepage
+  if (window.location.pathname === '/' || window.location.pathname === '/cart') {
+    const referrer = normalizeUrl(document.referrer);
+    const currentUrl = normalizeUrl(window.location.href);
+    const currentDomain = new URL(currentUrl).hostname;
+
+    const referrerMap = {
+      'https://suscripcion.vogue.es': 'https://suscripcion.vogue.es',
+      'https://suscripcion.revistaad.es': 'https://suscripcion.revistaad.es',
+      'https://suscripcion.revistagq.com': 'https://suscripcion.revistagq.com',
+      'https://suscripcion.traveler.es': 'https://suscripcion.traveler.es',
+      'https://suscripcion.revistavanityfair.es': 'https://suscripcion.revistavanityfair.es',
+    };
+
+    for (let key in referrerMap) {
+      if (referrer.startsWith(key) && currentUrl !== referrerMap[key]) {
+        const referrerDomain = new URL(key).hostname;
+        // Check if the referrer and current domains are the same
+        if (referrerDomain === currentDomain) {
+          window.location.href = referrerMap[key];
+        }
+        break;
+      }
+    }
+  } else if (getParameterByName('checkout_url')) {
+    const currentBaseUrl = new URL(window.location.href).origin;
+    let redirectUrl = '';
+
+    const referrerMap = {
+      'https://suscripcion.vogue.es': 'https://suscripcion.vogue.es',
+      'https://suscripcion.revistaad.es': 'https://suscripcion.revistaad.es',
+      'https://suscripcion.revistagq.com': 'https://suscripcion.revistagq.com',
+      'https://suscripcion.traveler.es': 'https://suscripcion.traveler.es',
+      'https://suscripcion.revistavanityfair.es': 'https://suscripcion.revistavanityfair.es',
+    };
+
+    for (let key in referrerMap) {
+      if (currentBaseUrl === new URL(key).origin) {
+        redirectUrl = referrerMap[key] + '/account/login';
+        break;
+      }
+    }
+
+    if (redirectUrl) {
+      window.location.href = redirectUrl;
+    }
+  }
+</script>

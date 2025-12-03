@@ -1,0 +1,2079 @@
+{% capture content %}
+{{ 'section-magazine.css' | asset_url | stylesheet_tag }}
+
+{%- style -%}
+  .section-{{ section.id }}-padding {
+    padding-top: {{ section.settings.padding_top | times: 0.75 | round: 0 }}px;
+    padding-bottom: {{ section.settings.padding_bottom | times: 0.75 | round: 0 }}px;
+  }
+
+  @media screen and (min-width: 750px) {
+    .section-{{ section.id }}-padding {
+      padding-top: {{ section.settings.padding_top }}px;
+      padding-bottom: {{ section.settings.padding_bottom }}px;
+    }
+  }
+{%- endstyle -%}
+
+{% if section.settings.image %}
+<div class="responsive-banner">
+  <picture>
+      <!-- For devices with a viewport width of 768px and up -->
+      <source media="(min-width: 750px)" srcset="{{ section.settings.image | img_url: '2048x' }}" loading="lazy" alt="{{ section.settings.image.alt }}">
+      
+      <!-- For devices with a viewport width below 768px -->
+      <img width="1500" height="auto" src="{{ section.settings.image_mobile | img_url: '1500x' }}" loading="lazy" alt="{{ section.settings.image_mobile.alt }}">
+  </picture>
+</div>
+{% endif %}
+
+<div class="isolate{% unless section.settings.full_width %} page-width{% endunless %}">
+  <div class="rich-text content-container color-{{ section.settings.color_scheme }} gradient{% if section.settings.full_width %} rich-text--full-width content-container--full-width{% endif %} section-{{ section.id }}-padding">
+    <div class="rich-text__wrapper rich-text__wrapper--{{ section.settings.desktop_content_position }}{% if section.settings.full_width %} page-width{% endif %}">
+      <div class="rich-text__blocks {{ section.settings.content_alignment }}">
+        {%- for block in section.blocks -%}
+          {%- case block.type -%}
+            {%- when 'heading' -%}
+              <h1
+                class="magazines__heading rte inline-richtext {{ block.settings.heading_size }}{% if settings.animations_reveal_on_scroll %} scroll-trigger animate--slide-in{% endif %}"
+                {{ block.shopify_attributes }}
+                {% if settings.animations_reveal_on_scroll %}
+                  data-cascade
+                  style="--animation-order: {{ forloop.index }};"
+                {% endif %}
+              >
+                {{ block.settings.heading }}
+              </h1>
+              <div
+                class="rich-text__text magazines__text rte{% if settings.animations_reveal_on_scroll %} scroll-trigger animate--slide-in{% endif %}"
+                {{ block.shopify_attributes }}
+                {% if settings.animations_reveal_on_scroll %}
+                  data-cascade
+                  style="--animation-order: {{ forloop.index }};"
+                {% endif %}
+              >
+                {{ block.settings.text }}
+              </div>
+            {%- when 'caption' -%}
+              
+            {%- when 'text' -%}
+              
+            {%- when 'button' -%}
+              <div
+                class="rich-text__buttons{% if block.settings.button_label != blank and block.settings.button_label_2 != blank %} rich-text__buttons--multiple{% endif %}{% if settings.animations_reveal_on_scroll %} scroll-trigger animate--slide-in{% endif %}"
+                {{ block.shopify_attributes }}
+                {% if settings.animations_reveal_on_scroll %}
+                  data-cascade
+                  style="--animation-order: {{ forloop.index }};"
+                {% endif %}
+              >
+                {%- if block.settings.button_label != blank -%}
+                  <a
+                    {% if block.settings.button_link == blank %}
+                      role="link" aria-disabled="true"
+                    {% else %}
+                      href="{{ block.settings.button_link }}"
+                    {% endif %}
+                    class="button{% if block.settings.button_style_secondary %} button--secondary{% else %} button--primary{% endif %}"
+                  >
+                    {{- block.settings.button_label | escape -}}
+                  </a>
+                {%- endif -%}
+                {%- if block.settings.button_label_2 != blank -%}
+                  <a
+                    {% if block.settings.button_link_2 == blank %}
+                      role="link" aria-disabled="true"
+                    {% else %}
+                      href="{{ block.settings.button_link_2 }}"
+                    {% endif %}
+                    class="button{% if block.settings.button_style_secondary_2 %} button--secondary{% else %} button--primary{% endif %}"
+                  >
+                    {{- block.settings.button_label_2 | escape -}}
+                  </a>
+                {%- endif -%}
+              </div>
+          {%- endcase -%}
+        {%- endfor -%}
+        <div class="magazines__gift-cards magazines__gift-cards--selector">
+          <div
+            class="rich-text__buttons scroll-trigger"
+          >
+              
+              <a
+                data-id="magazines__gift-cards--list"
+                href="{{ block.settings.button_link_2 }}"
+                class="button__gift"
+              >
+                <span class="button__gift-circle"></span>
+                <span>Es un regalo</span>
+                <?xml version="1.0"?><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><defs><style>.a{fill:none;stroke:#000;stroke-linecap:round;stroke-linejoin:round;stroke-width:1.5px;}</style></defs><title>gift-box</title><path class="a" d="M21.75,11.25H2.25v10.5a1.5,1.5,0,0,0,1.5,1.5h16.5a1.5,1.5,0,0,0,1.5-1.5Z"></path><path class="a" d="M21.75,6.75H2.25a1.5,1.5,0,0,0-1.5,1.5V10.5a.75.75,0,0,0,.75.75h21a.75.75,0,0,0,.75-.75V8.25A1.5,1.5,0,0,0,21.75,6.75Z"></path><path class="a" d="M11.25,6.75c-3.314,0-6.75-2.686-6.75-6"></path><path class="a" d="M4.5.75c3.314,0,6.75,2.686,6.75,6"></path><path class="a" d="M12.75,6.75c3.314,0,6.75-2.686,6.75-6"></path><path class="a" d="M19.5.75c-3.314,0-6.75,2.686-6.75,6"></path><rect class="a" x="9.75" y="6.75" width="4.5" height="16.5"></rect></svg>
+              </a>
+          </div>
+        </div>
+        <div id="magazines__gift-cards--list" class="magazines__gift-cards magazines__gift-cards--list" style="display: none;">
+          <hr>
+          <h2
+            class="magazines__gift-cards--heading rte inline-richtext h2 scroll-trigger"
+          >
+            Selecciona tu tarjeta regalo
+          </h2>
+          <!-- Slider main container -->
+          <div class="swiper gift-cards-swiper">
+            <!-- Additional required wrapper -->
+            <div class="swiper-wrapper">
+              {% for product in section.settings.collection_gift_cards.products %}
+              <!-- Slides -->
+              <div class="swiper-slide">
+                <a class="magazines__gift-card--item button-buy--gift-card"
+                  data-title="{{ product.title | split: " - " | last }}"
+                  data-variant-id="{{ product.first_available_variant.id }}"
+                  data-price="{{ product.price | money }}"
+                  href="#"
+                  data-dl-product-name="{{ product.title }}" 
+                  data-dl-product-id="{{ product.id }}" 
+                  data-dl-product-price="{{ product.price | money_without_currency | replace: ",", "." }}" 
+                  data-dl-product-brand="{{ product.vendor }}" 
+                  data-dl-product-variant="{{ product.title }}"
+                  data-dl-product-category="{{ product.type }}"
+                >
+                    <div class="magazines__gift-card--image">
+                      <img src="{{ product.featured_image | img_url: '500x' }}" alt="{{ product.featured_image.alt }}">
+                    </div>
+                        
+                  <div
+                    class="button button--secondary button-buy--gift-card-text full-unstyled-link"
+                  >
+                    Seleccionar
+                  </div>
+                </a>
+              </div>
+              {% endfor %}
+            </div>
+
+            <!-- If we need pagination -->
+            <div class="gift-cards-swiper-pagination"></div>
+
+          </div>
+          
+          
+        </div>
+        <div id="magazines__location" class="magazines__location" style="display: block;">
+          <h2
+            class="magazines__gift-cards--heading section__heading rte inline-richtext h2 scroll-trigger"
+          >
+            Localización
+          </h2>
+          <div
+            class="rich-text__buttons rich-text__buttons--multiple scroll-trigger"
+          >
+              <a
+                data-id="plans-national"
+                href="#"
+                class="button {% if localization.market.handle == "es"%}button--primary{% else %}button--secondary{% endif %} select-market active"
+              >
+                España
+              </a>
+
+              <a
+                data-id="plans-international"
+                href="#"
+                class="button {% if localization.market.handle != "es"%}button--primary{% else %}button--secondary{% endif %} select-market"
+              >
+                Internacional
+              </a>
+
+          </div>
+        </div>
+        <div id="magazines__plans" class="magazines__plans" style="display: block;">
+          <hr>
+          <h2
+            class="magazines__plans--heading section__heading rte inline-richtext h2 scroll-trigger"
+          >
+            Elige tu plan de suscripción
+          </h2>
+
+            <!-- Slider main container -->
+            <div id="plans-national" class="swiper plans-swiper  plans-count-{{ section.settings.collection.products.count }} active">
+              <!-- Additional required wrapper -->
+              <div class="swiper-wrapper">
+                <!-- Slides -->
+                
+                {% for product in section.settings.collection.products %}
+                  {% assign caption = "" %}
+                  {% if product.metafields.custom.metatag != blank %}
+                    {% assign caption = product.title | split: " - " | last %}
+                  {% else %}
+                    {% if product.metafields.custom.subheading != blank %}
+                      {% assign caption = product.metafields.custom.subheading %}
+                    {% endif %}
+                  {% endif %}
+
+                  <div class="swiper-slide">
+                    <div class="magazines__plan {% if product.metafields.custom.selected_local %}active{% endif %}">
+                      <div class="magazines__plan--header">{% if product.metafields.custom.metatag != blank %}{{ product.metafields.custom.metatag }}{% else %}{{ product.title | split: " - " | last }}{% endif %}</div>
+                      <div class="magazines__plan--content">
+                        {% if caption != blank %}
+                        <p class="magazines__plan--caption">{{ caption }}</p>
+                        {% endif %}
+                        <h3 {% if caption == blank %}style="margin-top: 0;"{% endif %}  class="magazines__plan--heading rte inline-richtext h3">{{ product.metafields.custom.featured }}</h3>
+                        <p class="magazines__plan--payment">{{ product.metafields.custom.payment }}</p>
+                        <a 
+                          {% if product.selected_or_first_available_selling_plan_allocation %}
+                            {% comment %} 
+                              {% if product.metafields.custom.monthly == true %}
+                                data-selling-plan="{{ product.selected_or_first_available_selling_plan_allocation.selling_plan.id }}" data-price="{{ product.price | times: 12 | money }}"
+                              {% else %}
+                                data-selling-plan="{{ product.selected_or_first_available_selling_plan_allocation.selling_plan.id }}" data-price="{{ product.price | money }}" 
+                              {% endif %} 
+                            {% endcomment %}
+                            data-selling-plan="{{ product.selected_or_first_available_selling_plan_allocation.selling_plan.id }}" data-price="{{ product.price | money }}"        
+                          {% else %}
+                            data-price="{{ product.price | money }}"
+                          {% endif %} 
+                            data-frequency="{{ product.metafields.custom.frequency }}"
+                            data-requires-selling-plan="{{ product.requires_selling_plan }}"
+                              data-monthly="{{ product.metafields.custom.monthly }}" 
+                            {% if product.metafields.custom.e_bono %}data-e-bono="{{ product.metafields.custom.e_bono }}"{% endif %}
+                            data-id="{{ product.id }}" 
+                            data-variant-id="{{ product.first_available_variant.id }}"  
+                            data-title="{{ product.title | split: " - " | last }}" 
+                            href="" 
+                            class="magazines__plan--button button" 
+                            data-dl-product-name="{{ product.title }}" 
+                            data-dl-product-id="{{ product.id }}" 
+                            data-dl-product-price="{{ product.price | money_without_currency | replace: ",", "." }}" 
+                            data-dl-product-brand="{{ product.vendor }}" 
+                            data-dl-product-variant="{{ product.title }}" 
+                            data-dl-product-category="{{ product.type }}" >
+                            {% if product.metafields.custom.selected_local %}
+                              Seleccionado
+                            {% else %}
+                              Seleccionar
+                            {% endif %}
+                            </a>
+                        <div class="magazines__plan--features">
+                          {{ product.description }}
+                        </div>
+                      </div>
+                      <div class="magazines__plan-bottom">
+                        <div class="magazines__plan--image">
+                          <img src="{{ product.featured_image | img_url: '200x' }}" alt="{{ product.featured_image.alt }}">
+                        </div>
+                        {% if product.metafields.custom.footer != blank %}<div class="magazines__plan--header magazines__plan--footer">{{ product.metafields.custom.footer }}</div>{% endif %}
+                      </div>
+                    </div>
+                  </div>
+                {% endfor %}
+              </div>
+
+              <!-- If we need pagination -->
+              <div class="plans-swiper-pagination"></div>
+
+            </div>
+
+            <!-- Slider main container -->
+            
+            {% assign international_count = 0 %}
+            {% for product in section.settings.collection.products %}
+              {% if product.metafields.custom.international %}
+                {% assign international_count = international_count | plus: 1 %}
+              {% endif %}
+            {% endfor %}
+            
+            <div id="plans-international" class="swiper plans-swiper plans-count-{{ international_count }} plans-swiper-international">
+              <!-- Additional required wrapper -->
+              <div class="swiper-wrapper">
+                <!-- Slides -->
+                
+                {% for product in section.settings.collection.products %}
+                  {% if product.metafields.custom.international %}
+                  {% assign caption = "" %}
+                  {% if product.metafields.custom.international_metatag != blank %}
+                    {% assign caption = product.title | split: " - " | last %}
+                  {% else %}
+                    {% if product.metafields.custom.international_subheading != blank %}
+                      {% assign caption = product.metafields.custom.international_subheading %}
+                    {% endif %}
+                  {% endif %}
+
+                  <div class="swiper-slide">
+                    <div class="magazines__plan {% if forloop.index == preselect %}active{% endif %}">
+                      <div class="magazines__plan--header">{% if product.metafields.custom.international_metatag != blank %}{{ product.metafields.custom.international_metatag }}{% else %}{{ product.title | split: " - " | last }}{% endif %}</div>
+                      <div class="magazines__plan--content">
+                        {% if caption != blank %}
+                        <p class="magazines__plan--caption">{{ caption }}</p>
+                        {% endif %}
+                        <h3 {% if caption == blank %}style="margin-top: 0;"{% endif %}  class="magazines__plan--heading rte inline-richtext h3">{{ product.metafields.custom.international_featured }}</h3>
+                        <p class="magazines__plan--payment">{{ product.metafields.custom.international_payment }}</p>
+                        <a 
+                          {% if product.selected_or_first_available_selling_plan_allocation %}
+                            {% comment %} {% if product.metafields.custom.monthly == true %}
+                              data-selling-plan="{{ product.selected_or_first_available_selling_plan_allocation.selling_plan.id }}" data-price="{{ product.price | times: 12 | money }}"
+                            {% else %}
+                              data-selling-plan="{{ product.selected_or_first_available_selling_plan_allocation.selling_plan.id }}" data-price="{{ product.price | money }}"
+                            {% endif %} {% endcomment %}
+                            data-selling-plan="{{ product.selected_or_first_available_selling_plan_allocation.selling_plan.id }}" data-price="{{ product.price | money }}"                          
+                          {% else %}
+                            data-price="{{ product.price | money }}"
+                          {% endif %} 
+                            data-frequency="{{ product.metafields.custom.frequency }}"
+                            data-requires-selling-plan="{{ product.requires_selling_plan }}"
+                              data-monthly="{{ product.metafields.custom.monthly }}" 
+                            data-id="{{ product.id }}" 
+                            data-variant-id="{{ product.first_available_variant.id }}"  
+                            data-title="{{ product.title | split: " - " | last }}" 
+                            href="" 
+                            class="magazines__plan--button button"
+                            data-dl-product-name="{{ product.title }}" 
+                            data-dl-product-id="{{ product.id }}" 
+                            data-dl-product-price="{{ product.price | money_without_currency | replace: ",", "." }}" 
+                            data-dl-product-brand="{{ product.vendor }}" 
+                            data-dl-product-variant="{{ product.title }}" 
+                            data-dl-product-category="{{ product.type }}" >
+                            {% if product.metafields.custom.selected_international %}
+                              Seleccionado
+                            {% else %}
+                              Seleccionar
+                            {% endif %}
+                            </a>
+                        <div class="magazines__plan--features">
+                          {{ product.metafields.custom.international_description | metafield_tag }}
+                        </div>
+                      </div>
+                      <div class="magazines__plan-bottom">
+                        <div class="magazines__plan--image">
+                          <img src="{{ product.featured_image | img_url: '200x' }}" alt="{{ product.featured_image.alt }}">
+                        </div>
+                        {% if product.metafields.custom.international_footer != blank %}<div class="magazines__plan--header magazines__plan--footer">{{ product.metafields.custom.international_footer }}</div>{% endif %}
+                      </div>
+                    </div>
+                  </div>
+                  {% endif %}
+                {% endfor %}
+              </div>
+
+              <!-- If we need pagination -->
+              <div class="plans-swiper-pagination"></div>
+
+            </div>
+
+            {% comment %} <div class="flex-container magazines__plans--container">
+              <div class="flex-item">
+                <div class="magazines__plan">
+                  <div class="magazines__plan--header">SUSCRIPCION ANUAL HOME DELIVERY</div>
+                  <div class="magazines__plan--content">
+                    {% comment %} <p class="magazines__plan--caption">SUSCRIPCION ANUAL E-BONO</p> {% endcomment %}
+                    <h3 class="magazines__plan--heading rte inline-richtext h3">Suscripción Mensual</h3>
+                    <p class="magazines__plan--payment">(84€ en modalidad pago mensual)</p>
+                    <a href="" class="button">Seleccionar</a>
+                    <ul class="magazines__plan--features">
+                      <li><b>Comodidad</b>: Recibe cada mes la edición impresa en la dirección que elijas.</li>
+                      <li><b>Ahorro</b>: Disfruta de un 10% de descuento al efectuar el pago único.</li>
+                      <li><b>Welcome Gift</b>: Consigue un regalo de bienvenida con tu suscripción. <span class="small">(gastos de envío no incluídos)</span>.</li>
+                    </ul>
+                    <div class="magazines__plan--image">
+                      <img src="https://cdn.shopify.com/s/files/1/0771/2387/9194/files/Portada_Vogue_411_Junio_Copy.png?v=1687516372" alt="">
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="flex-item">
+                <div class="magazines__plan">
+                  <div class="magazines__plan--header">RECOMENDADO</div>
+                  <div class="magazines__plan--content">
+                    <p class="magazines__plan--caption">SUSCRIPCION ANUAL E-BONO</p>
+                    <h3 class="magazines__plan--heading rte inline-richtext h3">1 año por 60€</h3>
+                    <p class="magazines__plan--payment">(Pago único, 66 € en modalidad pago mensual)</p>
+                    <a href="" class="button">Seleccionar</a>
+                    <ul class="magazines__plan--features">
+                      <li><b>Donde y cuando quieras</b>: Recoge tu revista en tu quiosco o punto de venta habitual.</li>
+                      <li>Disfruta de todos los regalos y extras que lleve la revista.</li>
+                      <li><b>Ahorro</b>: Disfruta de un 10 % de descuento al efectuar el pago único.</li>
+                    </ul>
+                    <div class="magazines__plan--image">
+                      <img src="https://cdn.shopify.com/s/files/1/0771/2387/9194/files/Portada_Vogue_411_Junio_Copy.png?v=1687516372" alt="">
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="flex-item">
+                <div class="magazines__plan">
+                  <div class="magazines__plan--header">REVISTA DEL MES</div>
+                  <div class="magazines__plan--content">
+                    {% comment %} <p class="magazines__plan--caption">SUSCRIPCION ANUAL E-BONO</p> {% endcomment %}
+                    <h3 class="magazines__plan--heading rte inline-richtext h3">10€</h3>
+                    <p class="magazines__plan--payment">(Pago único por el ejemplar)</p>
+                    <a href="" class="button">Seleccionar</a>
+                    <ul class="magazines__plan--features">
+                      <li>Consigue aquí el ejemplar del mes en curso.</li>
+                      <li>Si no encuentras o te quedaste sin el ejemplar del mes de Vogue, aquí lo puedes adquirir.</li>
+                    </ul>
+                    <div class="magazines__plan--image">
+                      <img src="https://cdn.shopify.com/s/files/1/0771/2387/9194/files/Portada_Vogue_411_Junio_Copy.png?v=1687516372" alt="">
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div> {% endcomment %}
+        </div>
+        <div id="magazines__welcome-gifts" class="magazines__welcome-gifts" style="display: none;">
+          <hr>
+          <h2
+            class="magazines__welcome-gifts--heading section__heading rte inline-richtext h2 scroll-trigger"
+          >
+            Selecciona welcome gift
+          </h2>
+          <!-- Slider main container -->
+          <div class="swiper gifts-swiper">
+          </div>
+        </div>
+
+  {% assign show_stores = false %}
+  {% assign show_stores_default = false %}
+  {% for product in section.settings.collection.products %}
+    {% if product.metafields.custom.e_bono and product.metafields.custom.selected_local %}
+      {% assign show_stores = true %}
+      {% assign show_stores_default = true %}
+      {% break %}
+    {% elsif product.metafields.custom.e_bono %}
+      {% assign show_stores = true %}
+      {% break %}
+    {% endif %}
+  {% endfor %}
+    {% if show_stores == true %}
+    <div id="magazines__store-locator" class="magazines__store-locator">
+<a href="#" id="open-locator" class="button button--secondary button--locator{% if show_stores_default %} show{% endif %}">Consulta el quiosco más cercano</a>
+
+  <div class="ebono-container" id="cabecera">
+    <div id="formulario">
+    <form id="formData">
+      <input id="tipo" type="hidden" name="tipo" value="0">
+      <div class="customer">
+        <div class="recipient-fields">
+          <div class="recipient-fields__field">
+            <div class="field">
+              <input
+                class="field__input"
+                id="valor"
+                type="text"
+                placeholder="Teclee cód.postal..."
+                name="valor"
+              >
+              <label class="field__label" for="valor">
+                <span class="recipient-email-label required">Cod.postal</span>
+              </label>
+            </div>
+          </div>
+        </div>
+      </div>
+    <div>
+    {% comment %} <label for="tipo">Tipo de búsqueda</label><select name="tipo" id="tipo">
+    <option value="0">Cód. postal</option>
+    <option value="1">Dirección</option>
+    </select><label for="valor">Valor</label> 
+    <input type="text" name="valor" id="valor" placeholder="Teclee cód.postal..." size="45">  {% endcomment %}
+    <button type="submit" id="boton" class="button button--primary">Buscar</button>
+    </div>
+    </form>
+  </div>
+    <!-- div en el que se cargará el iframe con el mapa -->
+  <div id="listado"></div>
+    <script type="text/javascript" charset="utf-8">// <![CDATA[
+            document.addEventListener('DOMContentLoaded', function() {
+    
+                const form = document.querySelector("#formData");
+                const valor = form.querySelector("#valor");
+                const tipo = form.querySelector("#tipo");
+                const listado = document.querySelector("#listado");
+    
+                function validateForm() {
+                    const valorLength = valor.value.length;
+                    if (tipo.value == "0") {
+                        return valorLength === 5;
+                    } else {
+                        return valorLength >= 1 && valorLength <= 125;
+                    }
+                }
+    
+                form.addEventListener('submit', function(e) {
+                    e.preventDefault();
+    
+                    if (!validateForm()) {
+                        alert("Invalid input");
+                        return;
+                    }
+    
+                    const pTipo = tipo.value;
+                    const pValor = valor.value;
+    
+                    if( pTipo === '0' ) {
+                        listado.innerHTML = '<div class="responsive-iframe-container"><iframe scrolling="no" src="https://servicios.gpress.renr.es/manager/localizadorapiv3/mapabonos.jsp?cp=' + pValor + '&mostrar=on&h=500&w=500"></iframe></div>';
+                    } else {
+                        listado.innerHTML = '<div class="responsive-iframe-container"><iframe scrolling="no" src="https://servicios.gpress.renr.es/manager/localizadorapiv3/mapabonos.jsp?cp=' + pValor + '&mostrar=on&h=500&w=500"></iframe></div>';
+                    }
+                });
+    
+                tipo.addEventListener('change', function() {
+                    if (this.value === "0") {
+                        valor.setAttribute("placeholder", "Teclee cód. postal...");
+                    } else if (this.value === "1") {
+                        valor.setAttribute("placeholder", "Teclee dirección...");
+                    }
+                });
+    
+            });
+        
+    // ]]></script>
+          </div>
+        </div>
+        {% endif %}
+
+        <div id="magazines__confirmation" class="magazines__confirmation" style="display: block;">
+          {% comment %} <form class="checkout-form" action="/cart/add" method="post"> {% endcomment %}
+          {% for product in section.settings.collection.products %}
+            {% if product.metafields.custom.selected_local %}
+              {%- assign product_form_id = 'product-form-' | append: section.id -%}
+          {%- form 'product',
+            product,
+            id: product_form_id,
+            class: 'form checkout-form',
+            data-type: 'add-to-cart-form'
+          -%}
+          {% render 'gift-card-recipient-form-home', product: product, form: form, section: section %}
+               
+          <h2
+            class="magazines__confirmation--heading section__heading rte inline-richtext h2 scroll-trigger"
+          >
+            {{ 'general.subscription.confirmation' | t }}
+          </h2>
+            <div class="magazines__confirmation--summary">
+              
+                <div class="magazines__confirmation--summary-info">
+                  <div class="magazines__confirmation--summary-product">
+                    <p>{{ product.title | split: " - " | last }}</p>
+                    <p class="renewal--yearly {% if product.requires_selling_plan %}{% if product.metafields.custom.monthly != true %}active{% endif %}{% endif %}">{{ 'general.subscription.renewal' | t }}</p>
+                    <p class="renewal--monthly {% if product.requires_selling_plan %} {% if product.metafields.custom.monthly == true %}active{% endif %}{% endif %}">{{ 'general.subscription.renewal_monthly' | t }}</p>
+                  </div>
+                  <div class="magazines__confirmation--summary-features">
+                    {{ product.description }}
+                  </div>
+                  
+                  <p class="magazines__confirmation--summary-frequency">{{ product.metafields.custom.frequency }}</p>
+                  
+                </div>
+                <div class="magazines__confirmation--summary-price">
+                  {% if product.selected_or_first_available_selling_plan_allocation %}
+                    {% comment %} {% if product.metafields.custom.monthly == true %}
+                      <p>{{ product.price | times: 12 | money }}</p>
+                    {% else %}
+                      <p>{{ product.price | money }}</p>
+                    {% endif %} {% endcomment %}
+                    <p>{{ product.price | money }}</p>
+                  {% else %}
+                  <p>{{ product.price | money }}</p>
+                  {% endif %}
+                </div>
+            </div> 
+            <div class="magazines__confirmation--disclaimer active">
+              <p>{{ 'general.subscription.title' | t }}</p>
+              <p class="disclaimer--yearly {% if product.metafields.custom.monthly != true %}active{% endif %}">{{ 'general.subscription.text' | t }}</p>
+              <p class="disclaimer--monthly {% if product.metafields.custom.monthly == true %}active{% endif %}">{{ 'general.subscription.text_mensual' | t }}</p>
+            </div>
+            
+              <div class="terms-checkbox">
+                <div class="custom-checkbox">
+                  <input type="checkbox" id="termsCheckbox" required/>
+                  <label for="termsCheckbox">
+                    {{ 'general.subscription.terms_html' | t }}
+                  </label>
+                </div>      
+              </div>  
+              <input type="hidden" name="return_to" value="checkout">
+              <input class="product-input" type="hidden" name="items[0]quantity" value="1">
+              <input class="product-input" type="hidden" name="items[0]id" value="{{ product.first_available_variant.id }}" 
+                data-dl-product-name="{{ product.title }}" 
+                data-dl-product-id="{{ product.id }}" 
+                data-dl-product-price="{{ product.price | money_without_currency | replace: ",", "." }}" 
+                data-dl-product-brand="{{ product.vendor }}" 
+                data-dl-product-variant="{{ product.title }}" 
+                data-dl-product-category="{{ product.type }}" >
+              {% if product.selected_or_first_available_selling_plan_allocation %}
+                <input class="product-input" type="hidden" name="items[0]selling_plan" value="{{ product.selected_or_first_available_selling_plan_allocation.selling_plan.id }}">
+              {% endif%}
+
+              <!-- Add to Cart Button -->
+              <input type="submit" class="button button--primary button--checkout" value="Confirmar">
+
+              <!-- Placeholder for the error message -->
+                <div id="giftMessage" style="color: red; display: none; margin-top: 10px;">
+                    <small>Selecciona tu regalo</small>
+                </div> 
+          
+          {% comment %} </form> {% endcomment %}
+        {% endform %}
+
+
+      {% endif %}
+    {% endfor %}
+        </div>
+        <div id="magazines__back" class="magazines__back">
+          <a id="scrollTop" href="#" class="button button--secondary">         
+            <span>{{ 'general.subscription.back' | t }}</span>
+          </a> 
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+{% if localization.market.handle == "es"%}
+
+  {% assign index_mobile = 1 %}
+  {% if section.settings.collection.products.count < 3 %}
+    {% assign index_mobile = 0 %}
+  {% endif %}
+
+  {% assign slides_desktop = 3 %}
+
+  {% if section.settings.collection.products.count == 1 %}
+    {% assign slides_desktop = 1 %}
+  {% endif %}
+
+  {% assign center_slides_desktop = false %}
+
+   {% if section.settings.collection.products.count == 1 %}
+    {% assign center_slides_desktop = true %}
+  {% endif %}
+
+  <script>
+    const plansSwiper = new Swiper('#plans-national', { 
+      // Optional parameters
+      direction: 'horizontal',
+      loop: false,
+      slidesPerView: "auto",
+      spaceBetween: 25,
+      initialSlide: {{ index_mobile }},
+      centeredSlides: true,
+      breakpoints: {
+          1010: {
+              slidesPerView: {{ slides_desktop }}, 
+              spaceBetween: 50,
+              initialSlide: 1,
+              centeredSlides: {{ center_slides_desktop }},
+              centerInsufficientSlides: true
+          }
+      },
+      // If we need pagination
+      pagination: {
+        el: '.plans-swiper-pagination',
+        clickable: true
+      },
+    });
+
+    const plansInternationalSwiper = new Swiper('#plans-international', { 
+      // Optional parameters
+      direction: 'horizontal',
+      loop: false,
+      slidesPerView: 1,
+      spaceBetween: 25,
+      initialSlide: 1,
+      centeredSlides: true,
+      breakpoints: {
+          1010: {
+              slidesPerView:1, 
+              spaceBetween: 50,
+              initialSlide: 1,
+              centeredSlides: true,
+          }
+      },
+      // If we need pagination
+      pagination: {
+        el: '.plans-swiper-pagination',
+        clickable: true
+      },
+    }); 
+  </script>
+{% else %}
+
+  {% assign slides_desktop = 3 %}
+
+  {% if section.settings.collection.products.count == 1 %}
+    {% assign slides_desktop = 1 %}
+  {% endif %}
+
+  {% assign center_slides_desktop = false %}
+
+   {% if section.settings.collection.products.count == 1 %}
+    {% assign center_slides_desktop = true %}
+  {% endif %}
+  <script>
+    const plansSwiper = new Swiper('#plans-national', { 
+      // Optional parameters
+      direction: 'horizontal',
+      loop: false,
+      slidesPerView: 1,
+      spaceBetween: 25,
+      initialSlide: 1,
+      centeredSlides: true,
+      breakpoints: {
+          1010: {
+              slidesPerView:3, 
+              spaceBetween: 50,
+              initialSlide: 1,
+              centeredSlides: true,
+          }
+      },
+      // If we need pagination
+      pagination: {
+        el: '.plans-swiper-pagination',
+        clickable: true
+      },
+    }); 
+
+    const plansInternationalSwiper = new Swiper('#plans-international', { 
+      // Optional parameters
+      direction: 'horizontal',
+      loop: false,
+      slidesPerView: 1,
+      spaceBetween: 25,
+      initialSlide: 1,
+      centeredSlides: true,
+      breakpoints: {
+          1010: {
+              slidesPerView:1, 
+              spaceBetween: 50,
+              initialSlide: 1,
+              centeredSlides: true,
+          }
+      },
+      // If we need pagination
+      pagination: {
+        el: '.plans-swiper-pagination',
+        clickable: true
+      },
+    }); 
+  </script>
+{% endif %}
+
+<script>
+// Assuming giftCards is a list of all '.button-buy--gift-card' elements
+let giftCards = document.querySelectorAll('.button-buy--gift-card');
+
+// Removing 'active' class from all gift cards
+giftCards.forEach(function(giftCard) {
+  let buttonTextElement = giftCard.querySelector('.button-buy--gift-card-text');
+  if (buttonTextElement) {
+      buttonTextElement.innerText = 'seleccionar';
+  }
+});
+
+// Adding click event listener
+let giftCardForm = document.querySelector('.gift-card-recipient-form-home');
+
+giftCards.forEach(function(giftCard) {
+    giftCard.addEventListener('click', function(event) {
+        event.preventDefault();
+        
+        // Remove 'active' class from all other cards and set their text to 'seleccionar'
+        giftCards.forEach(function(otherCard) {
+            let otherButtonTextElement = otherCard.querySelector('.button-buy--gift-card-text');
+            if (otherButtonTextElement) {
+                otherButtonTextElement.innerText = 'seleccionar';
+            }
+        });
+
+         // Change the text of the clicked card's .button-buy--gift-card-text
+         let buttonTextElement = giftCard.querySelector('.button-buy--gift-card-text');
+         if (buttonTextElement) {
+             buttonTextElement.innerText = 'seleccionado';
+         }
+
+        // Add 'active' class to .gift-card-recipient-form-home
+        giftCardForm.classList.add('active');
+    });
+});
+
+// Gift cards form
+document.querySelector('.button__gift').addEventListener('click', function() {
+  // var inputs = document.querySelectorAll('.recipient-form input');
+  // for (var i = 0; i < inputs.length; i++) {
+  //     inputs[i].value = '';
+  // }
+  if (!this.classList.contains('active')) {
+    dataLayer.push({ ecommerce: null });  // Clear the previous ecommerce object.
+    dataLayer.push({
+      'event': 'product-impression',
+      'ecommerce': {
+        'currencyCode': 'EUR',
+        'impressions': [{% for product in section.settings.collection_gift_cards.products %}{
+          'name': "{{ product.title }}",
+          'id': "{{ product.id }}",
+          'price': "{{ product.price | money_without_currency | replace: ",", "." }}", // Assuming giftsData has a price attribute
+          'brand': "{{ product.vendor }}", // Update this as needed
+          'category': "{{ product.type }}", // Update this as needed
+          'variant': "{{ product.title }}",
+          'list': "Homepage",
+          'position': "{{ forloop.index }}"
+        }{% unless forloop.last%},{% endunless %}{% endfor %}]
+      }
+    });
+  }
+
+  var openLocator = document.querySelector("#open-locator");
+  var ebonoContainer = document.querySelector(".ebono-container");
+  var listado = document.querySelector("#listado");
+  var valor = document.querySelector("#valor");
+
+  if (openLocator && openLocator.classList) {
+    openLocator.classList.remove('show');
+  }
+  if (ebonoContainer && ebonoContainer.classList) {
+  ebonoContainer.classList.remove('active'); // Remove active class from .ebono-container
+  }
+  if (listado) {
+    listado.innerHTML = ""; // Empty the content of #listado
+  }
+  if (valor) {
+    valor.value = ""; // Reset the value of #valor input
+  }
+  if (openLocator) {
+    openLocator.textContent = "Consulta el quiosco más cercano";
+  }
+
+  // Select all elements with the class .magazines__plan
+  var magazinesPlanItems = document.querySelectorAll('.magazines__plan');
+
+  // Loop through all selected elements
+  for (var i = 0; i < magazinesPlanItems.length; i++) {
+      // Remove the active class from each element
+      magazinesPlanItems[i].classList.remove('active');
+  }
+
+  // Finding .magazines__plan--button and changing its text to 'seleccionar'
+  var magazineButtons = document.querySelectorAll('.magazines__plan--button');
+  magazineButtons.forEach(function(button) {
+      button.innerText = 'seleccionar';
+  });
+
+  // Remove 'active' class to .gift-card-recipient-form-home
+  // First, select the element
+  let elem = document.querySelector('.gift-card-recipient-form-home');
+
+  // Then, toggle the 'active' class
+  elem.classList.toggle('active');
+
+  // First, select the checkbox
+  let checkbox = document.querySelector('input[name="items[0]properties[__shopify_send_gift_card_to_recipient]"]');
+
+  // Then, change the checked state
+  checkbox.checked = false; // Change this to true for checked, false for unchecked
+
+  // After that, create a new 'change' event
+  let event = new Event('change', {
+      bubbles: true,
+      cancelable: true
+  });
+
+  // Finally, dispatch the event
+  checkbox.dispatchEvent(event);
+});
+</script>
+
+<script>
+  // Change market 
+  document.addEventListener('DOMContentLoaded', function() {
+    const selectMarketButtons = document.querySelectorAll('.select-market');
+    var openLocator = document.querySelector("#open-locator");
+
+    selectMarketButtons.forEach((button) => {
+        button.addEventListener('click', function(event) {
+            event.preventDefault();
+
+            if (openLocator && openLocator.classList) {
+              openLocator.classList.remove('show');
+            }
+
+            var sectionWelcomeGifts = document.querySelector('#magazines__welcome-gifts');
+            sectionWelcomeGifts.style.display = 'none';
+
+            // Reset all buttons to secondary
+            selectMarketButtons.forEach((btn) => {
+                btn.classList.remove('button--primary');
+                btn.classList.remove('active');
+                btn.classList.add('button--secondary');
+            });
+
+            var confirmation = document.querySelector('#magazines__confirmation');
+            confirmation.style.display = 'none';
+
+            // Set the clicked button to primary
+            this.classList.add('button--primary');
+            this.classList.remove('button--secondary');
+            this.classList.add('active');
+
+            // Remove active from all .plans-swiper items
+            const plansSwiperItems = document.querySelectorAll('.plans-swiper');
+            plansSwiperItems.forEach((item) => {
+                item.classList.remove('active');
+            });
+
+            // Add active class to the element with id equal to the data-id of clicked element
+            const dataId = this.dataset.id;
+            const targetElement = document.getElementById(dataId);
+            if(targetElement) {
+                targetElement.classList.add('active');
+            }
+
+            // Remove active from all .magazines__plan
+            const magazinePlans = document.querySelectorAll('.magazines__plan');
+            magazinePlans.forEach((plan) => {
+                plan.classList.remove('active');
+            });
+
+            // Deselect all buttons
+            var buttons = document.querySelectorAll('.magazines__plan--button');
+            buttons.forEach(function(button) {
+                button.innerText = 'seleccionar';
+            });
+
+        });
+    });
+});
+
+
+</script>
+
+<script>
+  const giftCardsSwiper = new Swiper('.gift-cards-swiper', { 
+    // Optional parameters
+    direction: 'horizontal',
+    loop: false,
+    slidesPerView: "auto",
+    spaceBetween: 25,
+    centeredSlides: true,
+    breakpoints: {
+        749: {
+            slidesPerView:2, 
+            spaceBetween: 50,
+            centeredSlides: false,
+        }
+    },
+    // If we need pagination
+    pagination: {
+      el: '.gift-cards-swiper-pagination',
+      clickable: true
+    },
+  });
+
+  {% comment %} const giftsSwiper = new Swiper('.gifts-swiper', {
+    // Optional parameters
+    direction: 'horizontal',
+    loop: true,
+  
+    // If we need pagination
+    pagination: {
+      el: '.swiper-pagination',
+      clickable: true
+    },
+  
+    // Navigation arrows
+    navigation: {
+      nextEl: '.swiper-button-next',
+      prevEl: '.swiper-button-prev',
+    },
+    slidesPerView: "auto",
+    spaceBetween: 25,
+    centeredSlides: true,
+    breakpoints: {
+        749: {
+            slidesPerView:4, 
+            spaceBetween: 30,
+            centeredSlides: false,
+        }
+    }
+  }); {% endcomment %}
+
+
+  var welcomeGiftsData = {
+    {% for product in section.settings.collection.products %}
+        {% if product.metafields.custom.welcome_gifts.value != blank and product.metafields.custom.welcome_gifts.value.count > 0 %}
+          "{{ product.id }}":  {% if localization.market.handle == "es" %} {{ product.metafields.custom.welcome_gifts.value | json }}{% else %}null{% endif %}
+          {% unless forloop.last %},{% endunless %}
+        {% endif %}
+    {% endfor %} 
+  };
+
+  // get all the buttons
+  var buttons = document.querySelectorAll('.magazines__plan--button');
+  var openLocator = document.querySelector("#open-locator");
+  var ebonoContainer = document.querySelector(".ebono-container");
+  var listado = document.querySelector("#listado");
+  var valor = document.querySelector("#valor");
+
+  // add an event listener to each button
+  buttons.forEach(function(button) {
+    button.addEventListener('click', function(e) {
+      // prevent the default action
+      e.preventDefault();
+
+        // hide the git error message
+        let messageDiv = document.getElementById('giftMessage');
+        messageDiv.style.display = 'none';  // Show the message
+
+      // Check if the button has the data-e-bono attribute set to "true"
+      if (button.getAttribute('data-e-bono') === "true") {
+        if (openLocator && openLocator.classList) {
+          openLocator.classList.add('show');
+        }
+        if (openLocator) {
+          openLocator.textContent = "Consulta el quiosco más cercano";
+        }
+      } else {
+        if (openLocator && openLocator.classList) {
+          openLocator.classList.remove('show');
+        }
+        if (ebonoContainer && ebonoContainer.classList) {
+          ebonoContainer.classList.remove('active'); // Remove active class from .ebono-container
+        }
+        if (listado) {
+          listado.innerHTML = ""; // Empty the content of #listado
+        }
+        if (valor) {
+          valor.value = ""; // Reset the value of #valor input
+        }
+        if (openLocator) { 
+          openLocator.textContent = "Consulta el quiosco más cercano";
+        }
+      }
+
+      var productObj = {
+        name: this.getAttribute('data-dl-product-name'),
+        id: this.getAttribute('data-dl-product-id'),
+        price: this.getAttribute('data-dl-product-price'),
+        brand: this.getAttribute('data-dl-product-brand'),
+        variant: this.getAttribute('data-dl-product-variant'),
+        category: this.getAttribute('data-dl-product-category'),
+      };
+
+      // Push the product details to the dataLayer
+      pushToDataLayer(productObj);
+
+      var requiresSellingPlan = e.target.getAttribute('data-requires-selling-plan');
+
+      console.log("requiresSellingPlan", requiresSellingPlan);
+
+      // get the product ID from the button's data-id attribute
+      var productMonthly = e.target.getAttribute('data-monthly');
+
+      // get the product ID from the button's data-id attribute
+      var productId = e.target.getAttribute('data-id');
+
+      // get the gifts data for this product
+      // Locate the element using the data-id attribute
+      var national = document.querySelector('[data-id="plans-national"]');
+
+      // Check if the element exists and has the 'active' class
+      if (national && national.classList.contains('active')) {
+      var giftsData = welcomeGiftsData[productId];
+      }
+
+      if(requiresSellingPlan) {
+        if(productMonthly == "true") {
+          document.querySelector('.disclaimer--yearly').classList.remove("active");
+        document.querySelector('.disclaimer--monthly').classList.add("active");
+      } else {
+         document.querySelector('.disclaimer--yearly').classList.add("active");
+          document.querySelector('.disclaimer--monthly').classList.remove("active");
+        }
+      }
+
+    if(requiresSellingPlan) {
+      if(productMonthly == "true") {
+        document.querySelector('.renewal--yearly').classList.remove("active");
+        document.querySelector('.renewal--monthly').classList.add("active");
+      } else {
+        document.querySelector('.renewal--yearly').classList.add("active");
+        document.querySelector('.renewal--monthly').classList.remove("active");
+      } 
+    }
+
+    if (requiresSellingPlan == "false") {
+        console.log("no selling plan");
+        document.querySelector('.renewal--yearly').classList.remove("active");
+        document.querySelector('.renewal--monthly').classList.remove("active");
+        document.querySelector('.disclaimer--yearly').classList.remove("active");
+        document.querySelector('.disclaimer--monthly').classList.remove("active");
+    }
+
+      // handle case where there are no gifts for this product
+      if (!giftsData) {
+        var sectionWelcomeGifts = document.querySelector('#magazines__welcome-gifts');
+        sectionWelcomeGifts.style.display = 'none';
+      } else {
+        var sectionWelcomeGifts = document.querySelector('#magazines__welcome-gifts');
+        sectionWelcomeGifts.style.display = 'block';
+        // create the slider HTML
+        var sliderHTML = '<div class="swiper-wrapper">';
+        
+        let slidesDesktop,spacingSlidesDesktop,centeredSlidesDesktop;
+
+        if (giftsData.length <= 1) {
+            slidesDesktop = 3;
+            spacingSlidesDesktop = 0;
+            centeredSlidesDesktop = true;      
+        } else if (giftsData.length == 2) {
+            slidesDesktop = 2;
+            spacingSlidesDesktop = 25;
+            centeredSlidesDesktop = false;
+        } else {
+            slidesDesktop = 3;
+            spacingSlidesDesktop = 25;
+            centeredSlidesDesktop = false;
+        }
+
+
+        giftsData.forEach(function(gift) {
+          sliderHTML += '<div class="swiper-slide">';
+          sliderHTML += '<div class="magazines__welcome-gift--item">';
+          sliderHTML += '<img src="' + gift.featured_image + '" alt="">';
+          sliderHTML += '<a data-variant-id="' + gift.variants[0].id + '" data-title="' + gift.title + '" href="#" class="welcome-gift--button button button--secondary" data-dl-product-name="' + gift.title + '" data-dl-product-id="' + gift.id + '" data-dl-product-price="' + gift.price + '" data-dl-product-brand="' + gift.vendor + '" data-dl-product-variant="' + gift.title + '" data-dl-product-category="' + gift.type + '">' + gift.title + '</a>';
+          sliderHTML += '<p>' + gift.description + '</p>';
+          sliderHTML += '</div></div>';
+        });
+
+        sliderHTML += `
+        </div>
+        <div class="swiper-pagination welcome-gifts__swiper-pagination"></div>`;
+
+
+        // get the .gifts-swiper div
+        var giftsDiv = document.querySelector('.gifts-swiper');
+
+        // empty the div
+        while (giftsDiv.firstChild) {
+          giftsDiv.removeChild(giftsDiv.firstChild);
+        }
+
+        // append the slider
+        giftsDiv.innerHTML = sliderHTML;
+
+        let impressions = [];
+
+        giftsData.forEach(function(gift, index) {
+          impressions.push({
+            'name': gift.title,
+            'id': String(gift.id),
+            'price': gift.price, // Assuming giftsData has a price attribute
+            'brand': gift.vendor, // Update this as needed
+            'category': gift.type, // Update this as needed
+            'variant': gift.title,
+            'list': 'Homepage',
+            'position': index + 1
+          });
+        });
+
+        dataLayer.push({ ecommerce: null });  // Clear the previous ecommerce object.
+        dataLayer.push({
+          'event': 'product-impression',
+          'ecommerce': {
+            'currencyCode': 'EUR', // or '{{ shop.currency }}',
+            'impressions': impressions
+          }
+        });
+
+
+        // start the swiper
+        var swiper = new Swiper('.gifts-swiper', {
+          // Optional parameters
+          direction: 'horizontal',
+          loop: false,
+          centeredSlides: true,
+        
+          // If we need pagination
+          pagination: {
+            el: '.welcome-gifts__swiper-pagination',
+            clickable: true
+          }, 
+        
+          autoHeight: true,
+          slidesPerView: 1,
+          spaceBetween: 25,
+          breakpoints: {
+              749: {
+                  slidesPerView: slidesDesktop, 
+                  spaceBetween: spacingSlidesDesktop,
+                  centeredSlides: centeredSlidesDesktop,
+              }
+          }
+        });
+      }
+
+      document.querySelectorAll('.welcome-gift--button').forEach(function(button) {
+        button.addEventListener('click', function(e) {
+          e.preventDefault();
+      
+          var productObj = {
+            name: this.getAttribute('data-dl-product-name'),
+            id: this.getAttribute('data-dl-product-id'),
+            price: this.getAttribute('data-dl-product-price'), // Assuming you might need to fetch this data
+            brand: this.getAttribute('data-dl-product-brand'), // Update this as needed
+            category: this.getAttribute('data-dl-product-category'), // Update this as needed
+            variant: this.getAttribute('data-dl-product-name')
+          };
+      
+          pushToDataLayer(productObj);
+        });
+      });
+      
+
+      // Get all .magazines__plan elements
+      var allPlans = document.querySelectorAll('.magazines__plan');
+
+      // Loop through all .magazines__plan elements and remove 'active' class
+      allPlans.forEach(function(plan) {
+          plan.classList.remove('active');
+      });
+
+      // Finding .magazines__plan--button and changing its text to 'seleccionar'
+      var buttons = document.querySelectorAll('.magazines__plan--button');
+      buttons.forEach(function(button) {
+          button.innerText = 'seleccionar';
+      });
+
+      // Get the closest .magazines__plan element
+      var closestPlan = this.closest('.magazines__plan');
+
+      if (closestPlan) {
+          // Add 'active' class to it
+          closestPlan.classList.add('active');
+          // Update button text
+          var closestPlanButton = closestPlan.querySelector('.magazines__plan--button');
+          if (closestPlanButton) {
+              closestPlanButton.innerText = 'seleccionado';
+          }
+
+          // Find the .magazines__plan--features child element
+          var features = closestPlan.querySelector('.magazines__plan--features');
+
+          // Get .magazines__confirmation--summary-features element
+          // var summaryFeatures = document.querySelector('.magazines__confirmation--summary-features');
+
+          // if (features && summaryFeatures) {
+              // Empty .magazines__confirmation--summary-features
+              // summaryFeatures.innerHTML = '';
+
+              // Copy the content of .magazines__plan--features and append it to .magazines__confirmation--summary-features
+              // summaryFeatures.innerHTML = features.innerHTML;
+          // }
+      }
+
+      // Get the confirmation section and display it.
+      const confirmationSection = document.querySelector('#magazines__confirmation');
+      confirmationSection.style.display = 'block';
+
+      const summaryProductTitle = document.querySelector(".magazines__confirmation--summary-product p");
+      summaryProductTitle.textContent = event.target.getAttribute('data-title');
+
+      // Update the summary price.
+      const summaryPrice = document.querySelector('.magazines__confirmation--summary-price > p');
+      summaryPrice.textContent = event.target.getAttribute('data-price');
+
+      const summaryFrequency = document.querySelector('.magazines__confirmation--summary-frequency');
+      summaryFrequency.textContent = event.target.getAttribute('data-frequency');
+
+      // Empty the summary features.
+      const summaryFeatures = document.querySelector('.magazines__confirmation--summary-features');
+      summaryFeatures.innerHTML = '';
+
+      // Hide the disclaimer.
+      const disclaimer = document.querySelector('.magazines__confirmation--disclaimer');
+      disclaimer.style.display = 'none';
+
+      // Get the checkout form and remove all .product-input inside it.
+      const checkoutForm = document.querySelector('.checkout-form');
+      const productInputs = checkoutForm.querySelectorAll('.product-input');
+      productInputs.forEach((input) => {
+        input.remove();
+      });
+
+      if (closestPlan) {
+        // Find the .magazines__plan--features child element
+        var features = closestPlan.querySelector('.magazines__plan--features');
+
+        if (features && summaryFeatures) {
+
+            // Copy the content of .magazines__plan--features and append it to .magazines__confirmation--summary-features
+            summaryFeatures.innerHTML = features.innerHTML;
+        }
+    }
+
+      // Create new inputs.
+      const variantIdInput = document.createElement('input');
+      variantIdInput.setAttribute('class', 'product-input');
+      variantIdInput.setAttribute('type', 'hidden');
+      variantIdInput.setAttribute('name', 'items[0]id');
+      variantIdInput.setAttribute('value', event.target.getAttribute('data-variant-id'));
+      // Loop through all attributes of the clicked element
+      for (var i = 0; i < event.target.attributes.length; i++) {
+        var attribute = event.target.attributes[i];
+
+        // Check if the attribute name starts with 'data-dl'
+        if (attribute.name.startsWith('data-dl')) {
+            variantIdInput.setAttribute(attribute.name, attribute.value);
+        }
+    }
+
+      const quantityInput = document.createElement('input');
+      quantityInput.setAttribute('class', 'product-input');
+      quantityInput.setAttribute('type', 'hidden');
+      quantityInput.setAttribute('name', 'items[0]quantity');
+      quantityInput.setAttribute('value', '1');
+
+      // Append new inputs to the form.
+      checkoutForm.appendChild(variantIdInput);
+      checkoutForm.appendChild(quantityInput);
+
+      // Check if 'data-selling-plan' attribute exists
+      if (event.target.hasAttribute('data-selling-plan')) {
+        disclaimer.style.display = 'block';
+
+
+        // Create a new input
+        const sellingPlanInput = document.createElement('input');
+        sellingPlanInput.setAttribute('class', 'product-input');
+        sellingPlanInput.setAttribute('type', 'hidden');
+        sellingPlanInput.setAttribute('name', 'items[0]selling_plan');
+        sellingPlanInput.setAttribute('value', event.target.getAttribute('data-selling-plan'));
+
+        // Append the new input to the form
+        checkoutForm.appendChild(sellingPlanInput);
+      }
+
+    });
+  });
+
+  // Toggle Gift cards
+  var button = document.querySelector('[data-id="magazines__gift-cards--list"]');
+  var section1 = document.querySelector('#magazines__gift-cards--list');
+  var section2 = document.querySelector('#magazines__location');
+  var section3 = document.querySelector('#magazines__plans');
+  var section4 = document.querySelector('#magazines__welcome-gifts');
+  var section5 = document.querySelector('#magazines__confirmation');
+  const giftCardsButtons = document.querySelectorAll('.button-buy--gift-card');
+  
+  // Track whether the button has been clicked
+  var buttonClicked = false;
+
+  button.addEventListener('click', function(e) {
+    // Prevent the default action of the anchor tag
+    e.preventDefault();
+
+    buttonClicked = !buttonClicked;
+
+    // If the button has been clicked, show section1 and hide others
+    if (buttonClicked) {
+      section1.style.display = 'block';
+      section2.style.display = 'none';
+      section3.style.display = 'none';
+      section4.style.display = 'none';
+      section5.style.display = 'none';
+      // Add the 'active' class to the button
+      button.classList.add('active');
+    } else {
+      section1.style.display = 'none';
+      section2.style.display = 'block';
+      section3.style.display = 'block';
+      section5.style.display = 'none';
+
+      // Remove the 'active' class from the button
+      button.classList.remove('active');
+
+      giftCardsButtons.forEach(button => {
+          button.classList.remove('active');
+          let buttonTextElement = giftCard.querySelector('.button-buy--gift-card-text');
+          if (buttonTextElement) {
+              buttonTextElement.innerText = 'seleccionar';
+          }
+      });
+    }
+  });
+
+  // Select gift card
+  // Get all the elements.
+  const elements = document.querySelectorAll('.button-buy--gift-card');
+
+  // Loop through all elements.
+  elements.forEach((element) => {
+    // Add a click event listener.
+    element.addEventListener('click', (event) => {
+      // Prevent the default action.
+      event.preventDefault();
+
+      // Using event.currentTarget to get the clicked element.
+    var productObj = {
+      name: event.currentTarget.getAttribute('data-dl-product-name'),
+      id: event.currentTarget.getAttribute('data-dl-product-id'),
+      price: event.currentTarget.getAttribute('data-dl-product-price'),
+      brand: event.currentTarget.getAttribute('data-dl-product-brand'),
+      variant: event.currentTarget.getAttribute('data-dl-product-variant'),
+      category: event.currentTarget.getAttribute('data-dl-product-category'),
+    };
+
+    // Push the product details to the dataLayer
+    pushToDataLayer(productObj);
+
+      // Remove active class from all buttons
+      elements.forEach((el) => {
+        el.classList.remove('active');
+      });
+
+      // Add active class to the clicked button.
+      event.currentTarget.classList.add('active');
+
+      // Get the confirmation section and display it.
+      const confirmationSection = document.querySelector('#magazines__confirmation');
+      confirmationSection.style.display = 'block';
+
+
+
+      // Get the gift checkbox element using its class
+      const checkbox = document.querySelector(".checkbox__add-gift");
+
+      if (checkbox && !checkbox.checked) {
+          checkbox.click(); // Programmatically "click" the checkbox
+          // Trigger the change event on the checkbox
+          const changeEvent = new Event('change', { 'bubbles': true });
+          checkbox.dispatchEvent(changeEvent);
+      }
+
+      // Empty the summary product and append a new paragraph.
+      const summaryProduct = document.querySelector('.magazines__confirmation--summary-product p:first-of-type');
+      summaryProduct.innerHTML = ''; // This empties the div.
+      summaryProduct.innerHTML = event.currentTarget.getAttribute('data-title');
+
+      document.querySelector('.renewal--yearly').classList.remove("active");
+      document.querySelector('.renewal--monthly').classList.remove("active");
+
+      // Update the summary price.
+      const summaryPrice = document.querySelector('.magazines__confirmation--summary-price > p');
+      summaryPrice.textContent = event.currentTarget.getAttribute('data-price');
+
+      // Empty the summary features.
+      const summaryFeatures = document.querySelector('.magazines__confirmation--summary-features');
+      summaryFeatures.innerHTML = '';
+
+      // Update the summary price.
+      const summaryFrequency = document.querySelector('.magazines__confirmation--summary-frequency');
+      summaryFrequency.textContent = event.currentTarget.getAttribute('data-frequency');
+
+      // Hide the disclaimer.
+      const disclaimer = document.querySelector('.magazines__confirmation--disclaimer');
+      disclaimer.style.display = 'none';
+
+      // Get the checkout form and remove all .product-input inside it.
+      const checkoutForm = document.querySelector('.checkout-form');
+      const productInputs = checkoutForm.querySelectorAll('.product-input');
+      productInputs.forEach((input) => {
+        input.remove();
+      });
+
+      // Create new inputs.
+      const variantIdInput = document.createElement('input');
+      variantIdInput.setAttribute('class', 'product-input');
+      variantIdInput.setAttribute('type', 'hidden');
+      variantIdInput.setAttribute('name', 'items[0]id');
+      variantIdInput.setAttribute('value', event.currentTarget.getAttribute('data-variant-id'));
+      // Loop through all attributes of the clicked element
+      for (var i = 0; i < event.currentTarget.attributes.length; i++) {
+        var attribute = event.currentTarget.attributes[i];
+
+        // Check if the attribute name starts with 'data-dl'
+        if (attribute.name.startsWith('data-dl')) {
+            variantIdInput.setAttribute(attribute.name, attribute.value);
+        }
+      }
+
+      const quantityInput = document.createElement('input');
+      quantityInput.setAttribute('class', 'product-input');
+      quantityInput.setAttribute('type', 'hidden');
+      quantityInput.setAttribute('name', 'items[0]quantity');
+      quantityInput.setAttribute('value', '1');
+
+      // Append new inputs to the form.
+      checkoutForm.appendChild(variantIdInput);
+      checkoutForm.appendChild(quantityInput);
+    });
+  });
+</script>
+
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+      // Get the body (or any parent element that contains .welcome-gift--button)
+      var body = document.body;
+
+      // Attach click event listener to body
+      body.addEventListener('click', function() {
+          // Check if the clicked element has class .welcome-gift--button
+          if (event.target.matches('.welcome-gift--button')) {
+              // Prevent the default action
+              event.preventDefault();
+              // Get all .welcome-gift--button elements
+              var allButtons = document.querySelectorAll('.welcome-gift--button');
+
+              // Loop through all .welcome-gift--button elements and remove 'active' class
+              allButtons.forEach(function(button) {
+                  button.classList.remove('active');
+              });
+
+              // Add 'active' class to the clicked button
+              event.target.classList.add('active');
+
+              // Get the checkout form
+              const checkoutForm = document.querySelector('.checkout-form');
+
+              // Remove all existing .product-input-welcome-gift elements
+              var existingInputs = document.querySelectorAll('.product-input-welcome-gift');
+              existingInputs.forEach(function(input) {
+                  input.parentNode.removeChild(input);
+              });
+
+              // Create new inputs.
+              const variantIdInput = document.createElement('input');
+              variantIdInput.setAttribute('class', 'product-input product-input-welcome-gift');
+              variantIdInput.setAttribute('type', 'hidden');
+              variantIdInput.setAttribute('name', 'items[1]id');
+              variantIdInput.setAttribute('value', event.target.getAttribute('data-variant-id'));
+              variantIdInput.required = true;  // This makes the input required
+              // Loop through all attributes of the clicked element
+              for (var i = 0; i < event.target.attributes.length; i++) {
+                var attribute = event.target.attributes[i];
+
+                // Check if the attribute name starts with 'data-dl'
+                if (attribute.name.startsWith('data-dl')) {
+                    variantIdInput.setAttribute(attribute.name, attribute.value);
+                }
+              }
+
+              const quantityInput = document.createElement('input');
+              quantityInput.setAttribute('class', 'product-input product-input-welcome-gift');
+              quantityInput.setAttribute('type', 'hidden');
+              quantityInput.setAttribute('name', 'items[1]quantity');
+              quantityInput.setAttribute('value', '1');
+
+              // Append new inputs to the form.
+              checkoutForm.appendChild(variantIdInput);
+              checkoutForm.appendChild(quantityInput);
+          }
+      });
+  });
+</script>
+
+<script>
+  // Scroll top
+  document.getElementById('scrollTop').addEventListener('click', function(e) {
+    e.preventDefault();
+    window.scrollTo({
+      top: 0,
+      behavior: 'smooth'
+    });
+});
+</script>
+
+{% comment %} Gifts mandatory {% endcomment %}
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+    const checkoutButton = document.querySelector('.button--checkout');
+    const sectionWelcomeGifts = document.querySelector('#magazines__welcome-gifts');
+
+    checkoutButton.addEventListener('click', function (event) {
+        // Check if the welcome gifts section is displayed
+        if (sectionWelcomeGifts.style.display === 'block') {
+            // Prevent the form from submitting if no gift is selected
+            const giftButtons = document.querySelectorAll('.welcome-gift--button');
+            const activeGift = Array.from(giftButtons).some(button => button.classList.contains('active'));
+
+            if (!activeGift) {
+                event.preventDefault();  // Stop the form from submitting
+                let messageDiv = document.getElementById('giftMessage');
+                messageDiv.style.display = 'block';  // Show the message
+            }
+        }
+    });
+});
+
+</script>
+
+{% comment %} <script>
+  // Clear the cart on page load
+  window.onload = function() {
+
+    {% if cart.item_count > 0 %}
+    // If there are items in the cart, then proceed
+    {% for item in cart.items %}
+    dataLayer.push({ ecommerce: null });  // Clear the previous ecommerce object.
+    dataLayer.push({
+      'event': 'remove-from-cart',
+      'ecommerce': {
+        'remove': {                               // 'remove' actionFieldObject measures.
+          'products': [{
+              'name': '{{ item.product.title }}',
+              'id': '{{ item.product.id }}',
+              'price': '{{ item.price | money_without_currency | replace: ",", "." }}',
+              'brand': '{{ item.product.vendor }}',
+              'category': '{{ item.product.type }}',
+              'variant': '{{ item.product.title }}',
+              'quantity': '{{ item.quantity }}'
+          }]
+        }
+      }
+    });
+    {% endfor %}
+
+    fetch('/cart/clear.js', {
+      method: 'POST',
+    })
+    .then(response => {
+      if (response.ok) {
+        // console.log("Cart cleared successfully");
+      } else {
+        console.error("Error clearing cart: " + response.statusText);
+      }
+    })
+    .catch((error) => {
+      console.error('Error:', error);
+    });
+    
+    {% endif %}
+  };
+</script> {% endcomment %}
+
+
+{% comment %} Prevent from sending the form in case of the gift is selected {% endcomment %}
+<script>
+  // First, we need to get the checkbox, email input elements and the error message wrapper by their name attributes/classes
+  var checkbox = document.querySelector('input[name="items[0]properties[__shopify_send_gift_card_to_recipient]"]');
+  var emailInput = document.querySelector('input[name="items[0]properties[Recipient email]"]');
+  var errorMessageWrapper = document.querySelector('.product-form__recipient-error-message-wrapper');
+  
+  // Then we need to get the form
+  var form = document.querySelector('.checkout-form');
+  
+  // Now we can attach an event listener to the form's submit event
+  form.addEventListener('submit', function(event) {
+    // We only want to prevent the form from being submitted if the checkbox is checked and the email input is empty
+    if (checkbox.checked && emailInput.value === '') {
+      event.preventDefault();
+      checkbox.checked = false;
+      // Remove the hidden attribute from the error message wrapper
+      // errorMessageWrapper.removeAttribute('hidden');
+      // Get the top position of the form and subtract 200px
+      // var topPos = form.getBoundingClientRect().top + window.pageYOffset - 200;
+      // Smooth scroll to the position above the form
+      // window.scrollTo({ top: topPos, behavior: 'smooth' });
+    } else {
+      // If the user corrected the input, we need to ensure that the error message gets hidden again
+      errorMessageWrapper.setAttribute('hidden', '');
+    }
+
+    let products = []; // to collect products
+    
+    let item0 = form.querySelector('input[name="items[0]id"]');
+    if (item0) {
+        let product0 = {
+            'name': item0.getAttribute('data-dl-product-name'),
+            'id': item0.getAttribute('data-dl-product-id'),
+            'price': item0.getAttribute('data-dl-product-price'),
+            'brand': item0.getAttribute('data-dl-product-brand'),
+            'category': item0.getAttribute('data-dl-product-category'),
+            'variant': item0.getAttribute('data-dl-product-variant'),
+            'quantity': "1"
+        };
+        products.push(product0);
+    }
+
+    let item1 = form.querySelector('input[name="items[1]id"]');
+    if (item1) {
+        let product1 = {
+            'name': item1.getAttribute('data-dl-product-name'),
+            'id': item1.getAttribute('data-dl-product-id'),
+            'price': item1.getAttribute('data-dl-product-price'),
+            'brand': item1.getAttribute('data-dl-product-brand'),
+            'category': item1.getAttribute('data-dl-product-category'),
+            'variant': item1.getAttribute('data-dl-product-variant'),
+            'quantity': "1"
+        };
+        products.push(product1);
+    }
+
+    if (products.length) {
+        dataLayer.push({ ecommerce: null }); // Clear the previous ecommerce object.
+        dataLayer.push({
+            'event': 'add-to-cart',
+            'ecommerce': {
+                'currencyCode': 'EUR',
+                'add': {
+                    'products': products
+                }
+            },
+            'eventCallback': function() {
+                form.submit(); // Submit the form after the dataLayer push
+            }
+        });
+    } else {
+        // If no products, submit the form directly
+        form.submit();
+    }
+  });
+</script>
+
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    const openLocator = document.querySelector("#open-locator");
+    const ebonoContainer = document.querySelector(".ebono-container");
+    const listado = document.querySelector("#listado");
+    const valor = document.querySelector("#valor");
+
+    if (openLocator) {
+      openLocator.addEventListener('click', function(e) {
+          e.preventDefault(); // Prevent default action if #open-locator is a link
+
+          // Toggle the 'active' class on the .ebono-container
+          ebonoContainer.classList.toggle('active');
+
+          // Check if the 'active' class is set on the .ebono-container and change the text of #open-locator accordingly
+          if (ebonoContainer.classList.contains('active')) {
+              openLocator.textContent = "Cerrar";
+          } else {
+              openLocator.textContent = "Consulta el quiosco más cercano";
+              listado.innerHTML = ""; // Empty the content of #listado
+              valor.value = ""; // Reset the value of #valor input
+          }
+      });
+    }
+});
+
+
+</script>
+
+<script>
+window.addEventListener('load', function() {
+    var button = document.querySelector('.magazines__plan.active .magazines__plan--button');
+    if (button) {
+        button.click();
+    }
+});
+</script>
+
+{% comment %}Activar tarjetas regalo por URL{% endcomment %}
+<script>
+document.addEventListener("DOMContentLoaded", function() {
+    // Check if the URL contains the 'regalo' parameter
+    if (window.location.search.includes('regalo')) {
+        // Find the element with the class 'button__gift'
+        var giftButton = document.querySelector('.button__gift');
+        if (giftButton) {
+            // Trigger a click on the element
+            giftButton.click();
+        }
+    }
+});  
+</script>
+
+
+
+{% endcapture %}
+{% if request.design_mode == true %}
+  {% if settings.magazine == section.settings.domain %}
+    {{ content }}
+  {% endif %}
+{% else %}
+  {% if request.host contains section.settings.domain %}
+    {{ content }}
+  {% endif %}
+{% endif %}
+
+
+{% schema %}
+{
+  "name": "Magazines",
+  "tag": "section",
+  "class": "section",
+  "disabled_on": {
+    "groups": ["header", "footer"]
+  },
+  "settings": [
+    {
+      "type": "collection",
+      "id": "collection_gift_cards",
+      "label": "Gift Cards"
+    },
+    {
+      "type": "image_picker",
+      "id": "image",
+      "label": "Image"
+    },
+    {
+      "type": "image_picker",
+      "id": "image_mobile",
+      "label": "Image Mobile"
+    },
+    {
+      "type": "collection",
+      "id": "collection",
+      "label": "Productos"
+    },
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Título"
+    },
+    {
+      "type": "text",
+      "id": "domain",
+      "label": "Dominio"
+    },
+    {
+      "type": "select",
+      "id": "desktop_content_position",
+      "options": [
+        {
+          "value": "left",
+          "label": "t:sections.rich-text.settings.desktop_content_position.options__1.label"
+        },
+        {
+          "value": "center",
+          "label": "t:sections.rich-text.settings.desktop_content_position.options__2.label"
+        },
+        {
+          "value": "right",
+          "label": "t:sections.rich-text.settings.desktop_content_position.options__3.label"
+        }
+      ],
+      "default": "center",
+      "label": "t:sections.rich-text.settings.desktop_content_position.label",
+      "info": "t:sections.rich-text.settings.desktop_content_position.info"
+    },
+    {
+      "type": "select",
+      "id": "content_alignment",
+      "options": [
+        {
+          "value": "left",
+          "label": "t:sections.rich-text.settings.content_alignment.options__1.label"
+        },
+        {
+          "value": "center",
+          "label": "t:sections.rich-text.settings.content_alignment.options__2.label"
+        },
+        {
+          "value": "right",
+          "label": "t:sections.rich-text.settings.content_alignment.options__3.label"
+        }
+      ],
+      "default": "center",
+      "label": "t:sections.rich-text.settings.content_alignment.label"
+    },
+    {
+      "type": "color_scheme",
+      "id": "color_scheme",
+      "label": "t:sections.all.colors.label",
+      "default": "background-1"
+    },
+    {
+      "type": "checkbox",
+      "id": "full_width",
+      "default": true,
+      "label": "t:sections.rich-text.settings.full_width.label"
+    },
+    {
+      "type": "header",
+      "content": "t:sections.all.padding.section_padding_heading"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "min": 0,
+      "max": 120,
+      "step": 2,
+      "unit": "px",
+      "label": "t:sections.all.padding.padding_top",
+      "default": 40
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "min": 0,
+      "max": 120,
+      "step": 2,
+      "unit": "px",
+      "label": "t:sections.all.padding.padding_bottom",
+      "default": 52
+    }
+  ],
+  "blocks": [
+    {
+      "type": "heading",
+      "name": "t:sections.rich-text.blocks.heading.name",
+      "limit": 3,
+      "settings": [
+        {
+          "type": "inline_richtext",
+          "id": "heading",
+          "default": "Talk about your brand",
+          "label": "t:sections.rich-text.blocks.heading.settings.heading.label"
+        },
+        {
+          "type": "select",
+          "id": "heading_size",
+          "options": [
+            {
+              "value": "h2",
+              "label": "t:sections.all.heading_size.options__1.label"
+            },
+            {
+              "value": "h1",
+              "label": "t:sections.all.heading_size.options__2.label"
+            },
+            {
+              "value": "h0",
+              "label": "t:sections.all.heading_size.options__3.label"
+            },
+            {
+              "value": "hxl",
+              "label": "t:sections.all.heading_size.options__4.label"
+            }
+          ],
+          "default": "h1",
+          "label": "t:sections.all.heading_size.label"
+        },
+        {
+          "type": "richtext",
+          "id": "text",
+          "default": "<p>Share information about your brand with your customers. Describe a product, make announcements, or welcome customers to your store.</p>",
+          "label": "t:sections.rich-text.blocks.text.settings.text.label"
+        }
+      ]
+    },
+    {
+      "type": "caption",
+      "name": "t:sections.rich-text.blocks.caption.name",
+      "limit": 3,
+      "settings": [
+        {
+          "type": "text",
+          "id": "caption",
+          "default": "Add a tagline",
+          "label": "t:sections.rich-text.blocks.caption.settings.text.label"
+        },
+        {
+          "type": "select",
+          "id": "text_style",
+          "options": [
+            {
+              "value": "subtitle",
+              "label": "t:sections.rich-text.blocks.caption.settings.text_style.options__1.label"
+            },
+            {
+              "value": "caption-with-letter-spacing",
+              "label": "t:sections.rich-text.blocks.caption.settings.text_style.options__2.label"
+            }
+          ],
+          "default": "caption-with-letter-spacing",
+          "label": "t:sections.rich-text.blocks.caption.settings.text_style.label"
+        },
+        {
+          "type": "select",
+          "id": "text_size",
+          "options": [
+            {
+              "value": "small",
+              "label": "t:sections.rich-text.blocks.caption.settings.caption_size.options__1.label"
+            },
+            {
+              "value": "medium",
+              "label": "t:sections.rich-text.blocks.caption.settings.caption_size.options__2.label"
+            },
+            {
+              "value": "large",
+              "label": "t:sections.rich-text.blocks.caption.settings.caption_size.options__3.label"
+            }
+          ],
+          "default": "medium",
+          "label": "t:sections.rich-text.blocks.caption.settings.caption_size.label"
+        }
+      ]
+    },
+    {
+      "type": "text",
+      "name": "t:sections.rich-text.blocks.text.name",
+      "limit": 3,
+      "settings": [
+        {
+          "type": "richtext",
+          "id": "text",
+          "default": "<p>Share information about your brand with your customers. Describe a product, make announcements, or welcome customers to your store.</p>",
+          "label": "t:sections.rich-text.blocks.text.settings.text.label"
+        }
+      ]
+    },
+    {
+      "type": "button",
+      "name": "t:sections.rich-text.blocks.buttons.name",
+      "limit": 2,
+      "settings": [
+        {
+          "type": "text",
+          "id": "button_label",
+          "default": "Button label",
+          "label": "t:sections.rich-text.blocks.buttons.settings.button_label_1.label",
+          "info": "t:sections.rich-text.blocks.buttons.settings.button_label_1.info"
+        },
+        {
+          "type": "url",
+          "id": "button_link",
+          "label": "t:sections.rich-text.blocks.buttons.settings.button_link_1.label"
+        },
+        {
+          "type": "checkbox",
+          "id": "button_style_secondary",
+          "default": false,
+          "label": "t:sections.rich-text.blocks.buttons.settings.button_style_secondary_1.label"
+        },
+        {
+          "type": "text",
+          "id": "button_label_2",
+          "label": "t:sections.rich-text.blocks.buttons.settings.button_label_2.label",
+          "info": "t:sections.rich-text.blocks.buttons.settings.button_label_2.info"
+        },
+        {
+          "type": "url",
+          "id": "button_link_2",
+          "label": "t:sections.rich-text.blocks.buttons.settings.button_link_2.label"
+        },
+        {
+          "type": "checkbox",
+          "id": "button_style_secondary_2",
+          "default": false,
+          "label": "t:sections.rich-text.blocks.buttons.settings.button_style_secondary_2.label"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Magazines",
+      "blocks": [
+        {
+          "type": "heading"
+        },
+        {
+          "type": "text"
+        },
+        {
+          "type": "button"
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

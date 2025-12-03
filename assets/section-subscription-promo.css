@@ -1,0 +1,320 @@
+.qiosco-headline {
+    text-align: center;
+    font-size: 32px;
+    font-family: 'chamberibold_display';
+    margin-top: 0;
+    margin-left: auto;
+    margin-right: auto;
+    line-height: 1em;
+}
+
+.subscription-promo {
+    border: 1px solid #000;
+    border-radius: 4px;
+    margin: 0;
+    padding: 0;
+    max-width: 845px;
+    margin: 0 auto;
+}
+
+.subscription-promo__label {
+    background-color: #000;
+    border: 2px solid #fff;
+    border-radius: 4px;
+    color: #fff;
+    font-size: 12px;
+    text-align: center;
+    text-transform: uppercase;
+    padding: 10px;
+    margin: 0;
+}
+
+.subscription-promo__container {
+    padding: 32px;
+}
+
+.subscription-promo__header {
+    text-align: left;
+    margin-bottom: 8px;
+}
+
+.subscription-promo__header span {
+    white-space: nowrap;
+}
+
+.subscription-promo__header h2 {
+    font-family: 'chamberiblack';
+    font-size: 29px;
+    margin: 0;
+}
+
+.subscription-promo__header .subscription-promo__compare-at-price {
+    font-family: 'chamberibold_display';
+    color: #ABABAB;
+    text-decoration: line-through;
+    padding: 0 8px;
+}
+
+.subscription-promo__header p {
+    /* text-transform: uppercase; */
+    opacity: 0.5;
+    font-family: 'chamberiregular';
+    font-size: 16px;
+    margin: 0;
+}
+
+.subscription-promo__content {
+    text-align: left;
+    display: flex;
+    align-items: stretch;
+    flex-wrap: wrap;
+    gap: 32px;
+}
+
+.subscription-promo__image {
+    display: block !important;
+    width: 65%;
+    border-radius: 8px;
+    overflow: hidden;
+    background-image: url("https://cdn.shopify.com/s/files/1/0762/3940/5341/files/cr_bolsos_vogue_verano_10_XABI.png?v=1718704148");
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+.subscription-promo__image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+    display: block;
+}
+
+.subscription-promo__info {
+    flex: 1;
+}
+
+.subscription-promo__benefit p {
+    line-height: 1.2em;
+}
+
+.subscription-promo__info div:nth-child(2) {
+    padding: 16px 0;
+    margin: 16px 0;
+    border-top: 1px solid #000000;
+    border-bottom: 1px solid #000000;
+}
+
+.subscription-promo__info ul {
+    padding: 0;
+    letter-spacing: 0;
+    list-style: none;
+}
+
+.subscription-promo__info ul li {
+    font-size: 12px;
+    line-height: 1.4rem;
+    padding-left: 12px;
+    margin-bottom: 12px;
+    font-family: 'chamberiregular';
+    position: relative;
+    display: inline-block;
+}
+
+.subscription-promo__info ul li b {
+    font-family: 'chamberibold_display';
+}
+
+.subscription-promo__info li::before {
+    content: url(https://cdn.shopify.com/s/files/1/0771/2387/9194/files/marker.svg?v=1687944969);
+    position: absolute;
+    left: 0;
+    top: 0;
+}
+
+.subscription-promo__benefit p {
+    margin: 0;
+    text-transform: uppercase;
+    font-family: 'chamberiregular';
+}
+
+.subscription-promo__conditions p {
+    font-size: 10px;
+}
+
+.subscription-promo__conditions p:last-child {
+    margin-bottom: 0;
+}
+
+.separator {
+    display: block !important;
+    height: 1px;
+    width: 100%;
+    margin-top: 48px;
+    margin-right: auto;
+    margin-left: auto;
+    border-top: 1px solid #000;
+    max-width: 950px;
+}
+
+.quiosco-home-delivery {
+    border: 1px solid #000;
+    padding: 12px;
+    border-radius: 4px;
+    max-width: 500px;
+    margin: 48px auto 0;
+    display: flex;
+    gap: 16px;
+    flex-wrap: wrap;
+    align-items: stretch;
+    text-decoration: none;
+}
+
+.quiosco-home-delivery__content {
+    flex: 1;
+    text-align: right;
+}
+
+.quiosco-home-delivery__content p {
+    text-transform: uppercase;
+    font-family: 'chamberiregular';
+    line-height: 1.2em;
+    font-size: 17px;
+    color: #000;
+}
+
+.quiosco-home-delivery__content p b {
+    font-family: 'chamberibold';
+}
+
+.quiosco-home-delivery__content .button {
+    min-width: 130px;
+    line-height: 2.2em;
+    padding-top: 4px;
+    min-height: 0;
+    font-size: 11px;
+}
+
+.quiosco-home-delivery__image {
+    display: block !important;
+    width: 50%;
+    height: 0;
+    padding-bottom: 50%;
+    flex: 1;
+    border-radius: 4px;
+    overflow: hidden;
+    background-image: url('https://cdn.shopify.com/s/files/1/0762/3940/5341/files/cr_vogue_icon_01_2.jpg?v=1718706751');
+    background-size: cover;
+    background-position: bottom;
+    background-repeat: no-repeat;
+}
+
+@media only screen and (max-width: 749px) {
+    .quiosco-wrapper {
+        max-width: 690px;
+        margin-right: 30px;
+        margin-left: 30px;
+    }
+
+    .qiosco-headline {
+        text-align: left;
+        font-size: 45px;
+        max-width: 350px;
+        margin-left: 0;
+    }
+
+    .subscription-promo__header {
+        text-align: center;
+    }
+
+    .subscription-promo__content {
+        flex-direction: column;
+    }
+
+    .subscription-promo__image {
+        width: 100%;
+        padding-bottom: 100%;
+    }
+
+    .subscription-promo__benefit p,
+    .subscription-promo__conditions p {
+        text-align: center;
+    }
+
+    .subscription-promo__info {
+        display: flex;
+        flex-direction: column;
+    }
+
+    .subscription-promo__benefit {
+        order: 1;
+    }
+
+    .subscription-promo__list {
+        order: 2;
+    }
+
+    .subscription-promo__conditions {
+        order: 3;
+    }
+
+    .subscription-promo__info div:nth-child(1) {
+        padding: 16px 0;
+        margin: 16px 0;
+        border-top: 1px solid #000000;
+        border-bottom: 1px solid #000000;
+    }
+
+    .subscription-promo__info div:nth-child(2) {
+        padding: 0;
+        margin: 0;
+        border-top: none;
+        border-bottom: none;
+    }
+
+    .subscription-promo__info ul {
+        text-align: center;
+    }
+
+    .quiosco-home-delivery {
+        flex-direction: column-reverse;
+        margin-bottom: 32px;
+        margin-right: auto;
+        margin-left: auto;
+    }
+
+    .quiosco-home-delivery__image {
+        width: 100%;
+        padding-bottom: 100%;
+    }
+
+    .quiosco-home-delivery__content {
+        text-align: center;
+    }
+
+    .quiosco-home-delivery__content p {
+        margin-top: 0;
+    }
+
+    .separator {
+        margin-right: 50px;
+        margin-left: 50px;
+        width: auto;
+    }
+}
+
+@media only screen and (max-width: 560px) {
+    .quiosco-home-delivery {
+        margin-right: 30px;
+        margin-left: 30px;
+    }
+}
+
+@media only screen and (max-width: 410px) {
+    .qiosco-headline {
+        text-align: left;
+        font-size: 35px;
+        max-width: 350px;
+        margin-left: 0;
+    }
+}

@@ -1,0 +1,71 @@
+.ebono-container {
+    display: block;
+    position: relative;
+    width: 90%;
+    max-width: 520px;
+    margin: 60px auto;
+}
+
+.ebono-container button {
+    width: 100%;
+    margin-top: 2rem;
+}
+
+#listado {
+    margin-top: 22px;
+}
+
+.recipient-form .field__input {
+    border-radius: 4px;
+}
+
+.field:after,
+.select:after,
+.customer .field:after,
+.customer select:after,
+.localization-form__select:after {
+    border-radius: 4px;
+}
+
+.field:hover.field:after,
+.select:hover.select:after,
+.select__select:hover.select__select:after,
+.customer .field:hover.field:after,
+.customer select:hover.select:after,
+.localization-form__select:hover.localization-form__select:after {
+    border-radius: 4px;
+}
+
+.field__input:focus,
+.select__select:focus,
+.customer .field input:focus,
+.customer select:focus,
+.localization-form__select:focus.localization-form__select:after {
+    border-radius: 4px;
+}
+
+.field:hover.field:after,
+.select:hover.select:after,
+.select__select:hover.select__select:after,
+.customer .field:hover.field:after,
+.customer select:hover.select:after,
+.localization-form__select:hover.localization-form__select:after {
+    border-radius: 4px;
+}
+
+.responsive-iframe-container {
+    position: relative;
+    padding-bottom: 96%; /* Adjust this value to set the aspect ratio */
+    padding-top: 30px; /* This value is for any padding or border you might want */
+    height: 0;
+    overflow: hidden;
+}
+
+.responsive-iframe-container iframe {
+    border: none;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+}

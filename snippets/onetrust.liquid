@@ -1,0 +1,129 @@
+{% assign onetrust_id = blank %}
+{% assign fides_id = blank %}
+{% if request.host contains "suscripcion.vogue.es" %}
+  {% assign onetrust_id = "69981e7f-89f3-444e-9570-b221f294f410" %}
+  {% assign fides_id = "FDS-I0MYDI" %}
+{% elsif request.host contains "suscripcion.revistagq.com" %}
+  {% assign fides_id = "FDS-9UARB0" %}
+  {% assign onetrust_id = "31398081-8872-4c71-8e2b-34a017a230bd" %}
+{% elsif request.host contains "suscripcion.revistaad.es" %}
+  {% assign fides_id = "FDS-TDUGOR" %}
+  {% assign onetrust_id = "7d4cc7d9-2d2d-4e0e-be94-14cc0e445949" %}
+{% elsif request.host contains "suscripcion.revistavanityfair.es" %}
+  {% assign fides_id = "FDS-NZRCI3" %}
+  {% assign onetrust_id = "d087a597-a856-4275-94ac-244e313f0942" %}
+{% elsif request.host contains "suscripcion.traveler.es" %}
+  {% assign fides_id = "FDS-D1E117" %}
+  {% assign onetrust_id = "c1b5b83e-4af0-478a-8e7d-53b0e2649d01" %}
+{% elsif request.host contains "suscripcion.condenast.es" %}
+  {% assign onetrust_id = "cae7ea22-fce2-4c67-a6af-8a39d97dc406" %}
+{% endif %}
+
+  <script>
+  (function() {
+    // 2) Detect staging flag
+   // var isStage = window.location.search.indexOf('debug=true') !== -1;
+
+    // 3) Pull IDs from Liquid
+    var onetrustId = "{{ onetrust_id}}";
+    var fidesId    = "{{ fides_id}}";
+
+    if (fidesId) {
+      // 4) Full Ethyca Fides bootstrap
+      var fidesHost = "https://privacy.condenastdigital.com/fides.js"; // Host could also be "https://stag.privacy.condenastdigital.com/fides.js" for staging.
+      var fidesPropertyId = "{{ fides_id }}"; // Example Property ID
+      var fidesSrc = fidesHost + "?property_id=" + fidesPropertyId + "&";
+    
+      var gtmOptions = {
+        flag_type: "boolean",
+        non_applicable_flag_mode: "include",
+      };
+    
+      function setupShopifyBridge() {
+        addEventListener("FidesProxy", function (proxiedEvent) {
+          var shopify = window.Shopify || {};
+          var analytics = shopify.analytics || {
+            publish: function () {
+              console.warn("Shopify's analytics publish could not be found.");
+            },
+          };
+          analytics.publish(proxiedEvent.detail.event, proxiedEvent.detail.Fides);
+        });
+    
+        window.dataLayer = window.dataLayer || [];
+        var handleProxyDispatch = (...args) => {
+          var event = (args || [])[0];
+          var eventName = (event || {}).event || "";
+          if (eventName.startsWith("Fides")) {
+            var proxyEvent = new CustomEvent("FidesProxy", {
+              detail: event,
+            });
+            window.dispatchEvent(proxyEvent);
+          }
+        };
+        window.dataLayer.push = function (...args) {
+          Array.prototype.push.apply(this, args);
+          handleProxyDispatch.apply(this, args);
+        };
+      }
+    
+      function insertFidesScript() {
+        addEventListener("FidesInitializing", function () {
+          window.Fides.gtm(gtmOptions);
+        });
+    
+        addEventListener("FidesInitialized", function () {
+          window.Fides.shopify();
+          try {
+            var experience = window.Fides.experience || {};
+            var config = experience.experience_config || {};
+            var id = config.id;
+            if (id) {
+              window.document.body.classList.add(id);
+            }
+          } catch {
+            console.warn("Couldn't apply Fides experience ID to body.");
+          }
+        });
+    
+        var fidesPrefix = "fides_";
+        var searchParams = new URLSearchParams(location.search);
+        var fidesSearchParams = new URLSearchParams();
+        searchParams.forEach(function (key, value) {
+          if (key.startsWith(fidesPrefix)) {
+            fidesSearchParams.set(
+              key.replace(fidesPrefix, ""),
+              key === fidesPrefix + "cache_bust" ? Date.now().toString() : value
+            );
+          }
+        });
+        var src = fidesSrc + fidesSearchParams.toString();
+        var script = document.createElement("script");
+        script.async = false;
+        script.defer = false;
+        script.setAttribute("src", src);
+        script.setAttribute("id", "fides-js");
+        script.setAttribute("type", "text/javascript");
+        document.head.appendChild(script);
+        window.ethycaEnabled = true;
+      }
+    
+      setupShopifyBridge();
+      insertFidesScript();
+    } else if (onetrustId) {
+      // 5) Fallback: OneTrust
+      var o = document.createElement('script');
+      o.src = 'https://cdn.cookielaw.org/scripttemplates/otSDKStub.js';
+      o.setAttribute('data-domain-script', onetrustId);
+      o.async = true;
+      document.head.appendChild(o);
+
+      // Stub callback
+      var w = document.createElement('script');
+      w.text = 'function OptanonWrapper() {}';
+      document.head.appendChild(w);
+    } else {
+      console.log("Final Else");
+    }
+  })();
+</script>
