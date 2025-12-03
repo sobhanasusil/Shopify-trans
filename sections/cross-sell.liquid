@@ -1,0 +1,940 @@
+{% capture content %}
+{{ 'section-magazine.css' | asset_url | stylesheet_tag }}
+{{ 'section-subscription-promo.css' | asset_url | stylesheet_tag }}
+
+{%- style -%}
+  .section-{{ section.id }}-padding {
+    padding-top: {{ section.settings.padding_top | times: 0.75 | round: 0 }}px;
+    padding-bottom: {{ section.settings.padding_bottom | times: 0.75 | round: 0 }}px;
+  }
+
+  @media screen and (min-width: 750px) {
+    .section-{{ section.id }}-padding {
+      padding-top: {{ section.settings.padding_top }}px;
+      padding-bottom: {{ section.settings.padding_bottom }}px;
+    }
+  }
+{%- endstyle -%}
+
+{%- assign product = section.settings.product -%}
+
+<div class="venta-cruzada-header">
+  <h1>PACK PREMIUM CONDÉ NAST</h1>
+</div>
+
+ <div class="page-width venta-cruzada-top-section">
+    <div class="venta-cruzada-brands">
+        <div class="venta-cruzada-brand">
+            <div class="new-label">Novedad</div>
+            <img src="{{ section.settings.logo_1 | image_url: width: 400 }}" alt="{{ section.settings.logo_1_alt_text }}" width="auto" height="80">
+        </div>
+        <div class="venta-cruzada-plus">
+            <img src="{{ 'plus-icon.png' | asset_url }}" alt="Plus" width="60" height="60">
+        </div>
+        <div class="venta-cruzada-brand">
+            <img src="{{ section.settings.logo_2 | image_url: width: 400 }}" alt="{{ section.settings.logo_2_alt_text }}" width="auto" height="80">
+        </div>
+        
+    </div>
+    <div class="venta-cruzada-headline">
+        <h2> Double style, double inspiration with almost 40% discount.</h2>
+        <p>Subscribe now!</p>
+    </div>
+</div>
+
+<div class="venta-cruzada-magazines-display">
+    <div class="venta-cruzada-magazines-row">
+    {% if section.settings.magazine_image_1 != blank %}
+        <img src="{{ section.settings.magazine_image_1 | image_url: width: 400 }}" alt="{{ section.settings.magazine_image_1_alt }}" width="auto" height="80">
+    {% endif %}
+    
+    {% if section.settings.magazine_image_2 != blank %}
+        <img src="{{ section.settings.magazine_image_2 | image_url: width: 400 }}" alt="{{ section.settings.magazine_image_2_alt }}" width="auto" height="80">
+    {% endif %}
+    
+    {% if section.settings.magazine_image_3 != blank %}
+        <img src="{{ section.settings.magazine_image_3 | image_url: width: 400 }}" alt="{{ section.settings.magazine_image_3_alt }}" width="auto" height="80">
+    {% endif %}
+    
+    {% if section.settings.magazine_image_4 != blank %}
+        <img src="{{ section.settings.magazine_image_4 | image_url: width: 400 }}" alt="{{ section.settings.magazine_image_4_alt }}" width="auto" height="80">
+    {% endif %}
+    </div>
+    <p>Receive 12 issues of Vogue and 10 issues of AD <b>for only 75€</b>.</p>
+</div>
+
+<div class="page-width">
+    <div class="subscription-details">
+        <p><strong>Convenience:</strong> Receive the print edition each month at the address you choose.</p>
+        <p><strong>Savings:</strong> Enjoy a 38% discount when making a single payment.</p>
+        <p><strong>Extensive content:</strong> Get 12 issues of Vogue and 10 of AD to stay up to date with the latest in Fashion, Beauty and Decoration.</p>
+        <p><strong>Additionally:</strong> Free access to the digital edition of the magazine.</p>
+    </div>
+    <div class="subscription-disclaimer">
+        <p>(Price without discount 120€.) Promotion valid only in Peninsula.</p>
+    </div>
+</div>
+
+<div class="page-width">
+    <div class="venta-cruzada-subscription-confirmation">
+        <h2 class="venta-cruzada-summary-title">Purchase Summary</h2>
+        
+        <div class="venta-cruzada-price-box">
+            <div class="venta-cruzada-subscription-type">ANNUAL SUBSCRIPTION TO VOGUE AND AD PRINT MAGAZINE</div>
+            <div class="venta-cruzada-price">75 €</div>
+        </div>
+        
+        <div class="venta-cruzada-terms-box">
+            <h3 class="venta-cruzada-terms-title">AUTOMATIC RENEWAL AND CANCELLATION</h3>
+            <p class="venta-cruzada-terms-text">
+                After your initial one-year period, your subscription will automatically renew for one year at the 
+                then-current rate. Your subscription will continue until you cancel it. As the rate may change, 
+                we will send you a notice before each renewal indicating the term and the then-current rate. 
+                If you do nothing, we will charge the amount to the payment method you have selected. You can 
+                cancel at any time through your user area or by sending an email to subscriptions@condenast.in.
+            </p>
+        </div>
+        
+        <div class="venta-cruzada-consent">
+            <input type="checkbox" id="terms-consent" required>
+            <label for="terms-consent">
+                I have read and accept the terms and conditions of use and purchase, 
+                and the data protection policy. (required 
+                to continue)
+            </label>
+        </div>
+        
+        <form method="post" action="/cart/add" id="subscription-form">
+            <input type="hidden" name="return_to" value="/checkout">
+
+            {% comment %} First product from settings {% endcomment %}
+            <input type="hidden" name="items[0][id]" value="{{ section.settings.product.selected_or_first_available_variant.id }}">
+            <input type="hidden" name="items[0][quantity]" value="1">
+            {% if section.settings.product.requires_selling_plan %}
+                <input type="hidden" name="items[0][selling_plan]" value="{{ section.settings.product.selected_or_first_available_selling_plan_allocation.selling_plan.id }}">
+            {% endif %}
+
+            {% comment %} Second product from settings {% endcomment %}
+            <input type="hidden" name="items[1][id]" value="{{ section.settings.product_2.selected_or_first_available_variant.id }}">
+            <input type="hidden" name="items[1][quantity]" value="1">
+            {% if section.settings.product_2.requires_selling_plan %}
+                <input type="hidden" name="items[1][selling_plan]" value="{{ section.settings.product_2.selected_or_first_available_selling_plan_allocation.selling_plan.id }}">
+            {% endif %}
+
+            <button type="submit" id="confirm-subscription" class="venta-cruzada-confirm-button" disabled>CONFIRM</button>
+            </form>
+    </div>
+</div>
+
+<style>
+    .list-menu__item--link {
+        text-decoration: none;
+    }
+
+  .venta-cruzada-header {
+    background-color: #000;
+    padding: 26px;
+    text-align: center;
+  }
+
+  .venta-cruzada-header h1 {
+    margin: 0;
+    color: #000;
+    font-family: 'chamberiregular';
+    font-weight: var(--font-body-weight);
+    display: inline-block;
+    background-color: #fff;
+    border-radius: 6px;
+    padding: 4px 8px 4px;
+    font-size: 21px;
+    text-transform: uppercase;
+    border: 3px solid #000;
+    outline: 1px solid #fff;
+  }
+
+  .venta-cruzada-brands {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 16px;
+    margin-top: 72px;
+    position: relative;
+  }
+
+  .venta-cruzada-brand {
+    position: relative;
+  }
+
+  .venta-cruzada-brand img{
+    height: 80px;
+    display: block;
+  }
+
+  .venta-cruzada-plus img {
+    width: 60px;
+    height: 60px;
+    display: block;
+  }
+
+  .new-label {
+    background-color: #FFEFD7;
+    font-size: 14px;
+    text-transform: uppercase;
+    padding: 3px 12px;
+    border-radius: 5px;
+    font-family: 'chamberiregular';
+    font-weight: var(--font-body-weight);
+    display: inline-block;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
+    position: absolute;
+    top: 0;
+    left: 60%;
+    transform: translate(-50%, -50%);
+  }
+
+  .venta-cruzada-headline h2 {
+    font-family: 'chamberiextralight';
+    text-align: center;
+    font-size: 25px;
+    margin-bottom: 0;
+  }
+
+  .venta-cruzada-headline p {
+    font-family: 'chamberibold';
+    text-align: center;
+    margin-top: 0;
+    font-size: 25px;
+  }
+
+  .venta-cruzada-magazines-display {
+    background-color: #FFEFD7;
+    padding: 30px;
+    margin-top: 32px;
+  }
+
+  .venta-cruzada-magazines-row {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .venta-cruzada-magazines-row img {
+    box-shadow: 4px 6px 4px rgba(0, 0, 0, 0.5);
+  }
+
+  .venta-cruzada-magazines-row img:nth-child(1) {
+      transform: translateX(16px);
+  }
+
+  .venta-cruzada-magazines-row img:nth-child(1),
+  .venta-cruzada-magazines-row img:nth-child(4) {
+    height: 244px;
+  }
+
+  .venta-cruzada-magazines-row img:nth-child(2),
+  .venta-cruzada-magazines-row img:nth-child(3) {
+    height: 292px;
+    z-index: 2;
+    position: relative;
+  }
+
+  .venta-cruzada-magazines-row img:nth-child(2) {
+    margin-right: 4px;
+  }
+
+  .venta-cruzada-magazines-row img:nth-child(3) {
+    margin-left: 4px;
+  }
+
+  .venta-cruzada-magazines-row img:nth-child(4) {
+      transform: translateX(-16px);
+  }
+
+  .venta-cruzada-magazines-display p {
+    font-family: 'chamberiextralight';
+    text-align: center;
+    margin-top: 0;
+    font-size: 21px;
+    line-height: 23px;
+    margin: 26px 0 0;
+    text-transform: uppercase;
+  }
+
+  .venta-cruzada-magazines-display p strong,
+  .venta-cruzada-magazines-display p b {
+    font-family: 'chamberibold';
+  }
+
+  .subscription-details {
+    text-align: center;
+    max-width: 500px;
+    margin: 0 auto;
+    margin-top: 37px;
+  }
+
+  .subscription-details p {
+    font-family: 'chamberiregular';
+    font-size: 12px;
+    line-height: 14px;
+    margin-bottom: 14px;
+  }
+
+  .subscription-details p strong,
+  .subscription-details p b {
+    font-family: 'chamberibold';
+  }
+
+  .subscription-disclaimer p {
+    font-family: 'chamberibold';
+    font-size: 12px;
+    line-height: 14px;
+    margin-top: 14px;
+    text-transform: uppercase;
+    text-align: center;
+  }
+
+  .venta-cruzada-subscription-confirmation {
+    border-top: 1px solid #000;
+    margin: 40px auto 53px auto;
+    padding-top: 30px;
+    max-width: 500px;
+  }
+
+  .venta-cruzada-summary-title {
+    font-family: 'chamberiextralight';
+    text-align: center;
+    margin-bottom: 16px;
+    font-size: 14px;
+  }
+  
+  .venta-cruzada-price-box {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #000;
+    color: #fff;
+    padding: 12px 16px;
+    border-radius: 5px;
+    margin-bottom: 32px;
+  }
+  
+  .venta-cruzada-subscription-type {
+    font-family: 'chamberibold';
+    font-size: 10px;
+    line-height: 10px;
+    text-transform: uppercase;
+  }
+  
+  .venta-cruzada-price {
+    font-family: 'chamberiblack';
+    font-size: 18px;
+  }
+  
+  .venta-cruzada-terms-box {
+    border: 1px solid #000;
+    border-radius: 5px;
+    padding: 12px 18px;
+    margin-bottom: 30px;
+  }
+  
+  .venta-cruzada-terms-title {
+    font-family: 'chamberibold';
+    font-size: 10px;
+    margin-top: 0;
+    margin-bottom: 0;
+    text-transform: uppercase;
+  }
+  
+  .venta-cruzada-terms-text {
+    font-family: 'chamberibold';
+    margin-top: 0;
+    margin-bottom: 0;
+    font-size: 10px;
+    line-height: 1.4;
+  }
+  
+  .venta-cruzada-consent {
+    display: flex;
+    align-items: flex-start;
+    max-width: 240px;
+    margin: 0 auto;
+  }
+  
+  .venta-cruzada-consent input {
+    margin-right: 10px;
+    margin-top: 0;
+  }
+  
+  .venta-cruzada-consent label {
+    font-size: 10px;
+    line-height: 1.4;
+    font-family: 'chamberiregular';
+    cursor: pointer;
+  }
+  
+  .venta-cruzada-confirm-button {
+    font-family: 'chamberiextralight';
+    display: block;
+    width: 100%;
+    padding: 12px 18px 8px;
+    text-align: center;
+    border: 1px solid #000;
+    border-radius: 5px;
+    background-color: #fff;
+    color: #000;
+    font-weight: bold;
+    text-transform: uppercase;
+    cursor: pointer;
+    font-size: 14px;
+    margin: 30px auto 0;
+    max-width: 232px;
+  }
+
+  .venta-cruzada-consent input[type=checkbox]:before {
+    content: "";
+    display: block;
+    width: 14px;
+    height: 14px;
+    border: 1px solid #000;
+    border-radius: 2px;
+    background-color: #fff;
+    box-shadow: inset 3px 3px 3px #00000080;
+    margin-right: 10px;
+    vertical-align: middle;
+}
+
+.venta-cruzada-consent input[type=checkbox]:checked:before {
+    content: "";
+    background-color: #000;
+    -webkit-box-shadow: inset 0px 0px 0px 1px #fff;
+    -moz-box-shadow: inset 0px 0px 0px 1px #fff;
+    box-shadow: inset 0 0 0 1px #fff;
+}
+  
+  .venta-cruzada-confirm-button:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+  }
+
+  @media only screen and (max-width: 749px) {
+    .venta-cruzada-header {
+        padding: 17px;
+    }
+
+    .venta-cruzada-header h1 {
+        font-size: 12px;
+    }
+    .venta-cruzada-top-section {
+        padding-right: 42px;
+        padding-left: 42px;
+    }
+
+    .venta-cruzada-brands {
+        flex-direction: column;
+        gap: 8px;
+        margin-top: 60px;
+        position: relative;
+    }
+
+    .venta-cruzada-brand {
+        position: relative;
+    }
+
+    .venta-cruzada-brand img{
+        height: 52px;
+    }
+
+    .venta-cruzada-plus img {
+        width: 50px;
+        height: 50px;
+    }
+
+    .new-label {
+        left: 50%;
+        transform: translate(-50%, -80%);
+    }
+
+    .venta-cruzada-headline h2 {
+        font-size: 18px;
+        max-width: 275px;
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+    .venta-cruzada-headline p {
+        font-size: 18px;
+        max-width: 275px;
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+    .venta-cruzada-magazines-row img:nth-child(1),
+    .venta-cruzada-magazines-row img:nth-child(4) {
+        display: none;
+    }
+
+    .venta-cruzada-magazines-row img:nth-child(2),
+    .venta-cruzada-magazines-row img:nth-child(3) {
+        height: 235px;
+    }
+
+    .venta-cruzada-magazines-row {
+        align-items: flex-start;
+    }
+
+    .venta-cruzada-magazines-row img:nth-child(2) {
+        transform: translateX(23px);
+    }
+
+    .venta-cruzada-magazines-row img:nth-child(3) {
+        margin-top: 70px;
+        transform: translateX(-23px);
+    }
+
+    .venta-cruzada-magazines-display p {
+        max-width: 294px;
+        margin-left: auto;
+        margin-right: auto;
+        font-size: 18px;
+    }
+
+    .subscription-details p {
+        max-width: 305px;
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+    .subscription-disclaimer p {
+        font-size: 10px;
+        max-width: 228px;
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+    .venta-cruzada-subscription-confirmation {
+        margin-top: 24px;
+        padding-top: 16px;
+        max-width: 227px;
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+    .venta-cruzada-summary-title {
+        margin-bottom: 24px;
+    }
+
+    .venta-cruzada-price-box {
+        flex-direction: column-reverse;
+        justify-content: space-between;
+        align-items: flex-start;
+        padding: 8px 13px;
+        border-radius: 5px;
+        margin-bottom: 32px;
+    }
+       
+  }
+</style>
+
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    const checkbox = document.getElementById('terms-consent');
+    const confirmButton = document.getElementById('confirm-subscription');
+    
+    checkbox.addEventListener('change', function() {
+      confirmButton.disabled = !this.checked;
+    });
+  });
+</script>
+
+{% endcapture %}
+{% if request.design_mode == true %}
+  {% if settings.magazine == section.settings.domain %}
+    {{ content }}
+  {% endif %}
+{% else %}
+  {% if request.host contains section.settings.domain %}
+    {{ content }}
+  {% else %}
+    <script>
+      window.location.href = '/';
+    </script>
+  {% endif %}
+{% endif %}
+
+{% schema %}
+{
+  "name": "Cross Sell",
+  "tag": "section",
+  "class": "section",
+  "disabled_on": {
+    "groups": ["header", "footer"]
+  },
+  "settings": [
+    {
+      "type": "text",
+      "id": "domain",
+      "label": "Domain"
+    },
+    {
+      "type": "product",
+      "id": "product",
+      "label": "Product"
+    },
+    {
+      "type": "product",
+      "id": "product_2",
+      "label": "Second product"
+    },
+    {
+      "type": "image_picker",
+      "id": "logo_1",
+      "label": "Logo 1"
+    },
+    {
+      "type": "text",
+      "id": "logo_1_alt_text",
+      "label": "Logo 1 Alt Text",
+      "default": "Vogue"
+    },
+    {
+      "type": "image_picker",
+      "id": "logo_2",
+      "label": "Logo 2"
+    },
+    {
+      "type": "text",
+      "id": "logo_2_alt_text",
+      "label": "Logo 2 Alt Text",
+      "default": "AD"
+    },
+    {
+      "type": "header",
+      "content": "Magazine Images"
+    },
+    {
+      "type": "image_picker",
+      "id": "magazine_image_1",
+      "label": "Magazine Image 1"
+    },
+    {
+      "type": "text",
+      "id": "magazine_image_1_alt",
+      "label": "Magazine Image 1 Alt Text",
+      "default": "Magazine Cover 1"
+    },
+    {
+      "type": "image_picker",
+      "id": "magazine_image_2",
+      "label": "Magazine Image 2"
+    },
+    {
+      "type": "text",
+      "id": "magazine_image_2_alt",
+      "label": "Magazine Image 2 Alt Text",
+      "default": "Magazine Cover 2"
+    },
+    {
+      "type": "image_picker",
+      "id": "magazine_image_3",
+      "label": "Magazine Image 3"
+    },
+    {
+      "type": "text",
+      "id": "magazine_image_3_alt",
+      "label": "Magazine Image 3 Alt Text",
+      "default": "Magazine Cover 3"
+    },
+    {
+      "type": "image_picker",
+      "id": "magazine_image_4",
+      "label": "Magazine Image 4"
+    },
+    {
+      "type": "text",
+      "id": "magazine_image_4_alt",
+      "label": "Magazine Image 4 Alt Text",
+      "default": "Magazine Cover 4"
+    },
+    {
+      "type": "image_picker",
+      "id": "image",
+      "label": "Image"
+    },
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Title"
+    },
+    {
+      "type": "text",
+      "id": "label",
+      "label": "Black background title"
+    },
+    {
+      "type": "text",
+      "id": "box_title",
+      "label": "Box title"
+    },
+    {
+      "type": "text",
+      "id": "box_subtitle",
+      "label": "Box subtitle"
+    },
+    {
+      "type": "richtext",
+      "id": "list",
+      "label": "List",
+      "default": "<ul><li><b>Secure all cover gifts.</b></li><li>With <b>all the benefits</b> of being a subscriber and kiosk extras.</li><li>Available <b>from the first day</b> of sale.</li></ul>"
+    },
+    {
+      "type": "richtext",
+      "id": "benefit",
+      "label": "Benefit",
+      "default": "<p>Collect the issue at your nearest kiosk* and enjoy all the cover gifts and extras that the magazine carries each month, for a year, as long as your subscription lasts.</p>"
+    },
+    {
+      "type": "richtext",
+      "id": "conditions",
+      "label": "Conditions",
+      "default": "<p>Subscribe before the 10th of July and you can collect the August issue on the same day it goes on sale along with the Vogue summer bag at the kiosk (three models to choose from, limited units).</p><p>Subscription available only in Spain.</p>"
+    },
+    {
+      "type": "richtext",
+      "id": "gift",
+      "label": "Gift",
+      "default": "<p>If you are interested in receiving it at home with a <b>welcome I.C.O.N gift</b>: See Home delivery option </p>"
+    },
+    {
+      "type": "image_picker",
+      "id": "gift_image",
+      "label": "Gift image"
+    },
+    {
+      "type": "select",
+      "id": "desktop_content_position",
+      "options": [
+        {
+          "value": "left",
+          "label": "t:sections.rich-text.settings.desktop_content_position.options__1.label"
+        },
+        {
+          "value": "center",
+          "label": "t:sections.rich-text.settings.desktop_content_position.options__2.label"
+        },
+        {
+          "value": "right",
+          "label": "t:sections.rich-text.settings.desktop_content_position.options__3.label"
+        }
+      ],
+      "default": "center",
+      "label": "t:sections.rich-text.settings.desktop_content_position.label",
+      "info": "t:sections.rich-text.settings.desktop_content_position.info"
+    },
+    {
+      "type": "select",
+      "id": "content_alignment",
+      "options": [
+        {
+          "value": "left",
+          "label": "t:sections.rich-text.settings.content_alignment.options__1.label"
+        },
+        {
+          "value": "center",
+          "label": "t:sections.rich-text.settings.content_alignment.options__2.label"
+        },
+        {
+          "value": "right",
+          "label": "t:sections.rich-text.settings.content_alignment.options__3.label"
+        }
+      ],
+      "default": "center",
+      "label": "t:sections.rich-text.settings.content_alignment.label"
+    },
+    {
+      "type": "color_scheme",
+      "id": "color_scheme",
+      "label": "t:sections.all.colors.label",
+      "default": "background-1"
+    },
+    {
+      "type": "checkbox",
+      "id": "full_width",
+      "default": true,
+      "label": "t:sections.rich-text.settings.full_width.label"
+    },
+    {
+      "type": "header",
+      "content": "t:sections.all.padding.section_padding_heading"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "min": 0,
+      "max": 120,
+      "step": 2,
+      "unit": "px",
+      "label": "t:sections.all.padding.padding_top",
+      "default": 40
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "min": 0,
+      "max": 120,
+      "step": 2,
+      "unit": "px",
+      "label": "t:sections.all.padding.padding_bottom",
+      "default": 52
+    }
+  ],
+  "blocks": [
+    {
+      "type": "heading",
+      "name": "t:sections.rich-text.blocks.heading.name",
+      "limit": 3,
+      "settings": [
+        {
+          "type": "inline_richtext",
+          "id": "heading",
+          "default": "Talk about your brand",
+          "label": "t:sections.rich-text.blocks.heading.settings.heading.label"
+        },
+        {
+          "type": "select",
+          "id": "heading_size",
+          "options": [
+            {
+              "value": "h2",
+              "label": "t:sections.all.heading_size.options__1.label"
+            },
+            {
+              "value": "h1",
+              "label": "t:sections.all.heading_size.options__2.label"
+            },
+            {
+              "value": "h0",
+              "label": "t:sections.all.heading_size.options__3.label"
+            },
+            {
+              "value": "hxl",
+              "label": "t:sections.all.heading_size.options__4.label"
+            }
+          ],
+          "default": "h1",
+          "label": "t:sections.all.heading_size.label"
+        },
+        {
+          "type": "richtext",
+          "id": "text",
+          "default": "<p>Share information about your brand with your customers. Describe a product, make announcements, or welcome customers to your store.</p>",
+          "label": "t:sections.rich-text.blocks.text.settings.text.label"
+        }
+      ]
+    },
+    {
+      "type": "caption",
+      "name": "t:sections.rich-text.blocks.caption.name",
+      "limit": 3,
+      "settings": [
+        {
+          "type": "text",
+          "id": "caption",
+          "default": "Add a tagline",
+          "label": "t:sections.rich-text.blocks.caption.settings.text.label"
+        },
+        {
+          "type": "select",
+          "id": "text_style",
+          "options": [
+            {
+              "value": "subtitle",
+              "label": "t:sections.rich-text.blocks.caption.settings.text_style.options__1.label"
+            },
+            {
+              "value": "caption-with-letter-spacing",
+              "label": "t:sections.rich-text.blocks.caption.settings.text_style.options__2.label"
+            }
+          ],
+          "default": "caption-with-letter-spacing",
+          "label": "t:sections.rich-text.blocks.caption.settings.text_style.label"
+        },
+        {
+          "type": "select",
+          "id": "text_size",
+          "options": [
+            {
+              "value": "small",
+              "label": "t:sections.rich-text.blocks.caption.settings.caption_size.options__1.label"
+            },
+            {
+              "value": "medium",
+              "label": "t:sections.rich-text.blocks.caption.settings.caption_size.options__2.label"
+            },
+            {
+              "value": "large",
+              "label": "t:sections.rich-text.blocks.caption.settings.caption_size.options__3.label"
+            }
+          ],
+          "default": "medium",
+          "label": "t:sections.rich-text.blocks.caption.settings.caption_size.label"
+        }
+      ]
+    },
+    {
+      "type": "text",
+      "name": "t:sections.rich-text.blocks.text.name",
+      "limit": 3,
+      "settings": [
+        {
+          "type": "richtext",
+          "id": "text",
+          "default": "<p>Share information about your brand with your customers. Describe a product, make announcements, or welcome customers to your store.</p>",
+          "label": "t:sections.rich-text.blocks.text.settings.text.label"
+        }
+      ]
+    },
+    {
+      "type": "button",
+      "name": "t:sections.rich-text.blocks.buttons.name",
+      "limit": 2,
+      "settings": [
+        {
+          "type": "text",
+          "id": "button_label",
+          "default": "Button label",
+          "label": "t:sections.rich-text.blocks.buttons.settings.button_label_1.label",
+          "info": "t:sections.rich-text.blocks.buttons.settings.button_label_1.info"
+        },
+        {
+          "type": "url",
+          "id": "button_link",
+          "label": "t:sections.rich-text.blocks.buttons.settings.button_link_1.label"
+        },
+        {
+          "type": "checkbox",
+          "id": "button_style_secondary",
+          "default": false,
+          "label": "t:sections.rich-text.blocks.buttons.settings.button_style_secondary_1.label"
+        },
+        {
+          "type": "text",
+          "id": "button_label_2",
+          "label": "t:sections.rich-text.blocks.buttons.settings.button_label_2.label",
+          "info": "t:sections.rich-text.blocks.buttons.settings.button_label_2.info"
+        },
+        {
+          "type": "url",
+          "id": "button_link_2",
+          "label": "t:sections.rich-text.blocks.buttons.settings.button_link_2.label"
+        },
+        {
+          "type": "checkbox",
+          "id": "button_style_secondary_2",
+          "default": false,
+          "label": "t:sections.rich-text.blocks.buttons.settings.button_style_secondary_2.label"
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}
