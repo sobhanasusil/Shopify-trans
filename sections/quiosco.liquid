@@ -120,7 +120,7 @@
                 
                 {% if show_stores == true %}
                 <div id="magazines__store-locator" class="magazines__store-locator">
-                        <a href="#" id="open-locator" class="button button--secondary button--locator{% if show_stores_default %} show{% endif %}">*Consulta el quiosco más cercano</a>
+                        <a href="#" id="open-locator" class="button button--secondary button--locator{% if show_stores_default %} show{% endif %}">*Find the nearest kiosk</a>
 
                         <div class="ebono-container" id="cabecera">
                             <div id="formulario">
@@ -134,21 +134,21 @@
                                                 class="field__input"
                                                 id="valor"
                                                 type="text"
-                                                placeholder="Teclee cód.postal..."
+                                                placeholder="Enter postal code..."
                                                 name="valor"
                                             >
                                             <label class="field__label" for="valor">
-                                                <span class="recipient-email-label required">Cod.postal</span>
+                                                <span class="recipient-email-label required">Postal code</span>
                                             </label>
                                             </div>
                                         </div>
                                         </div>
                                     </div>
                                     <div>
-                                    <button type="submit" id="boton" class="button button--primary">Buscar</button>
+                                    <button type="submit" id="boton" class="button button--primary">Search</button>
                                 </form>
                             </div>
-                            <!-- div en el que se cargará el iframe con el mapa -->
+                            <!-- div in which the iframe with the map will be loaded -->
                             <div id="listado"></div>
                                     
                             <script type="text/javascript" charset="utf-8">// <![CDATA[
@@ -188,9 +188,9 @@
 
                                     tipo.addEventListener('change', function() {
                                         if (this.value === "0") {
-                                            valor.setAttribute("placeholder", "Teclee cód. postal...");
+                                            valor.setAttribute("placeholder", "Enter postal code...");
                                         } else if (this.value === "1") {
-                                            valor.setAttribute("placeholder", "Teclee dirección...");
+                                            valor.setAttribute("placeholder", "Enter address...");
                                         }
                                     });
 
@@ -280,7 +280,7 @@
                 <a href="/" class="quiosco-home-delivery">
                     <span class="quiosco-home-delivery__content">
                         {{ section.settings.gift }}
-                        <span class="button button--primary">Seleccionar</span>
+                        <span class="button button--primary">Select</span>
                     </span>
                     <span class="quiosco-home-delivery__image" style="background-image: url({{ section.settings.gift_image | image_url: width: '800x' }})"></span> 
                 </a>
@@ -373,14 +373,14 @@ giftCards.forEach(function(giftCard) {
         giftCards.forEach(function(otherCard) {
             let otherButtonTextElement = otherCard.querySelector('.button-buy--gift-card-text');
             if (otherButtonTextElement) {
-                otherButtonTextElement.innerText = 'seleccionar';
+                otherButtonTextElement.innerText = 'select';
             }
         });
 
          // Change the text of the clicked card's .button-buy--gift-card-text
          let buttonTextElement = giftCard.querySelector('.button-buy--gift-card-text');
          if (buttonTextElement) {
-             buttonTextElement.innerText = 'seleccionado';
+             buttonTextElement.innerText = 'selected';
          }
 
         // Add 'active' class to .gift-card-recipient-form-home
@@ -432,7 +432,7 @@ document.querySelector('.button__gift').addEventListener('click', function() {
     valor.value = ""; // Reset the value of #valor input
   }
   if (openLocator) {
-    openLocator.textContent = "Consulta el quiosco más cercano";
+    openLocator.textContent = "Find the nearest newsstand";
   }
 
   // Select all elements with the class .magazines__plan
@@ -447,7 +447,7 @@ document.querySelector('.button__gift').addEventListener('click', function() {
   // Finding .magazines__plan--button and changing its text to 'seleccionar'
   var magazineButtons = document.querySelectorAll('.magazines__plan--button');
   magazineButtons.forEach(function(button) {
-      button.innerText = 'seleccionar';
+      button.innerText = 'select';
   });
 
   // Remove 'active' class to .gift-card-recipient-form-home
@@ -528,7 +528,7 @@ document.querySelector('.button__gift').addEventListener('click', function() {
             // Deselect all buttons
             var buttons = document.querySelectorAll('.magazines__plan--button');
             buttons.forEach(function(button) {
-                button.innerText = 'seleccionar';
+                button.innerText = 'select';
             });
 
         });
@@ -615,7 +615,7 @@ document.querySelector('.button__gift').addEventListener('click', function() {
           openLocator.classList.add('show');
         }
         if (openLocator) {
-          openLocator.textContent = "Consulta el quiosco más cercano";
+          openLocator.textContent = "Find the nearest newsstand";
         }
       } else {
         if (openLocator && openLocator.classList) {
@@ -631,7 +631,7 @@ document.querySelector('.button__gift').addEventListener('click', function() {
           valor.value = ""; // Reset the value of #valor input
         }
         if (openLocator) { 
-          openLocator.textContent = "Consulta el quiosco más cercano";
+          openLocator.textContent = "Find the nearest newsstand";
         }
       }
 
@@ -800,7 +800,7 @@ document.querySelector('.button__gift').addEventListener('click', function() {
       // Finding .magazines__plan--button and changing its text to 'seleccionar'
       var buttons = document.querySelectorAll('.magazines__plan--button');
       buttons.forEach(function(button) {
-          button.innerText = 'seleccionar';
+          button.innerText = 'select';
       });
 
       // Get the closest .magazines__plan element
@@ -812,7 +812,7 @@ document.querySelector('.button__gift').addEventListener('click', function() {
           // Update button text
           var closestPlanButton = closestPlan.querySelector('.magazines__plan--button');
           if (closestPlanButton) {
-              closestPlanButton.innerText = 'seleccionado';
+              closestPlanButton.innerText = 'selected';
           }
 
           // Find the .magazines__plan--features child element
@@ -955,7 +955,7 @@ document.querySelector('.button__gift').addEventListener('click', function() {
           button.classList.remove('active');
           let buttonTextElement = giftCard.querySelector('.button-buy--gift-card-text');
           if (buttonTextElement) {
-              buttonTextElement.innerText = 'seleccionar';
+              buttonTextElement.innerText = 'select';
           }
       });
     }
@@ -1282,7 +1282,7 @@ document.querySelector('.button__gift').addEventListener('click', function() {
           if (ebonoContainer.classList.contains('active')) {
               openLocator.textContent = "Cerrar";
           } else {
-              openLocator.textContent = "Consulta el quiosco más cercano";
+              openLocator.textContent = "Find the nearest kiosk";
               listado.innerHTML = ""; // Empty the content of #listado
               valor.value = ""; // Reset the value of #valor input
           }
@@ -1337,7 +1337,7 @@ document.addEventListener("DOMContentLoaded", function() {
 
 {% schema %}
 {
-  "name": "Quiosco",
+  "name": "newsstand",
   "tag": "section",
   "class": "section",
   "disabled_on": {
@@ -1347,12 +1347,12 @@ document.addEventListener("DOMContentLoaded", function() {
     {
       "type": "text",
       "id": "domain",
-      "label": "Dominio"
+      "label": "Domain"
     },
     {
         "type": "product",
         "id": "product",
-        "label": "Producto"
+        "label": "Product"
     },
     {
       "type": "image_picker",
@@ -1362,51 +1362,51 @@ document.addEventListener("DOMContentLoaded", function() {
     {
       "type": "text",
       "id": "title",
-      "label": "Título"
+      "label": "Title"
     },
     {
       "type": "text",
       "id": "label",
-      "label": "Título fondo negra"
+      "label": "Black background title"
     },
     {
       "type": "text",
       "id": "box_title",
-      "label": "Título caja"
+      "label": "Box title"
     },
     {
       "type": "text",
       "id": "box_subtitle",
-      "label": "Subtítulo caja"
+      "label": "Box subtitle"
     },
     {
         "type": "richtext",
         "id": "list",
-        "label": "Lista",
-        "default": "<ul><li><b>Asegúrate todos los regalos de portada.</b></li><li>Con <b>todas las ventajas</b> de ser suscriptor y los extras de quiosco.</li><li>Disponible <b>desde el primer día</b> de salida a la venta.</li></ul>"
+        "label": "List",
+        "default": "<ul><li><b>Secure all cover gifts.</b></li><li>With <b>all the benefits</b> of being a subscriber and kiosk extras.</li><li>Available <b>from the first day</b> of sale.</li></ul>"
     },
     {
         "type": "richtext",
         "id": "benefit",
-        "label": "Beneficio",
-        "default": "<p>Recoge el ejemplar en tu quiosco más cercano* y disfruta de todos los regalos de portada y extras que lleve la revista cada mes, durante un año, mientras dure tu suscripción.</p>"
+        "label": "Benefit",
+        "default": "<p>Collect the issue at your nearest kiosk* and enjoy all the cover gifts and extras that the magazine carries each month, for a year, as long as your subscription lasts.</p>"
     },
     {
         "type": "richtext",
         "id": "conditions",
-        "label": "Condiciones",
-        "default": "<p>Suscríbete antes del día 10 de julio y podrás recoger el ejemplar de agosto el mismo día que salga a la venta junto al bolso del verano Vogue en el quiosco (tres modelos a elegir, unidades Limitadas).</p><p>Suscripción disponible sólo en España.</p>"
+        "label": "Conditions",
+        "default": "<p>Subscribe before the 10th of July and you can collect the August issue on the same day it goes on sale along with the Vogue summer bag at the kiosk (three models to choose from, limited units).</p><p>Subscription available only in Spain.</p>"
     },
     {
         "type": "richtext",
         "id": "gift",
-        "label": "Regalo",
-        "default": "<p>Si te interesa recibirla en casa con un <b>regalo I.C.O.N</b> de bienvenida: Ver opción Home delivery </p>"
+        "label": "Gift",
+        "default": "<p>If you are interested in receiving it at home with a <b>welcome I.C.O.N gift</b>: See Home delivery option </p>"
     },
     {
         "type": "image_picker",
         "id": "gift_image",
-        "label": "Imagen regalo"
+        "label": "Gift image"
     },
     {
       "type": "select",

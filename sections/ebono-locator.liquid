@@ -29,27 +29,27 @@
                 class="field__input"
                 id="valor"
                 type="text"
-                placeholder="Teclee cód.postal..."
+                placeholder="Enter postal code..."
                 name="valor"
               >
               <label class="field__label" for="valor">
-                <span class="recipient-email-label required">Cod.postal</span>
+                <span class="recipient-email-label required">Postal code</span>
               </label>
             </div>
           </div>
         </div>
       </div>
     <div>
-    {% comment %} <label for="tipo">Tipo de búsqueda</label><select name="tipo" id="tipo">
-    <option value="0">Cód. postal</option>
-    <option value="1">Dirección</option>
-    </select><label for="valor">Valor</label> 
-    <input type="text" name="valor" id="valor" placeholder="Teclee cód.postal..." size="45">  {% endcomment %}
-    <button type="submit" id="boton" class="button button--primary">Buscar</button>
+    {% comment %} <label for="tipo">Search type</label><select name="tipo" id="tipo">
+    <option value="0">Postal code</option>
+    <option value="1">Address</option>
+    </select><label for="valor">Value</label> 
+    <input type="text" name="valor" id="valor" placeholder="Enter postal code..." size="45">  {% endcomment %}
+    <button type="submit" id="boton" class="button button--primary">Search</button>
     </div>
     </form>
   </div>
-    <!-- div en el que se cargará el iframe con el mapa -->
+    <!-- div in which the iframe with the map will be loaded -->
   <div id="listado"></div>
     <script type="text/javascript" charset="utf-8">// <![CDATA[
             document.addEventListener('DOMContentLoaded', function() {
@@ -88,9 +88,9 @@
     
                 tipo.addEventListener('change', function() {
                     if (this.value === "0") {
-                        valor.setAttribute("placeholder", "Teclee cód. postal...");
+                        valor.setAttribute("placeholder", "Enter postal code...");
                     } else if (this.value === "1") {
-                        valor.setAttribute("placeholder", "Teclee dirección...");
+                        valor.setAttribute("placeholder", "Enter address...");
                     }
                 });
     
