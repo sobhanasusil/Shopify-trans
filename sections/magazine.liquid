@@ -774,7 +774,7 @@ giftCards.forEach(function(giftCard) {
     giftCard.addEventListener('click', function(event) {
         event.preventDefault();
         
-        // Remove 'active' class from all other cards and set their text to 'seleccionar'
+        // Remove 'active' class from all other cards and set their text to 'select'
         giftCards.forEach(function(otherCard) {
             let otherButtonTextElement = otherCard.querySelector('.button-buy--gift-card-text');
             if (otherButtonTextElement) {
@@ -849,7 +849,7 @@ document.querySelector('.button__gift').addEventListener('click', function() {
       magazinesPlanItems[i].classList.remove('active');
   }
 
-  // Finding .magazines__plan--button and changing its text to 'seleccionar'
+  // Finding .magazines__plan--button and changing its text to 'select'
   var magazineButtons = document.querySelectorAll('.magazines__plan--button');
   magazineButtons.forEach(function(button) {
       button.innerText = 'select';
@@ -1234,7 +1234,7 @@ document.querySelector('.button__gift').addEventListener('click', function() {
           plan.classList.remove('active');
       });
 
-      // Finding .magazines__plan--button and changing its text to 'seleccionar'
+      // Finding .magazines__plan--button and changing its text to 'select'
       var buttons = document.querySelectorAll('.magazines__plan--button');
       buttons.forEach(function(button) {
           button.innerText = 'select';

@@ -358,7 +358,7 @@ let giftCards = document.querySelectorAll('.button-buy--gift-card');
 giftCards.forEach(function(giftCard) {
   let buttonTextElement = giftCard.querySelector('.button-buy--gift-card-text');
   if (buttonTextElement) {
-      buttonTextElement.innerText = 'seleccionar';
+      buttonTextElement.innerText = 'select';
   }
 });
 
@@ -369,7 +369,7 @@ giftCards.forEach(function(giftCard) {
     giftCard.addEventListener('click', function(event) {
         event.preventDefault();
         
-        // Remove 'active' class from all other cards and set their text to 'seleccionar'
+        // Remove 'active' class from all other cards and set their text to 'select'
         giftCards.forEach(function(otherCard) {
             let otherButtonTextElement = otherCard.querySelector('.button-buy--gift-card-text');
             if (otherButtonTextElement) {
@@ -444,7 +444,7 @@ document.querySelector('.button__gift').addEventListener('click', function() {
       magazinesPlanItems[i].classList.remove('active');
   }
 
-  // Finding .magazines__plan--button and changing its text to 'seleccionar'
+  // Finding .magazines__plan--button and changing its text to 'select'
   var magazineButtons = document.querySelectorAll('.magazines__plan--button');
   magazineButtons.forEach(function(button) {
       button.innerText = 'select';
@@ -797,7 +797,7 @@ document.querySelector('.button__gift').addEventListener('click', function() {
           plan.classList.remove('active');
       });
 
-      // Finding .magazines__plan--button and changing its text to 'seleccionar'
+      // Finding .magazines__plan--button and changing its text to 'select'
       var buttons = document.querySelectorAll('.magazines__plan--button');
       buttons.forEach(function(button) {
           button.innerText = 'select';
@@ -1302,7 +1302,7 @@ window.addEventListener('load', function() {
 });
 </script>
 
-{% comment %}Activar tarjetas regalo por URL{% endcomment %}
+{% comment %}Activate gift cards by URL{% endcomment %}
 <script>
 document.addEventListener("DOMContentLoaded", function() {
     // Check if the URL contains the 'regalo' parameter
