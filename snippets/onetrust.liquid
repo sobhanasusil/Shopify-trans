@@ -1,18 +1,15 @@
 {% assign onetrust_id = blank %}
 {% assign fides_id = blank %}
-{% if request.host contains "suscripcion.vogue.es" %}
+{% if request.host contains "subscription.vogue.in" %}
   {% assign onetrust_id = "69981e7f-89f3-444e-9570-b221f294f410" %}
   {% assign fides_id = "FDS-I0MYDI" %}
-{% elsif request.host contains "suscripcion.revistagq.com" %}
+{% elsif request.host contains "subscription.gqindia.com" %}
   {% assign fides_id = "FDS-9UARB0" %}
   {% assign onetrust_id = "31398081-8872-4c71-8e2b-34a017a230bd" %}
-{% elsif request.host contains "suscripcion.revistaad.es" %}
+{% elsif request.host contains "subscription.architecturaldigest.in" %}
   {% assign fides_id = "FDS-TDUGOR" %}
   {% assign onetrust_id = "7d4cc7d9-2d2d-4e0e-be94-14cc0e445949" %}
-{% elsif request.host contains "suscripcion.revistavanityfair.es" %}
-  {% assign fides_id = "FDS-NZRCI3" %}
-  {% assign onetrust_id = "d087a597-a856-4275-94ac-244e313f0942" %}
-{% elsif request.host contains "suscripcion.traveler.es" %}
+{% elsif request.host contains "subscription.cntraveller.in" %}
   {% assign fides_id = "FDS-D1E117" %}
   {% assign onetrust_id = "c1b5b83e-4af0-478a-8e7d-53b0e2649d01" %}
 {% elsif request.host contains "suscripcion.condenast.es" %}

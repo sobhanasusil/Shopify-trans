@@ -4,21 +4,22 @@
     {% comment %}Temporal redirect{% endcomment %}
     {% unless request.design_mode %}
       <script>
-        if (window.location.host === 'tienda.condenast.es' && window.location.pathname === '/') {
-          window.location.href = 'https://tienda.condenast.es/pages/suscripciones-conde-nast';
-        }
+      // need redirection logic for india brand @Deepak
+      //  if (window.location.host === 'tienda.condenast.es' && window.location.pathname === '/') {
+        //  window.location.href = 'https://tienda.condenast.es/pages/suscripciones-conde-nast';
+      //  }
 
-        if (window.location.pathname.startsWith('/collections/all')) {
-          window.location.href = 'https://tienda.condenast.es/pages/suscripciones-conde-nast';
-        }
+       // if (window.location.pathname.startsWith('/collections/all')) {
+        //  window.location.href = 'https://tienda.condenast.es/pages/suscripciones-conde-nast';
+       // }
 
-        if (
-          (window.location.host === 'conde-nast-es.myshopify.com' && window.location.pathname === '/') ||
-          window.location.pathname === '/cart'
-        ) {
-          window.location.href = 'https://tienda.condenast.es/pages/suscripciones-conde-nast';
+      //  if (
+        //  (window.location.host === 'conde-nast-es.myshopify.com' && window.location.pathname === '/') ||
+       //   window.location.pathname === '/cart'
+      //  ) {
+     //     window.location.href = 'https://tienda.condenast.es/pages/suscripciones-conde-nast';
         }
-      </script>
+     // </script>
     {% endunless %}
 
     {% render 'url-redirect' %}
@@ -75,15 +76,14 @@
     </script>
 
     {% assign default_collection == null %}
-    {% if request.host contains 'suscripcion.vogue.es' %}
+    {% if request.host contains 'subscription.vogue.in' %}
       {%- capture default_collection -%}vogue{%- endcapture -%}
-    {% elsif request.host contains 'suscripcion.revistagq.com' %}
+    {% elsif request.host contains 'subscription.gqindia.com' %}
       {%- capture default_collection -%}gq{%- endcapture -%}
-    {% elsif request.host contains 'suscripcion.revistaad.es' %}
+    {% elsif request.host contains 'subscription.architecturaldigest.in' %}
       {%- capture default_collection -%}ad{%- endcapture -%}
-    {% elsif request.host contains 'suscripcion.revistavanityfair.es' %}
-      {%- capture default_collection -%}vanity-fair{%- endcapture -%}
-    {% elsif request.host contains 'suscripcion.traveler.es' %}
+
+    {% elsif request.host contains 'subscription.cntraveller.in' %}
       {%- capture default_collection -%}traveler{%- endcapture -%}
     {% endif %}
 
@@ -149,41 +149,29 @@
     <meta name="theme-color" content="">
     <link rel="canonical" href="{{ canonical_url }}">
 
-    {% if request.host contains 'suscripcion.vogue.es' %}
+    {% if request.host contains 'subscription.vogue.in' %}
       <link
         rel="icon"
         type="image/png"
         href="https://cdn.shopify.com/s/files/1/0762/3940/5341/files/favicon.ico?v=1700471989"
       >
-    {% elsif request.host contains 'suscripcion.revistagq.com' %}
+    {% elsif request.host contains 'subscription.gqindia.com' %}
       <link
         rel="icon"
         type="image/png"
         href="https://cdn.shopify.com/s/files/1/0762/3940/5341/files/favicon_1.ico?v=1700472046"
       >
-    {% elsif request.host contains 'suscripcion.revistaad.es' %}
+    {% elsif request.host contains 'subscription.architecturaldigest.in' %}
       <link
         rel="icon"
         type="image/png"
         href="https://cdn.shopify.com/s/files/1/0762/3940/5341/files/favicon-ad-int.ico?v=1700472092"
       >
-    {% elsif request.host contains 'suscripcion.revistavanityfair.es' %}
-      <link
-        rel="icon"
-        type="image/png"
-        href="https://cdn.shopify.com/s/files/1/0762/3940/5341/files/favicon-black.ico?v=1700472151"
-      >
-    {% elsif request.host contains 'suscripcion.traveler.es' %}
+    {% elsif request.host contains 'subscription.cntraveller.in' %}
       <link
         rel="icon"
         type="image/png"
         href="https://cdn.shopify.com/s/files/1/0762/3940/5341/files/favicon-cnt-spain.ico?v=1700472217"
-      >
-    {% elsif request.host contains 'tienda.condenast.es' %}
-      <link
-        rel="icon"
-        type="image/png"
-        href="https://cdn.shopify.com/s/files/1/0762/3940/5341/files/cn_fav.png?v=1701267450"
       >
     {% endif %}
 
@@ -193,15 +181,13 @@
 
     <title>
       Subscription
-      {% if request.host contains 'suscripcion.vogue.es' %}
+      {% if request.host contains 'subscription.vogue.in' %}
         Vogue
-      {% elsif request.host contains 'suscripcion.revistagq.com' %}
+      {% elsif request.host contains 'subscription.gqindia.com' %}
         GQ
-      {% elsif request.host contains 'suscripcion.revistaad.es' %}
+      {% elsif request.host contains 'subscription.architecturaldigest.in' %}
         AD
-      {% elsif request.host contains 'suscripcion.revistavanityfair.es' %}
-        Vanity Fair
-      {% elsif request.host contains 'suscripcion.traveler.es' %}
+      {% elsif request.host contains 'subscription.cntraveller.in' %}
         Traveler
       {% endif %}
       {%- if current_page != 1 %} &ndash; Page {{ current_page }}{% endif -%}
