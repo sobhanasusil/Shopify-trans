@@ -91,7 +91,7 @@
                 then-current rate. Your subscription will continue until you cancel it. As the rate may change, 
                 we will send you a notice before each renewal indicating the term and the then-current rate. 
                 If you do nothing, we will charge the amount to the payment method you have selected. You can 
-                cancel at any time through your user area or by sending an email to suscripciones@condenast.es.
+                cancel at any time through your user area or by sending an email to subscriptions@condenast.in.
             </p>
         </div>
         
@@ -121,7 +121,7 @@
                 <input type="hidden" name="items[1][selling_plan]" value="{{ section.settings.product_2.selected_or_first_available_selling_plan_allocation.selling_plan.id }}">
             {% endif %}
 
-            <button type="submit" id="confirm-subscription" class="venta-cruzada-confirm-button" disabled>CONFIRMAR</button>
+            <button type="submit" id="confirm-subscription" class="venta-cruzada-confirm-button" disabled>CONFIRM</button>
             </form>
     </div>
 </div>
@@ -563,7 +563,7 @@
 
 {% schema %}
 {
-  "name": "Venta Cruzada",
+  "name": "Cross Sell",
   "tag": "section",
   "class": "section",
   "disabled_on": {
@@ -573,17 +573,17 @@
     {
       "type": "text",
       "id": "domain",
-      "label": "Dominio"
+      "label": "Domain"
     },
     {
       "type": "product",
       "id": "product",
-      "label": "Producto"
+      "label": "Product"
     },
     {
       "type": "product",
       "id": "product_2",
-      "label": "Segundo producto"
+      "label": "Second product"
     },
     {
       "type": "image_picker",
@@ -701,13 +701,13 @@
     {
       "type": "richtext",
       "id": "gift",
-      "label": "Regalo",
+      "label": "Gift",
       "default": "<p>If you are interested in receiving it at home with a <b>welcome I.C.O.N gift</b>: See Home delivery option </p>"
     },
     {
       "type": "image_picker",
       "id": "gift_image",
-      "label": "Imagen regalo"
+      "label": "Gift image"
     },
     {
       "type": "select",
