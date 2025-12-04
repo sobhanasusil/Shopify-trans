@@ -442,7 +442,7 @@
   {% endfor %}
     {% if show_stores == true %}
     <div id="magazines__store-locator" class="magazines__store-locator">
-<a href="#" id="open-locator" class="button button--secondary button--locator{% if show_stores_default %} show{% endif %}">Find the nearest kiosk</a>
+<a href="#" id="open-locator" class="button button--secondary button--locator{% if show_stores_default %} show{% endif %}">Find the nearest store</a>
 
   <div class="ebono-container" id="cabecera">
     <div id="formulario">
@@ -837,7 +837,7 @@ document.querySelector('.button__gift').addEventListener('click', function() {
     valor.value = ""; // Reset the value of #valor input
   }
   if (openLocator) {
-    openLocator.textContent = "Find the nearest kiosk";
+    openLocator.textContent = "Find the nearest store";
   }
 
   // Select all elements with the class .magazines__plan
@@ -1026,7 +1026,7 @@ document.querySelector('.button__gift').addEventListener('click', function() {
           openLocator.classList.add('show');
         }
         if (openLocator) {
-          openLocator.textContent = "Find the nearest kiosk";
+          openLocator.textContent = "Find the nearest store";
         }
       } else {
         if (openLocator && openLocator.classList) {
@@ -1042,7 +1042,7 @@ document.querySelector('.button__gift').addEventListener('click', function() {
           valor.value = ""; // Reset the value of #valor input
         }
         if (openLocator) { 
-          openLocator.textContent = "Find the nearest kiosk";
+          openLocator.textContent = "Find the nearest store";
         }
       }
 
