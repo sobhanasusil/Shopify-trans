@@ -1,1 +1,65 @@
-{"name":"t:sections.header.name","type":"header","sections":{"header":{"type":"header","blocks":{"9c2e25fd-960b-46c0-b99a-3eeb26fe81bb":{"type":"logo","settings":{"domain":"subscription.vogue.in","title":"Vogue","logo":"shopify:\/\/shop_images\/Logo_VOGUE.png"}},"68e38d65-bdbf-4e88-8022-ddafd71909c8":{"type":"logo","settings":{"domain":"subscription.gqindia.com","title":"GQ","logo":"shopify:\/\/shop_images\/GQ-negro.png"}}"79cd7bac-1f27-4f8f-8cb9-ac81fe37475d":{"type":"logo","settings":{"domain":"subscription.cntraveller.in","title":"Traveler","logo":"shopify:\/\/shop_images\/Logo-CN-TRAVELER-negro.png"}},"8c11f1ab-452c-46e5-96f8-ff05a283abe4":{"type":"logo","settings":{"domain":"subscription.architecturaldigest.in","title":"AD","logo":"shopify:\/\/shop_images\/logoprintdigital_copy.png"}}},"block_order":["9c2e25fd-960b-46c0-b99a-3eeb26fe81bb","68e38d65-bdbf-4e88-8022-ddafd71909c8","79cd7bac-1f27-4f8f-8cb9-ac81fe37475d","8c11f1ab-452c-46e5-96f8-ff05a283abe4"],"settings":{"domain":"","logo_position":"middle-left","menu":"main-menu","menu_type_desktop":"dropdown","sticky_header_type":"on-scroll-up","show_line_separator":true,"color_scheme":"background-1","enable_country_selector":false,"enable_language_selector":true,"mobile_logo_position":"center","margin_bottom":0,"padding_top":20,"padding_bottom":20}}},"order":["header"]}
+{
+  "name": "t:sections.header.name",
+  "type": "header",
+  "sections": {
+    "header": {
+      "type": "header",
+      "blocks": {
+        "9c2e25fd-960b-46c0-b99a-3eeb26fe81bb": {
+          "type": "logo",
+          "settings": {
+            "domain": "subscription.vogue.in",
+            "title": "Vogue",
+            "logo": "shopify://shop_images/Logo_VOGUE.png"
+          }
+        },
+        "68e38d65-bdbf-4e88-8022-ddafd71909c8": {
+          "type": "logo",
+          "settings": {
+            "domain": "subscription.gqindia.com",
+            "title": "GQ",
+            "logo": "shopify://shop_images/GQ-negro.png"
+          }
+        },
+        "79cd7bac-1f27-4f8f-8cb9-ac81fe37475d": {
+          "type": "logo",
+          "settings": {
+            "domain": "subscription.cntraveller.in",
+            "title": "Traveler",
+            "logo": "shopify://shop_images/Logo-CN-TRAVELER-negro.png"
+          }
+        },
+        "8c11f1ab-452c-46e5-96f8-ff05a283abe4": {
+          "type": "logo",
+          "settings": {
+            "domain": "subscription.architecturaldigest.in",
+            "title": "AD",
+            "logo": "shopify://shop_images/logoprintdigital_copy.png"
+          }
+        }
+      },
+      "block_order": [
+        "9c2e25fd-960b-46c0-b99a-3eeb26fe81bb",
+        "68e38d65-bdbf-4e88-8022-ddafd71909c8",
+        "79cd7bac-1f27-4f8f-8cb9-ac81fe37475d",
+        "8c11f1ab-452c-46e5-96f8-ff05a283abe4"
+      ],
+      "settings": {
+        "domain": "",
+        "logo_position": "middle-left",
+        "menu": "main-menu",
+        "menu_type_desktop": "dropdown",
+        "sticky_header_type": "on-scroll-up",
+        "show_line_separator": true,
+        "color_scheme": "background-1",
+        "enable_country_selector": false,
+        "enable_language_selector": true,
+        "mobile_logo_position": "center",
+        "margin_bottom": 0,
+        "padding_top": 20,
+        "padding_bottom": 20
+      }
+    }
+  },
+  "order": ["header"]
+}
