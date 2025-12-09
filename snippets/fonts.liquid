@@ -391,43 +391,60 @@
 </style>
 {% elsif request.host contains "subscription.cntraveller.in" %}
 <style>
-    /* Fonts */
+    /* Fonts - FarnhamDisplay */
     @font-face {
-        font-family: 'Canela Medium';
-        src: url({{ 'Canela-Medium.woff2' | asset_url }}) format('woff2'),
-            url({{ 'Canela-Medium.woff' | asset_url }}) format('woff');
-        font-weight: 500;
+        font-family: 'FarnhamDisplay';
+        src: url({{ 'FarnhamDisplay-Regular.woff2' | asset_url }}) format('woff2'),
+            url({{ 'FarnhamDisplay-Regular.woff' | asset_url }}) format('woff');
+        font-weight: 400;
         font-style: normal;
         font-display: swap;
     }
     
     @font-face {
-        font-family: 'Canela Light';
-        src: url({{ 'Canela-Light.woff2' | asset_url }}) format('woff2'),
-            url({{ 'Canela-Light.woff' | asset_url }}) format('woff');
+        font-family: 'FarnhamDisplay';
+        src: url({{ 'FarnhamDisplay-Light.woff2' | asset_url }}) format('woff2'),
+            url({{ 'FarnhamDisplay-Light.woff' | asset_url }}) format('woff');
         font-weight: 300;
         font-style: normal;
         font-display: swap;
     }
     
     @font-face {
-        font-family: 'Canela Bold';
-        src: url({{ 'Canela-Bold.woff2' | asset_url }}) format('woff2'),
-            url({{ 'Canela-Bold.woff' | asset_url }}) format('woff');
-        font-weight: bold;
+        font-family: 'FarnhamDisplay';
+        src: url({{ 'FarnhamDisplay-Medium.woff2' | asset_url }}) format('woff2'),
+            url({{ 'FarnhamDisplay-Medium.woff' | asset_url }}) format('woff');
+        font-weight: 500;
         font-style: normal;
         font-display: swap;
     }
     
-     
+    @font-face {
+        font-family: 'FarnhamDisplay';
+        src: url({{ 'FarnhamDisplay-Bold.woff2' | asset_url }}) format('woff2'),
+            url({{ 'FarnhamDisplay-Bold.woff' | asset_url }}) format('woff');
+        font-weight: 700;
+        font-style: normal;
+        font-display: swap;
+    }
+    
+    @font-face {
+        font-family: 'FarnhamDisplay';
+        src: url({{ 'FarnhamDisplay-Semibold.woff2' | asset_url }}) format('woff2'),
+            url({{ 'FarnhamDisplay-Semibold.woff' | asset_url }}) format('woff');
+        font-weight: 600;
+        font-style: normal;
+        font-display: swap;
+    }
 
     :root {
-        --font-heading-family: 'Canela Bold', {{ settings.type_header_font.fallback_families }};
-        --font-body-family: 'Canela Medium', {{ settings.type_body_font.fallback_families }}
+        --font-heading-family: 'FarnhamDisplay', {{ settings.type_header_font.fallback_families }};
+        --font-body-family: 'FarnhamDisplay', {{ settings.type_body_font.fallback_families }}
     }
 
     .header__icons * {
-        font-family: 'Canela Light'!important;
+        font-family: 'FarnhamDisplay'!important;
+        font-weight: 300;
     }
 
     .magazines__gift-cards--heading,
@@ -435,27 +452,32 @@
     .magazines__confirmation--heading, 
     .section__heading,
     .recipient-checkbox  {
-        font-family: 'Canela Bold'!important;
+        font-family: 'FarnhamDisplay'!important;
+        font-weight: 700;
     }
 
     .magazines__text {
-        font-family: 'Canela Bold'!important;
+        font-family: 'FarnhamDisplay'!important;
+        font-weight: 400;
     }
 
     .button__gift { 
-        font-family: 'Canela Light'!important;
+        font-family: 'FarnhamDisplay'!important;
+        font-weight: 300;
     }
 
     b {
-        font-family: 'Canela Bold';
+        font-family: 'FarnhamDisplay';
+        font-weight: 700;
     }
 
     .button, button {
-        font-family: 'Canela Medium'!important;
+        font-family: 'FarnhamDisplay'!important;
+        font-weight: 500;
     }
 
     .footer-block * {
-        font-family: {{ settings.type_body_font.family }}, {{ settings.type_body_font.fallback_families }}
+        font-family: 'FarnhamDisplay', {{ settings.type_body_font.family }}, {{ settings.type_body_font.fallback_families }}
     }
 
 </style>
