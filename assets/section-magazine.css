@@ -4,12 +4,21 @@ hr {
     display: none;
 }
 
+/* Global fix for swiper-slide width issue - prevents 61.667px default width */
+/* Ensure content inside swiper-slide has proper width for Swiper's auto calculation */
+.plans-swiper .swiper-slide > *,
+
+/* Override Swiper's calculated width when it's too small (less than 100px) */
+.plans-swiper .swiper-slide[style*="width"] {
+    min-width: 285px !important;
+}
+
 @media only screen and (max-width: 749px) {
     /* hr {
         display: block;
         margin-top: 0;
         margin-bottom: 24px;
-        margin-left: 50px;
+        margin-left: 80px;
         margin-right: 50px;
         background-color: #000;
     } */
@@ -246,6 +255,7 @@ hr {
 
 .plans-swiper .swiper-wrapper {
     align-items: flex-end;
+    padding: 10px 0;  /*by annamalai*/
 }
 
 .plans-count-2 .swiper-slide {
@@ -273,6 +283,7 @@ hr {
     margin-top: 20px;
 }
 
+
 .magazines__plans--heading {
     font-size: 14px;
     margin-top: 0;
@@ -296,8 +307,9 @@ hr {
 }
 
 .magazines__plan {
-    border: 1px solid #000;
-    border-radius: 4px;
+    position: relative;
+    overflow: hidden;
+    box-shadow: 0 0 3px 2px #a7a7a7;  /*by annamalai*/
     list-style-type: none;
     margin: 0;
     padding: 0;
@@ -310,12 +322,28 @@ hr {
 }
 
 .plans-count-1 {
-    max-width: 285px;
+   /*max-width: 285px;*/
 }
 
 .plans-count-1 .magazines__plan {
-    max-width: 285px;
+    width: 285px !important;
+    max-width: 285px !important;
+    min-width: 285px !important;
     min-height: 0;
+}
+/* Fix swiper-slide width for plans-count-1 - must override Swiper's inline styles */
+.plans-count-1 .swiper-slide {
+    width: 285px !important;
+    min-width: 285px !important;
+    max-width: 285px !important;
+    flex-shrink: 0;
+}
+
+/* Force width on swiper-slide content for proper calculation */
+.plans-count-1 .swiper-slide > * {
+    width: 285px !important;
+    min-width: 285px !important;
+    max-width: 285px !important;
 }
 
 @media only screen and (min-width: 1011px) {
@@ -343,10 +371,11 @@ hr {
 }
 
 .magazines__plan--header {
-    background-color: #000000;
+    color: #000000;
+    font-weight:bold;
     border: 2px solid #fff;
     border-radius: 4px;
-    color: #fff;
+    /* color: #fff; */
     font-size: 12px;
     text-align: center;
     text-transform: uppercase;
@@ -403,6 +432,44 @@ hr {
     text-align: left;
 }
 
+
+/* by susil  */
+.magazines__plan--discount-badge {
+    position: absolute;
+    display: flex;  /*by annamalai*/
+    align-items: flex-end;  /*by annamalai*/
+    height: 100px;  /*by annamalai*/
+    top: 0;
+    left: 0;
+    background-color: #8a7439;
+    box-shadow: 0 0 3px 2px #a7a7a7;
+    color: #ffffff;
+    font-size: 12px;
+    font-weight: 700;
+    padding: 6px 20px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    z-index: 10;
+    transform: rotate(-45deg);
+    transform-origin: top left;
+    margin-left: -80px;  /*by annamalai*/
+    margin-top: -14px;  /*by annamalai*/
+    line-height: 1;  /*by annamalai*/
+    white-space: nowrap;
+}
+
+
+.magazines__plan--discount-badge::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0.1) 0%, rgba(0, 0, 0, 0.1) 100%);
+    pointer-events: none;
+}
+/* by susil  */
 .magazines__plan--caption {
     font-size: 12px;
     font-weight: bold;
@@ -439,6 +506,7 @@ hr {
     padding: 4px;
     min-height: 30px;
     margin-top: 16px;
+    margin-bottom: 16px;
     margin-left: auto;
     margin-right: auto;
     display: flex;
@@ -604,6 +672,8 @@ hr {
 
     .plans-swiper .swiper-slide {
         width: 285px !important;
+        min-width: 285px !important;
+        max-width: 285px !important;
     }
 }
 

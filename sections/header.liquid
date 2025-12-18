@@ -181,36 +181,63 @@
         <h1 class="header__heading">
       {%- endif -%}
           <a href="{{ routes.root_url }}" class="header__heading-link link link--text focus-inset">
-            {% for block in section.blocks %}
-              {% capture logo_content %}
-              <div class="header__heading-logo-wrapper">
-                {%- assign logo_alt = block.settings.logo.alt | default: shop.name | escape -%}
-                {%- assign logo_height = settings.logo_width | divided_by: block.settings.logo.aspect_ratio -%}
-                {% capture sizes %}(max-width: {{ settings.logo_width | times: 2 }}px) 50vw, {{ settings.logo_width | times: 2 }}px{% endcapture %}
-                {% capture widths %}{{ settings.logo_width }}, {{ settings.logo_width | times: 1.5 | round }}, {{ settings.logo_width | times: 2 }}{% endcapture %}
-                {{ block.settings.logo | image_url: width: 800 | image_tag:
-                  class: 'header__heading-logo motion-reduce',
-                  widths: widths,
-                  height: logo_height,
-                  width: block.settings.logo_width,
-                  alt: logo_alt,
-                  sizes: sizes,
-                  preload: true,
-                  srcset: nil
-                }}
-              </div> 
-              {% endcapture %}
-              {% if request.design_mode == true %}
-                  {% if settings.magazine == block.settings.domain %}
-                    {{ logo_content }}
-                  {% endif %}
-              {% else %}
-                {% if request.host contains block.settings.domain %}
-                  {{ logo_content }}
-                {% endif %}
-              {% endif %}
-              
-            {% endfor %}
+           {%- comment -%}
+  Step 1 — fallback to main shop logo
+{%- endcomment -%}
+
+{% assign final_logo = settings.logo %}
+{% assign final_logo_domain = '' %}
+
+{%- comment -%}
+  Step 2 — check each block for a matching domain
+{%- endcomment -%}
+{% for block in section.blocks %}
+  {% if block.type == 'logo' and block.settings.logo != blank %}
+    {% if request.design_mode %}
+      {% if settings.magazine == block.settings.domain %}
+        {% assign final_logo = block.settings.logo %}
+        {% assign final_logo_domain = block.settings.domain %}
+      {% endif %}
+    {% else %}
+      {% if request.host contains block.settings.domain %}
+        {% assign final_logo = block.settings.logo %}
+        {% assign final_logo_domain = block.settings.domain %}
+      {% endif %}
+    {% endif %}
+  {% endif %}
+{% endfor %}
+
+{%- comment -%}
+  Step 3 — output final_logo (either theme logo or block logo)
+{%- endcomment -%}
+
+<div class="header__heading-logo-wrapper">
+  {% if final_logo != blank %}
+    {% assign logo_alt = final_logo.alt | default: shop.name | escape %}
+    {% assign logo_height = settings.logo_width | divided_by: final_logo.aspect_ratio %}
+
+    {% capture sizes %}
+      (max-width: {{ settings.logo_width | times: 2 }}px) 50vw, {{ settings.logo_width | times: 2 }}px
+    {% endcapture %}
+
+    {% capture widths %}
+      {{ settings.logo_width }}, {{ settings.logo_width | times: 1.5 | round }}, {{ settings.logo_width | times: 2 }}
+    {% endcapture %}
+
+    {{ final_logo | image_url: width: 800 | image_tag:
+      class: 'header__heading-logo motion-reduce',
+      widths: widths,
+      height: logo_height,
+      width: settings.logo_width,
+      alt: logo_alt,
+      sizes: sizes,
+      preload: true
+    }}
+  {% else %}
+    <span class="h2">{{ shop.name }}</span>
+  {% endif %}
+</div>
+
           </a>
       {%- if request.page_type == 'index' -%}
         </h1>

@@ -1,26 +1,76 @@
 <!doctype html>
 <html class="no-js" lang="{{ request.locale.iso_code }}">
   <head>
-    {% comment %}Temporal redirect{% endcomment %}
-    {% unless request.design_mode %}
+   
+    {% comment %} {% unless request.design_mode %}
       <script>
       // need redirection logic for india brand @Deepak
-      //  if (window.location.host === 'tienda.condenast.es' && window.location.pathname === '/') {
-        //  window.location.href = 'https://tienda.condenast.es/pages/suscripciones-conde-nast';
-      //  }
-
-       // if (window.location.pathname.startsWith('/collections/all')) {
-        //  window.location.href = 'https://tienda.condenast.es/pages/suscripciones-conde-nast';
-       // }
-
-      //  if (
-        //  (window.location.host === 'conde-nast-es.myshopify.com' && window.location.pathname === '/') ||
-       //   window.location.pathname === '/cart'
-      //  ) {
-     //     window.location.href = 'https://tienda.condenast.es/pages/suscripciones-conde-nast';
+        if (window.location.host === 'pgm326-m0.myshopify.com' && window.location.pathname === '/') {
+          window.location.href = 'https://tienda.condenast.es/pages/suscripciones-conde-nast';
         }
-     // </script>
-    {% endunless %}
+
+       if (window.location.pathname.startsWith('/collections/all')) {
+        window.location.href = 'https://tienda.condenast.es/pages/suscripciones-conde-nast';
+       }
+
+       if (
+         (window.location.host === 'conde-nast-es.myshopify.com' && window.location.pathname === '/') ||
+         window.location.pathname === '/cart'
+       ) {
+         window.location.href = 'https://tienda.condenast.es/pages/suscripciones-conde-nast';
+        }
+      </script>
+    {% endunless %} {% endcomment %}
+
+
+ {% if request.design_mode %}
+<script>
+(function () {
+  console.log('=== MARKET URL HELPER ===');
+
+  // Liquid values
+  var shopifyMarket = '{{ localization.market.handle }}';
+  var themeMagazine = '{{ settings.magazine }}';
+  var sectionDomain = '{{ section.settings.domain | default: "" }}';
+
+  console.log('Shopify market:', shopifyMarket);
+  console.log('Theme setting magazine:', themeMagazine);
+  console.log('Section domain:', sectionDomain);
+
+  //  HARD STOP: only act when BOTH match
+  if (!themeMagazine || !sectionDomain || themeMagazine !== sectionDomain) {
+    console.log('Magazine and section domain do NOT match → skip');
+    return;
+  }
+
+  var url = new URL(window.location.href);
+
+  //  ONLY read actual query param
+  var urlMarket = url.searchParams.get('market');
+  console.log('URL market param:', urlMarket);
+
+  //  Add ONLY if missing
+  if (!urlMarket && shopifyMarket) {
+    url.searchParams.set('market', shopifyMarket);
+    console.log('Redirecting to:', url.toString());
+    window.location.replace(url.toString());
+  } else {
+    console.log('Market already present or invalid → skip');
+  }
+
+  console.log('========================');
+})();
+</script>
+{% endif %}
+
+
+
+
+
+
+
+
+
 
     {% render 'url-redirect' %}
 
@@ -439,7 +489,7 @@
         document.documentElement.classList.add('shopify-design-mode');
       }
     </script>
-    {% render 'onetrust' %}
+    {% render 'ethya' %}
 
   </head>
 

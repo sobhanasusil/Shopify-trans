@@ -1,6 +1,52 @@
 {% capture content %}
 {{ 'section-magazine.css' | asset_url | stylesheet_tag }}
 
+{%- comment -%} Market Detection and Logging {%- endcomment -%}
+{%- assign current_market = localization.market.handle -%}
+{%- assign market_name = localization.market.name -%}
+{%- assign market_iso_code = localization.market.iso_code -%}
+{%- assign shop_currency = shop.currency -%}
+
+<script>
+  console.log('=== MARKET DEBUG INFO ===');
+  console.log('entire object localization','{{ localization }}')
+  console.log('section data','{{ section }}')
+  console.log('Market Handle:', '{{ current_market }}');
+  console.log('Market Name:', '{{ market_name }}');
+  console.log('Market ISO Code:', '{{ market_iso_code }}');
+  console.log('Shop Currency:', '{{ shop_currency }}');
+  console.log('Request Host:', '{{ request.host }}');
+  console.log('========================');
+  
+   
+  // Log entire localization object (access properties directly since json filter doesn't work)
+  console.log('=== ENTIRE LOCALIZATION OBJECT ===');
+  console.log('entire object localization', '{{ localization }}');
+  console.log('localization.market.handle:', '{{ localization.market.handle }}');
+  console.log('localization.market.name:', '{{ localization.market.name }}');
+  console.log('localization.market.iso_code:', '{{ localization.market.iso_code }}');
+  console.log('localization.language.iso_code:', '{{ localization.language.iso_code }}');
+  console.log('localization.language.endonym_name:', '{{ localization.language.endonym_name }}');
+  console.log('localization.currency.iso_code:', '{{ localization.currency.iso_code }}');
+  console.log('localization.currency.symbol:', '{{ localization.currency.symbol }}');
+  console.log('===================================');
+  
+  // Log entire section object (access properties directly since json filter doesn't work)
+  console.log('=== ENTIRE SECTION OBJECT ===');
+  console.log('section data', '{{ section }}');
+  console.log('section.id:', '{{ section.id }}');
+  console.log('section.type:', '{{ section.type }}');
+  console.log('section.settings.collection.products:', '{{ section.settings.collection.products }}');
+  console.log('section.settings.domain:', '{{ section.settings.domain }}');
+  console.log('section.settings.padding_top:', '{{ section.settings.padding_top }}');
+  console.log('section.settings.padding_bottom:', '{{ section.settings.padding_bottom }}');
+  console.log('section.blocks count:', {{ section.blocks.size }});
+  {% for block in section.blocks %}
+  console.log('section.blocks[{{ forloop.index0 }}].type:', '{{ block.type }}');
+  {% endfor %}
+  console.log('==============================');
+</script>
+
 {%- style -%}
   .section-{{ section.id }}-padding {
     padding-top: {{ section.settings.padding_top | times: 0.75 | round: 0 }}px;
@@ -158,32 +204,53 @@
           
         </div>
         <div id="magazines__location" class="magazines__location" style="display: block;">
-          <h2
+          {% comment %} <h2
             class="magazines__gift-cards--heading section__heading rte inline-richtext h2 scroll-trigger"
           >
             Location
-          </h2>
+          </h2> {% endcomment %}
           <div
             class="rich-text__buttons rich-text__buttons--multiple scroll-trigger"
           >
               <a
                 data-id="plans-national"
                 href="#"
-                class="button {% if localization.market.handle == "es"%}button--primary{% else %}button--secondary{% endif %} select-market active"
+                class="button {% if localization.market.handle == "in"%}button--primary{% else %}button--secondary{% endif %} select-market active"
               >
-                India
+                Print
               </a>
 
               <a
                 data-id="plans-international"
                 href="#"
-                class="button {% if localization.market.handle != "es"%}button--primary{% else %}button--secondary{% endif %} select-market"
+                class="button {% if localization.market.handle != "in"%}button--primary{% else %}button--secondary{% endif %} select-market"
               >
-                International
+                Best Seller
+              </a>
+
+               <a
+                data-id="plans-international"
+                href="#"
+                class="button {% if localization.market.handle != "in"%}button--primary{% else %}button--secondary{% endif %} select-market"
+              >
+                Digital
               </a>
 
           </div>
         </div>
+       
+          {% comment %} <div id="magazines_product_collection" class="magazines_product_collection" style="display:block">
+            <div  class="rich-text__buttons rich-text__buttons--multiple scroll-trigger"
+          >
+            <a
+              data-id="print-subscription"
+              href="#"
+             class="button {% if localization.market.handle == "in"%}button--primary{% else %}button--secondary{% endif %} select-market active"
+              >
+              Print
+            </a>
+          </div> {% endcomment %}
+       
         <div id="magazines__plans" class="magazines__plans" style="display: block;">
           <hr>
           <h2
@@ -216,16 +283,72 @@
                         <p class="magazines__plan--caption">{{ caption }}</p>
                         {% endif %}
                         <h3 {% if caption == blank %}style="margin-top: 0;"{% endif %}  class="magazines__plan--heading rte inline-richtext h3">{{ product.metafields.custom.featured }}</h3>
+                        {%- comment -%} Price Display with Discount Badge by susil {%- endcomment -%}
+                        {%- assign variant = product.selected_or_first_available_variant -%}
+                        {%- assign compare_at_price = variant.compare_at_price -%}
+                        {%- assign price = variant.price -%}
+                        {%- if compare_at_price > price -%}
+                          {%- assign discount_amount = compare_at_price | minus: price -%}
+                          {%- assign discount_percentage = discount_amount | times: 100.0 | divided_by: compare_at_price | round -%}
+                          <div class="magazines__plan--price-wrapper">
+                            <span class="magazines__plan--discount-badge">
+                              {{ discount_percentage }}% OFF
+                            </span>
+                          </div>
+                        {%- else -%}
+                          <div class="magazines__plan--price-wrapper">
+                            <div class="magazines__plan--price-container">
+                              <span class="magazines__plan--price-regular">
+                                {{ price | money }}
+                              </span>
+                            </div>
+                          </div>
+  {%- comment -%} Price Display with Discount Badge by susil {%- endcomment -%}
+                        {%- endif -%}
+                        <div>
+                           <div class="magazines__plan--image-container">
+                     
+                        <div class="magazines__plan--image">
+                          <img src="{{ product.featured_image | img_url: '200x' }}" alt="{{ product.featured_image.alt }}">
+                        </div>
+                        {% if product.metafields.custom.footer != blank %}<div class="magazines__plan--header magazines__plan--footer">{{ product.metafields.custom.footer }}</div>{% endif %}
+                      </div>
+                        </div>
                         <p class="magazines__plan--payment">{{ product.metafields.custom.payment }}</p>
-                        <a 
+                       
+                        <div class="magazines__plan--features">
+                          {{ product.description }}
+                        </div>
+                        
+                      </div>
+                      <div class="magazines__plan-bottom">
+                        {% comment %} by susil  {% endcomment %}
+                           {%- comment -%} Price Display in Footer {%- endcomment -%}
+                        {%- assign variant = product.selected_or_first_available_variant -%}
+                        {%- assign compare_at_price = variant.compare_at_price -%}
+                        {%- assign price = variant.price -%}
+                        {%- if compare_at_price > price -%}
+                          <div class="magazines__plan--price-wrapper">
+                            <div class="magazines__plan--price-container">
+                              <span class="magazines__plan--price-sale">
+                                {{ price | money }}
+                              </span>
+                              <span class="magazines__plan--price-compare">
+                                <s>{{ compare_at_price | money }}</s>
+                              </span>
+                            </div>
+                          </div>
+                        {%- else -%}
+                          <div class="magazines__plan--price-wrapper">
+                            <div class="magazines__plan--price-container">
+                              <span class="magazines__plan--price-regular">
+                                {{ price | money }}
+                              </span>
+                            </div>
+                          </div>
+                        {%- endif -%}
+                        <a
                           {% if product.selected_or_first_available_selling_plan_allocation %}
-                            {% comment %} 
-                              {% if product.metafields.custom.monthly == true %}
-                                data-selling-plan="{{ product.selected_or_first_available_selling_plan_allocation.selling_plan.id }}" data-price="{{ product.price | times: 12 | money }}"
-                              {% else %}
-                                data-selling-plan="{{ product.selected_or_first_available_selling_plan_allocation.selling_plan.id }}" data-price="{{ product.price | money }}" 
-                              {% endif %} 
-                            {% endcomment %}
                             data-selling-plan="{{ product.selected_or_first_available_selling_plan_allocation.selling_plan.id }}" data-price="{{ product.price | money }}"        
                           {% else %}
                             data-price="{{ product.price | money }}"
@@ -250,17 +373,10 @@
                             {% else %}
                               Select
                             {% endif %}
-                            </a>
-                        <div class="magazines__plan--features">
-                          {{ product.description }}
-                        </div>
+                        </a>
                       </div>
-                      <div class="magazines__plan-bottom">
-                        <div class="magazines__plan--image">
-                          <img src="{{ product.featured_image | img_url: '200x' }}" alt="{{ product.featured_image.alt }}">
-                        </div>
-                        {% if product.metafields.custom.footer != blank %}<div class="magazines__plan--header magazines__plan--footer">{{ product.metafields.custom.footer }}</div>{% endif %}
-                      </div>
+                         {% comment %} by susil  {% endcomment %}
+                     
                     </div>
                   </div>
                 {% endfor %}
@@ -298,12 +414,29 @@
 
                   <div class="swiper-slide">
                     <div class="magazines__plan {% if forloop.index == preselect %}active{% endif %}">
-                      <div class="magazines__plan--header">{% if product.metafields.custom.international_metatag != blank %}{{ product.metafields.custom.international_metatag }}{% else %}{{ product.title | split: " - " | last }}{% endif %}</div>
+                      <div class="magazines__plan--header">{% if product.metafields.custom.international_metatag != blank %}{{ product.metafields.custom.international_metatag }}{% else %}{{ product.title | split: " - " | last }}{% endif %}
+                        <div class="magazines__plan--image">
+                          <img src="{{ product.featured_image | img_url: '200x' }}" alt="{{ product.featured_image.alt }}">
+                        </div>
+                      </div>
                       <div class="magazines__plan--content">
                         {% if caption != blank %}
                         <p class="magazines__plan--caption">{{ caption }}</p>
                         {% endif %}
                         <h3 {% if caption == blank %}style="margin-top: 0;"{% endif %}  class="magazines__plan--heading rte inline-richtext h3">{{ product.metafields.custom.international_featured }}</h3>
+                       {% comment %} by susil  {% endcomment %}
+                          {%- comment -%} Discount Badge - Top Left Corner {%- endcomment -%}
+                        {%- assign variant = product.selected_or_first_available_variant -%}
+                        {%- assign compare_at_price = variant.compare_at_price -%}
+                        {%- assign price = variant.price -%}
+                        {%- if compare_at_price > price -%}
+                          {%- assign discount_amount = compare_at_price | minus: price -%}
+                          {%- assign discount_percentage = discount_amount | times: 100.0 | divided_by: compare_at_price | round -%}
+                          <span class="magazines__plan--discount-badge">
+                            {{ discount_percentage }}% Off
+                          </span>
+                        {%- endif -%}
+                        {% comment %} by susil  {% endcomment %}
                         <p class="magazines__plan--payment">{{ product.metafields.custom.international_payment }}</p>
                         <a 
                           {% if product.selected_or_first_available_selling_plan_allocation %}
@@ -341,9 +474,7 @@
                         </div>
                       </div>
                       <div class="magazines__plan-bottom">
-                        <div class="magazines__plan--image">
-                          <img src="{{ product.featured_image | img_url: '200x' }}" alt="{{ product.featured_image.alt }}">
-                        </div>
+                        
                         {% if product.metafields.custom.international_footer != blank %}<div class="magazines__plan--header magazines__plan--footer">{{ product.metafields.custom.international_footer }}</div>{% endif %}
                       </div>
                     </div>
@@ -626,7 +757,7 @@
   </div>
 </div>
 
-{% if localization.market.handle == "es"%}
+{% if localization.market.handle == "in"%}
 
   {% assign index_mobile = 1 %}
   {% if section.settings.collection.products.count < 3 %}
@@ -939,6 +1070,8 @@ document.querySelector('.button__gift').addEventListener('click', function() {
         });
     });
 });
+
+{% comment %} by susil  {% endcomment %}
 
 
 </script>
@@ -1780,8 +1913,19 @@ document.addEventListener("DOMContentLoaded", function() {
 </script>
 
 
+{% if request.design_mode %}
+  <script>
+    console.log('************************************************');
+    console.log('Design mode enabled');
+    console.log('Theme setting magazine:', '{{ settings.magazine }}');
+    console.log('Section domain:', '{{ section.settings.domain }}');
+    console.log('Request host:', '{{ request.host }}');
+    console.log('************************************************');
+  </script>
+{% endif %}
 
 {% endcapture %}
+
 {% if request.design_mode == true %}
   {% if settings.magazine == section.settings.domain %}
     {{ content }}
