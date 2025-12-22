@@ -1,1 +1,63 @@
-{"sections":{"slideshow_VgtWNB":{"type":"slideshow","blocks":{"slide_T3i9aY":{"type":"slide","settings":{"image":"shopify:\/\/shop_images\/2vogue_staff_bolsos_verano_alta_silviadelarosa_04.jpg","heading":"<strong>Asegura los regalos exclusivos de portada Vogue con la suscripción en quiosco.<\/strong>","heading_size":"h2","subheading":"<em><strong>En agosto: el bolso<\/strong><\/em>","button_label":"","link":"shopify:\/\/products\/vogue-suscripcion-anual-e-bono","button_style_secondary":false,"box_align":"top-center","show_text_box":false,"text_alignment":"center","image_overlay_opacity":20,"color_scheme":"inverse","text_alignment_mobile":"center"}}},"block_order":["slide_T3i9aY"],"settings":{"layout":"grid","slide_height":"adapt_image","slider_visual":"dots","auto_rotate":true,"change_slides_speed":3,"image_behavior":"none","show_text_below":false,"accessibility_info":"Slideshow about our brand"}},"main":{"type":"quiosco","custom_css":[],"settings":{"domain":"suscripcion.vogue.es","product":"vogue-suscripcion-anual-e-bono","image":"shopify:\/\/shop_images\/cr_vogue_bolsos_verano_2025_16_1.jpg","title":"","label":"","box_title":"","box_subtitle":"","list":"<ul><li><strong>Asegúrate todos los regalos de portada.<\/strong><\/li><li>Con <strong>todas las ventajas<\/strong> de ser suscriptor y los extras de quiosco.<\/li><li>Disponible <strong>desde el primer día<\/strong> de salida a la venta.<\/li><\/ul>","benefit":"<p>Recoge el ejemplar en tu quiosco más cercano* y disfruta de todos los regalos de portada y extras que lleve la revista cada mes, durante un año, mientras dure tu suscripción.<\/p><p>Empieza tu suscripción con Vogue agosto y el bolso del verano.<\/p>","conditions":"<p>Suscríbete antes del día 10 de julio y podrás recoger el ejemplar de agosto el mismo día que salga a la venta junto al bolso edición limitada Vogue en el quiosco (cuatro modelos a elegir, unidades limitadas).<\/p><p>Suscripción disponible sólo en España.<\/p>","gift":"<p>Si te interesa recibirla en casa con un <strong>regalo exclusivo<\/strong> de bienvenida: Ver opción Home delivery.<\/p>","gift_image":"shopify:\/\/shop_images\/cr_vogue_bioderma_solares_silviadelarosa_01_2.jpg","desktop_content_position":"center","content_alignment":"center","color_scheme":"","full_width":true,"padding_top":28,"padding_bottom":28}}},"order":["slideshow_VgtWNB","main"]}
+{
+  "sections": {
+    "slideshow_VgtWNB": {
+      "type": "slideshow",
+      "blocks": {
+        "slide_T3i9aY": {
+          "type": "slide",
+          "settings": {
+            "image": "shopify://shop_images/2vogue_staff_bolsos_verano_alta_silviadelarosa_04.jpg",
+            "heading": "<strong>Secure exclusive Vogue cover gifts with the store subscription.</strong>",
+            "heading_size": "h2",
+            "subheading": "<em><strong>In August: the bag</strong></em>",
+            "button_label": "",
+            "link": "shopify://products/vogue-subscription-annual-e-bono",
+            "button_style_secondary": false,
+            "box_align": "top-center",
+            "show_text_box": false,
+            "text_alignment": "center",
+            "image_overlay_opacity": 20,
+            "color_scheme": "inverse",
+            "text_alignment_mobile": "center"
+          }
+        }
+      },
+      "block_order": ["slide_T3i9aY"],
+      "settings": {
+        "layout": "grid",
+        "slide_height": "adapt_image",
+        "slider_visual": "dots",
+        "auto_rotate": true,
+        "change_slides_speed": 3,
+        "image_behavior": "none",
+        "show_text_below": false,
+        "accessibility_info": "Slideshow about our brand"
+      }
+    },
+    "main": {
+      "type": "quiosco",
+      "custom_css": [],
+      "settings": {
+        "domain": "subscription.vogue.in",
+        "product": "vogue-subscription-annual-e-bono",
+        "image": "shopify://shop_images/cr_vogue_bolsos_verano_2025_16_1.jpg",
+        "title": "",
+        "label": "",
+        "box_title": "",
+        "box_subtitle": "",
+        "list": "<ul><li><strong>Secure all cover gifts.</strong></li><li>With <strong>all the benefits</strong> of being a subscriber and store extras.</li><li>Available <strong>from the first day</strong> of sale.</li></ul>",
+        "benefit": "<p>Collect the issue at your nearest store* and enjoy all the cover gifts and extras that the magazine carries each month, for a year, as long as your subscription lasts.</p><p>Start your subscription with Vogue August and the summer bag.</p>",
+        "conditions": "<p>Subscribe before the 10th of July and you can collect the August issue on the same day it goes on sale along with the limited edition Vogue bag at the store (four models to choose from, limited units).</p><p>Subscription available only in India.</p>",
+        "gift": "<p>If you are interested in receiving it at home with an <strong>exclusive welcome gift</strong>: See Home delivery option.</p>",
+        "gift_image": "shopify://shop_images/cr_vogue_bioderma_solares_silviadelarosa_01_2.jpg",
+        "desktop_content_position": "center",
+        "content_alignment": "center",
+        "color_scheme": "",
+        "full_width": true,
+        "padding_top": 28,
+        "padding_bottom": 28
+      }
+    }
+  },
+  "order": ["slideshow_VgtWNB", "main"]
+}

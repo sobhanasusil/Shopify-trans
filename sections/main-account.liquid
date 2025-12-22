@@ -147,15 +147,15 @@
         {{ 'customer.account.view_addresses' | t }} ({{ customer.addresses_count }})
       </a>
 
-      <a href="https://shopify.com/76239405341/account/e/e85ad72a-1b9d-4038-8e07-a4d61164ed72" class="button button--primary button--manage-subscription">Gestionar suscripciones</a>
+      <a href="https://shopify.com/76239405341/account/e/e85ad72a-1b9d-4038-8e07-a4d61164ed72" class="button button--primary button--manage-subscription">Manage subscriptions</a>
     </div>
   </div>
   <div>
     {%- for transaction in customer.transactions -%}
       {% if transaction.gateway_display_name == "Gift card" %}
         <br>
-        <h2 class="customer__title">Mis tarjetas regalo</h2>
-        Saldo en la tarjeta de regalo: <b>{{ transaction.payment_details.gift_card.balance |  money }}</b> <a href="{{ transaction.payment_details.gift_card.url }}?{{ url_param }}">Ver tarjeta</a>
+        <h2 class="customer__title">My gift cards</h2>
+        Balance on gift card: <b>{{ transaction.payment_details.gift_card.balance |  money }}</b> <a href="{{ transaction.payment_details.gift_card.url }}?{{ url_param }}">View card</a>
       {% endif %}
     {%- endfor -%}
   </div>

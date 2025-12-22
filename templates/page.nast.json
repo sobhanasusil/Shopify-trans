@@ -1,1 +1,152 @@
-{"sections":{"main":{"type":"main-page","disabled":true,"settings":{"padding_top":16,"padding_bottom":28}},"5ef82b50-5d3e-43ef-a403-3bb4c7fa26a3":{"type":"image-banner","blocks":{"template--21515302371613__5ef82b50-5d3e-43ef-a403-3bb4c7fa26a3-heading-1":{"type":"heading","settings":{"heading":"","heading_size":"h1"}},"template--21515302371613__5ef82b50-5d3e-43ef-a403-3bb4c7fa26a3-text-1":{"type":"text","settings":{"text":"","text_style":"body"}},"template--21515302371613__5ef82b50-5d3e-43ef-a403-3bb4c7fa26a3-buttons-1":{"type":"buttons","settings":{"button_label_1":"","button_link_1":"","button_style_secondary_1":false,"button_label_2":"","button_link_2":"","button_style_secondary_2":false}}},"block_order":["template--21515302371613__5ef82b50-5d3e-43ef-a403-3bb4c7fa26a3-heading-1","template--21515302371613__5ef82b50-5d3e-43ef-a403-3bb4c7fa26a3-text-1","template--21515302371613__5ef82b50-5d3e-43ef-a403-3bb4c7fa26a3-buttons-1"],"settings":{"image":"shopify:\/\/shop_images\/blond-woman-with-winter-pine.jpg","image_overlay_opacity":0,"image_height":"small","desktop_content_position":"top-left","show_text_box":false,"desktop_content_alignment":"center","color_scheme":"","image_behavior":"fixed","mobile_content_alignment":"center","stack_images_on_mobile":false,"show_text_below":false}},"ea5865f6-f25b-4114-8b69-2a07425bbfdc":{"type":"rich-text","blocks":{"template--21515302371613__ea5865f6-f25b-4114-8b69-2a07425bbfdc-text-1":{"type":"text","settings":{"text":"<p>Gracias por visitar el site de suscripciones de Condé Nast.<br\/>Haga click en cualquiera de los cabeceras para comenzar el proceso de compra.<\/p>"}}},"block_order":["template--21515302371613__ea5865f6-f25b-4114-8b69-2a07425bbfdc-text-1"],"settings":{"desktop_content_position":"center","content_alignment":"center","color_scheme":"background-1","full_width":true,"padding_top":52,"padding_bottom":52}},"c84f9e03-f717-4e70-88c3-3ff205cd81fc":{"type":"multicolumn","blocks":{"template--21515302371613__c84f9e03-f717-4e70-88c3-3ff205cd81fc-column-1":{"type":"column","settings":{"color_scheme":"","image":"shopify:\/\/shop_images\/Logo_VOGUE.png","title":"","text":"<p>Acceso a la suscripcion de la revista <a href=\"https:\/\/suscripcion.vogue.es\/\" target=\"_blank\" title=\"https:\/\/suscripcion.vogue.es\/\">VOGUE<\/a><\/p>","link_label":"","link":"https:\/\/suscripcion.vogue.es\/"}},"template--21515302371613__c84f9e03-f717-4e70-88c3-3ff205cd81fc-column-2":{"type":"column","settings":{"color_scheme":"","image":"shopify:\/\/shop_images\/logoprintdigital_copy.png","title":"","text":"<p>Acceso a la suscripción de la revista <a href=\"https:\/\/suscripcion.revistaad.es\/\" target=\"_blank\" title=\"https:\/\/suscripcion.revistaad.es\/\">AD<\/a><\/p>","link_label":"","link":""}},"template--21515302371613__c84f9e03-f717-4e70-88c3-3ff205cd81fc-column-3":{"type":"column","settings":{"color_scheme":"","image":"shopify:\/\/shop_images\/Vanity_logo.png","title":"","text":"<p>Acceso a la suscripcición de la revista <a href=\"https:\/\/suscripcion.revistavanityfair.es\/\" target=\"_blank\" title=\"https:\/\/suscripcion.revistavanityfair.es\/\">VANITY FAIIR<\/a><\/p>","link_label":"","link":""}},"c483a55c-c094-46fc-b3b7-d0248f4c81e7":{"type":"column","settings":{"color_scheme":"","image":"shopify:\/\/shop_images\/TRAVELER.png","title":"","text":"<p>Acceso a la suscripción de la revista <a href=\"https:\/\/suscripcion.traveler.es\/\" target=\"_blank\" title=\"https:\/\/suscripcion.traveler.es\/\">TRAVELER<\/a><\/p>","link_label":"","link":""}},"5a023dba-59a9-46b2-a6d6-9580061e5015":{"type":"column","settings":{"color_scheme":"","image":"shopify:\/\/shop_images\/GQ_OK.png","title":"","text":"<p>Acceso a la suscripción de la revista <a href=\"https:\/\/suscripcion.revistagq.com\/\" target=\"_blank\" title=\"https:\/\/suscripcion.revistagq.com\/\">GQ<\/a><\/p>","link_label":"","link":""}}},"block_order":["template--21515302371613__c84f9e03-f717-4e70-88c3-3ff205cd81fc-column-1","template--21515302371613__c84f9e03-f717-4e70-88c3-3ff205cd81fc-column-2","template--21515302371613__c84f9e03-f717-4e70-88c3-3ff205cd81fc-column-3","c483a55c-c094-46fc-b3b7-d0248f4c81e7","5a023dba-59a9-46b2-a6d6-9580061e5015"],"settings":{"title":"","heading_size":"h1","image_width":"full","image_ratio":"adapt","columns_desktop":5,"column_alignment":"center","background_style":"primary","button_label":"","button_link":"","color_scheme":"accent-2","columns_mobile":"1","swipe_on_mobile":false,"padding_top":0,"padding_bottom":16}}},"order":["main","5ef82b50-5d3e-43ef-a403-3bb4c7fa26a3","ea5865f6-f25b-4114-8b69-2a07425bbfdc","c84f9e03-f717-4e70-88c3-3ff205cd81fc"]}
+{
+  "sections": {
+    "main": {
+      "type": "main-page",
+      "disabled": true,
+      "settings": { "padding_top": 16, "padding_bottom": 28 }
+    },
+    "5ef82b50-5d3e-43ef-a403-3bb4c7fa26a3": {
+      "type": "image-banner",
+      "blocks": {
+        "template--21515302371613__5ef82b50-5d3e-43ef-a403-3bb4c7fa26a3-heading-1": {
+          "type": "heading",
+          "settings": { "heading": "", "heading_size": "h1" }
+        },
+        "template--21515302371613__5ef82b50-5d3e-43ef-a403-3bb4c7fa26a3-text-1": {
+          "type": "text",
+          "settings": { "text": "", "text_style": "body" }
+        },
+        "template--21515302371613__5ef82b50-5d3e-43ef-a403-3bb4c7fa26a3-buttons-1": {
+          "type": "buttons",
+          "settings": {
+            "button_label_1": "",
+            "button_link_1": "",
+            "button_style_secondary_1": false,
+            "button_label_2": "",
+            "button_link_2": "",
+            "button_style_secondary_2": false
+          }
+        }
+      },
+      "block_order": [
+        "template--21515302371613__5ef82b50-5d3e-43ef-a403-3bb4c7fa26a3-heading-1",
+        "template--21515302371613__5ef82b50-5d3e-43ef-a403-3bb4c7fa26a3-text-1",
+        "template--21515302371613__5ef82b50-5d3e-43ef-a403-3bb4c7fa26a3-buttons-1"
+      ],
+      "settings": {
+        "image": "shopify://shop_images/blond-woman-with-winter-pine.jpg",
+        "image_overlay_opacity": 0,
+        "image_height": "small",
+        "desktop_content_position": "top-left",
+        "show_text_box": false,
+        "desktop_content_alignment": "center",
+        "color_scheme": "",
+        "image_behavior": "fixed",
+        "mobile_content_alignment": "center",
+        "stack_images_on_mobile": false,
+        "show_text_below": false
+      }
+    },
+    "ea5865f6-f25b-4114-8b69-2a07425bbfdc": {
+      "type": "rich-text",
+      "blocks": {
+        "template--21515302371613__ea5865f6-f25b-4114-8b69-2a07425bbfdc-text-1": {
+          "type": "text",
+          "settings": {
+            "text": "<p>Thank you for visiting the Condé Nast subscriptions site.<br/>Click on any of the publications to begin the purchase process.</p>"
+          }
+        }
+      },
+      "block_order": [
+        "template--21515302371613__ea5865f6-f25b-4114-8b69-2a07425bbfdc-text-1"
+      ],
+      "settings": {
+        "desktop_content_position": "center",
+        "content_alignment": "center",
+        "color_scheme": "background-1",
+        "full_width": true,
+        "padding_top": 52,
+        "padding_bottom": 52
+      }
+    },
+    "c84f9e03-f717-4e70-88c3-3ff205cd81fc": {
+      "type": "multicolumn",
+      "blocks": {
+        "template--21515302371613__c84f9e03-f717-4e70-88c3-3ff205cd81fc-column-1": {
+          "type": "column",
+          "settings": {
+            "color_scheme": "",
+            "image": "shopify://shop_images/Logo_VOGUE.png",
+            "title": "",
+            "text": "<p>Access to the <a href=\"subscription.vogue.in/\" target=\"_blank\" title=\"subscription.vogue.in/\">VOGUE</a> magazine subscription</p>",
+            "link_label": "",
+            "link": "subscription.vogue.in/"
+          }
+        },
+        "template--21515302371613__c84f9e03-f717-4e70-88c3-3ff205cd81fc-column-2": {
+          "type": "column",
+          "settings": {
+            "color_scheme": "",
+            "image": "shopify://shop_images/logoprintdigital_copy.png",
+            "title": "",
+            "text": "<p>Access to the <a href=\"subscription.architecturaldigest.in/\" target=\"_blank\" title=\"subscription.architecturaldigest.in/\">AD</a> magazine subscription</p>",
+            "link_label": "",
+            "link": ""
+          }
+        }
+        },
+        "c483a55c-c094-46fc-b3b7-d0248f4c81e7": {
+          "type": "column",
+          "settings": {
+            "color_scheme": "",
+            "image": "shopify://shop_images/TRAVELER.png",
+            "title": "",
+            "text": "<p>Access to the <a href=\"https://subscription.cntraveller.in/\" target=\"_blank\" title=\"https://subscription.cntraveller.in/\">CN TRAVELER</a> magazine subscription</p>",
+            "link_label": "",
+            "link": ""
+          }
+        },
+        "5a023dba-59a9-46b2-a6d6-9580061e5015": {
+          "type": "column",
+          "settings": {
+            "color_scheme": "",
+            "image": "shopify://shop_images/GQ_OK.png",
+            "title": "",
+            "text": "<p>Access to the <a href=\"https://subscription.gqindia.com/\" target=\"_blank\" title=\"https://subscription.gqindia.com/\">GQ</a> magazine subscription</p>",
+            "link_label": "",
+            "link": ""
+          }
+        }
+      },
+      "block_order": [
+        "template--21515302371613__c84f9e03-f717-4e70-88c3-3ff205cd81fc-column-1",
+        "template--21515302371613__c84f9e03-f717-4e70-88c3-3ff205cd81fc-column-2",
+        "template--21515302371613__c84f9e03-f717-4e70-88c3-3ff205cd81fc-column-3",
+        "c483a55c-c094-46fc-b3b7-d0248f4c81e7",
+        "5a023dba-59a9-46b2-a6d6-9580061e5015"
+      ],
+      "settings": {
+        "title": "",
+        "heading_size": "h1",
+        "image_width": "full",
+        "image_ratio": "adapt",
+        "columns_desktop": 5,
+        "column_alignment": "center",
+        "background_style": "primary",
+        "button_label": "",
+        "button_link": "",
+        "color_scheme": "accent-2",
+        "columns_mobile": "1",
+        "swipe_on_mobile": false,
+        "padding_top": 0,
+        "padding_bottom": 16
+      }
+    }
+  },
+  "order": [
+    "main",
+    "5ef82b50-5d3e-43ef-a403-3bb4c7fa26a3",
+    "ea5865f6-f25b-4114-8b69-2a07425bbfdc",
+    "c84f9e03-f717-4e70-88c3-3ff205cd81fc"
+  ]
+}

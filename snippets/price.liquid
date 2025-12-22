@@ -46,6 +46,23 @@
         - div.price__regular: Displayed when there are no variants on sale
         - div.price__sale: Displayed when a variant is a sale
     {%- endcomment -%}
+      {%- comment -%} DEBUG: Price Data Logging {%- endcomment -%}
+    {%- comment -%}
+      DEBUG INFO:
+      - product exists: {{ product != blank }}
+      - use_variant: {{ use_variant }}
+      - target type: {% if use_variant %}variant{% else %}product{% endif %}
+      - price: {{ price }}
+      - compare_at_price: {{ compare_at_price }}
+      - money_price: {{ money_price }}
+      - available: {{ available }}
+      - price_varies: {{ product.price_varies }}
+      - compare_at_price_varies: {{ product.compare_at_price_varies }}
+    {%- endcomment -%}
+    
+    {%- comment -%} DEBUG: Visible output (remove in production) {%- endcomment -%}
+    <div style="display: none;" class="price-debug" data-debug-price="{{ price }}" data-debug-compare="{{ compare_at_price }}" data-debug-money="{{ money_price }}" data-debug-available="{{ available }}"></div>
+    
     <div class="price__regular">
       <span class="visually-hidden visually-hidden--inline">{{ 'products.product.price.regular_price' | t }}</span>
       <span class="price-item price-item--regular">
@@ -95,3 +112,23 @@
     </span>
   {%- endif -%}
 </div>
+{%- comment -%} DEBUG: JavaScript Console Logging {%- endcomment -%}
+<script>
+  (function() {
+    const debugElement = document.querySelector('.price-debug');
+    if (debugElement) {
+      const debugData = {
+        price: debugElement.getAttribute('data-debug-price'),
+        compare_at_price: debugElement.getAttribute('data-debug-compare'),
+        money_price: debugElement.getAttribute('data-debug-money'),
+        available: debugElement.getAttribute('data-debug-available')
+      };
+      console.log('🔍 Price Debug Data:', debugData);
+      console.log('📊 Price Component:', {
+        element: debugElement.closest('.price'),
+        isOnSale: debugElement.closest('.price')?.classList.contains('price--on-sale'),
+        isSoldOut: debugElement.closest('.price')?.classList.contains('price--sold-out')
+      });
+    }
+  })();
+</script>

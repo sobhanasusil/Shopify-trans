@@ -1,22 +1,12 @@
-{% assign onetrust_id = blank %}
 {% assign fides_id = blank %}
-{% if request.host contains "suscripcion.vogue.es" %}
-  {% assign onetrust_id = "69981e7f-89f3-444e-9570-b221f294f410" %}
-  {% assign fides_id = "FDS-I0MYDI" %}
-{% elsif request.host contains "suscripcion.revistagq.com" %}
-  {% assign fides_id = "FDS-9UARB0" %}
-  {% assign onetrust_id = "31398081-8872-4c71-8e2b-34a017a230bd" %}
-{% elsif request.host contains "suscripcion.revistaad.es" %}
-  {% assign fides_id = "FDS-TDUGOR" %}
-  {% assign onetrust_id = "7d4cc7d9-2d2d-4e0e-be94-14cc0e445949" %}
-{% elsif request.host contains "suscripcion.revistavanityfair.es" %}
-  {% assign fides_id = "FDS-NZRCI3" %}
-  {% assign onetrust_id = "d087a597-a856-4275-94ac-244e313f0942" %}
-{% elsif request.host contains "suscripcion.traveler.es" %}
-  {% assign fides_id = "FDS-D1E117" %}
-  {% assign onetrust_id = "c1b5b83e-4af0-478a-8e7d-53b0e2649d01" %}
-{% elsif request.host contains "suscripcion.condenast.es" %}
-  {% assign onetrust_id = "cae7ea22-fce2-4c67-a6af-8a39d97dc406" %}
+{% if request.host contains "subscription.vogue.in" %}
+  {% assign fides_id = "FDS-TFUT6Q" %}
+{% elsif request.host contains "subscription.gqindia.com" %}
+  {% assign fides_id = "FDS-ZOJBMO" %}
+{% elsif request.host contains "subscription.architecturaldigest.in" %}
+  {% assign fides_id = "FDS-O9PALF" %}
+{% elsif request.host contains "subscription.cntraveller.in" %}
+  {% assign fides_id = "FDS-6V9NOG" %}
 {% endif %}
 
   <script>
@@ -25,7 +15,7 @@
    // var isStage = window.location.search.indexOf('debug=true') !== -1;
 
     // 3) Pull IDs from Liquid
-    var onetrustId = "{{ onetrust_id}}";
+
     var fidesId    = "{{ fides_id}}";
 
     if (fidesId) {
@@ -110,18 +100,6 @@
     
       setupShopifyBridge();
       insertFidesScript();
-    } else if (onetrustId) {
-      // 5) Fallback: OneTrust
-      var o = document.createElement('script');
-      o.src = 'https://cdn.cookielaw.org/scripttemplates/otSDKStub.js';
-      o.setAttribute('data-domain-script', onetrustId);
-      o.async = true;
-      document.head.appendChild(o);
-
-      // Stub callback
-      var w = document.createElement('script');
-      w.text = 'function OptanonWrapper() {}';
-      document.head.appendChild(w);
     } else {
       console.log("Final Else");
     }

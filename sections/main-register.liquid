@@ -1,15 +1,13 @@
 {{ 'customer.css' | asset_url | stylesheet_tag }}
 
 {% assign magazine = blank %}
-{% if request.host contains "suscripcion.vogue.es" %}
+{% if request.host contains "subscription.vogue.in" %}
     {% assign magazine = "c_vogue" %}
-{% elsif request.host contains "suscripcion.revistagq.com" %}
+{% elsif request.host contains "subscription.gqindia.com" %}
     {% assign magazine = "c_gq" %}
-{% elsif request.host contains "suscripcion.revistaad.es" %}
+{% elsif request.host contains "subscription.architecturaldigest.in" %}
     {% assign magazine = "c_ad" %}
-{% elsif request.host contains "suscripcion.revistavanityfair.es" %}
-    {% assign magazine = "c_vanity-fair" %}
-{% elsif request.host contains "suscripcion.traveler.es" %}
+{% elsif request.host contains "subscription.cntraveller.in" %}
     {% assign magazine = "c_traveler" %}
 {% endif %}
 

@@ -1,1 +1,41 @@
-{"sections":{"main":{"type":"venta-cruzada","custom_css":[],"settings":{"domain":"suscripcion.vogue.es","product":"vogue-suscripcion-home-delivery","product_2":"ad-suscripcion-anual-home-delivery","logo_1":"shopify:\/\/shop_images\/Logo_VOGUE_ac330838-fcdd-4d51-86c7-a69854ad2a28.png","logo_1_alt_text":"Vogue","logo_2":"shopify:\/\/shop_images\/Logo_AD_N.png","logo_2_alt_text":"AD","magazine_image_1":"shopify:\/\/shop_images\/Vogue_Agosto.png","magazine_image_1_alt":"Magazine Cover 1","magazine_image_2":"shopify:\/\/shop_images\/Vogue_445_Abril.png","magazine_image_2_alt":"Magazine Cover 2","magazine_image_3":"shopify:\/\/shop_images\/Portada_AD_204.jpg","magazine_image_3_alt":"Magazine Cover 3","magazine_image_4":"shopify:\/\/shop_images\/Portada_AD_201.png","magazine_image_4_alt":"Magazine Cover 4","title":"","label":"","box_title":"","box_subtitle":"","list":"<ul><li><strong>Asegúrate todos los regalos de portada.<\/strong><\/li><li>Con <strong>todas las ventajas<\/strong> de ser suscriptor y los extras de quiosco.<\/li><li>Disponible <strong>desde el primer día<\/strong> de salida a la venta.<\/li><\/ul>","benefit":"<p>Recoge el ejemplar en tu quiosco más cercano* y disfruta de todos los regalos de portada y extras que lleve la revista cada mes, durante un año, mientras dure tu suscripción.<\/p>","conditions":"<p>Suscríbete antes del día 10 de octubre y podrás recoger el ejemplar de agosto el mismo día que salga a la venta junto al tote bag edición limitada Vogue en el quiosco (tres modelos a elegir, unidades Limitadas).<\/p><p>Suscripción disponible sólo en España.<\/p>","gift":"<p>Si te interesa recibirla en casa con un <strong>regalo exclusivo<\/strong> de bienvenida: Ver opción Home delivery.<\/p>","gift_image":"shopify:\/\/shop_images\/Violeta.jpg","desktop_content_position":"center","content_alignment":"center","color_scheme":"","full_width":true,"padding_top":28,"padding_bottom":28}}},"order":["main"]}
+{
+  "sections": {
+    "main": {
+      "type": "venta-cruzada",
+      "custom_css": [],
+      "settings": {
+        "domain": "subscription.vogue.in",
+        "product": "vogue-subscription-home-delivery",
+        "product_2": "ad-subscription-annual-home-delivery",
+        "logo_1": "shopify://shop_images/Logo_VOGUE_ac330838-fcdd-4d51-86c7-a69854ad2a28.png",
+        "logo_1_alt_text": "Vogue",
+        "logo_2": "shopify://shop_images/Logo_AD_N.png",
+        "logo_2_alt_text": "AD",
+        "magazine_image_1": "shopify://shop_images/Vogue_Agosto.png",
+        "magazine_image_1_alt": "Magazine Cover 1",
+        "magazine_image_2": "shopify://shop_images/Vogue_445_Abril.png",
+        "magazine_image_2_alt": "Magazine Cover 2",
+        "magazine_image_3": "shopify://shop_images/Portada_AD_204.jpg",
+        "magazine_image_3_alt": "Magazine Cover 3",
+        "magazine_image_4": "shopify://shop_images/Portada_AD_201.png",
+        "magazine_image_4_alt": "Magazine Cover 4",
+        "title": "",
+        "label": "",
+        "box_title": "",
+        "box_subtitle": "",
+        "list": "<ul><li><strong>Secure all cover gifts.</strong></li><li>With <strong>all the benefits</strong> of being a subscriber and store extras.</li><li>Available <strong>from the first day</strong> of sale.</li></ul>",
+        "benefit": "<p>Collect the issue at your nearest store* and enjoy all the cover gifts and extras that the magazine carries each month, for a year, as long as your subscription lasts.</p>",
+        "conditions": "<p>Subscribe before the 10th of October and you can collect the August issue on the same day it goes on sale along with the limited edition Vogue tote bag at the store (three models to choose from, limited units).</p><p>Subscription available only in India.</p>",
+        "gift": "<p>If you are interested in receiving it at home with an <strong>exclusive welcome gift</strong>: See Home delivery option.</p>",
+        "gift_image": "shopify://shop_images/Violeta.jpg",
+        "desktop_content_position": "center",
+        "content_alignment": "center",
+        "color_scheme": "",
+        "full_width": true,
+        "padding_top": 28,
+        "padding_bottom": 28
+      }
+    }
+  },
+  "order": ["main"]
+}

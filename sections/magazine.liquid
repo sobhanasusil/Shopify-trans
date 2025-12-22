@@ -1,6 +1,52 @@
 {% capture content %}
 {{ 'section-magazine.css' | asset_url | stylesheet_tag }}
 
+{%- comment -%} Market Detection and Logging {%- endcomment -%}
+{%- assign current_market = localization.market.handle -%}
+{%- assign market_name = localization.market.name -%}
+{%- assign market_iso_code = localization.market.iso_code -%}
+{%- assign shop_currency = shop.currency -%}
+
+<script>
+  console.log('=== MARKET DEBUG INFO ===');
+  console.log('entire object localization','{{ localization }}')
+  console.log('section data','{{ section }}')
+  console.log('Market Handle:', '{{ current_market }}');
+  console.log('Market Name:', '{{ market_name }}');
+  console.log('Market ISO Code:', '{{ market_iso_code }}');
+  console.log('Shop Currency:', '{{ shop_currency }}');
+  console.log('Request Host:', '{{ request.host }}');
+  console.log('========================');
+  
+   
+  // Log entire localization object (access properties directly since json filter doesn't work)
+  console.log('=== ENTIRE LOCALIZATION OBJECT ===');
+  console.log('entire object localization', '{{ localization }}');
+  console.log('localization.market.handle:', '{{ localization.market.handle }}');
+  console.log('localization.market.name:', '{{ localization.market.name }}');
+  console.log('localization.market.iso_code:', '{{ localization.market.iso_code }}');
+  console.log('localization.language.iso_code:', '{{ localization.language.iso_code }}');
+  console.log('localization.language.endonym_name:', '{{ localization.language.endonym_name }}');
+  console.log('localization.currency.iso_code:', '{{ localization.currency.iso_code }}');
+  console.log('localization.currency.symbol:', '{{ localization.currency.symbol }}');
+  console.log('===================================');
+  
+  // Log entire section object (access properties directly since json filter doesn't work)
+  console.log('=== ENTIRE SECTION OBJECT ===');
+  console.log('section data', '{{ section }}');
+  console.log('section.id:', '{{ section.id }}');
+  console.log('section.type:', '{{ section.type }}');
+  console.log('section.settings.collection.products:', '{{ section.settings.collection.products }}');
+  console.log('section.settings.domain:', '{{ section.settings.domain }}');
+  console.log('section.settings.padding_top:', '{{ section.settings.padding_top }}');
+  console.log('section.settings.padding_bottom:', '{{ section.settings.padding_bottom }}');
+  console.log('section.blocks count:', {{ section.blocks.size }});
+  {% for block in section.blocks %}
+  console.log('section.blocks[{{ forloop.index0 }}].type:', '{{ block.type }}');
+  {% endfor %}
+  console.log('==============================');
+</script>
+
 {%- style -%}
   .section-{{ section.id }}-padding {
     padding-top: {{ section.settings.padding_top | times: 0.75 | round: 0 }}px;
@@ -105,7 +151,7 @@
                 class="button__gift"
               >
                 <span class="button__gift-circle"></span>
-                <span>Es un regalo</span>
+                <span>It's a gift</span>
                 <?xml version="1.0"?><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><defs><style>.a{fill:none;stroke:#000;stroke-linecap:round;stroke-linejoin:round;stroke-width:1.5px;}</style></defs><title>gift-box</title><path class="a" d="M21.75,11.25H2.25v10.5a1.5,1.5,0,0,0,1.5,1.5h16.5a1.5,1.5,0,0,0,1.5-1.5Z"></path><path class="a" d="M21.75,6.75H2.25a1.5,1.5,0,0,0-1.5,1.5V10.5a.75.75,0,0,0,.75.75h21a.75.75,0,0,0,.75-.75V8.25A1.5,1.5,0,0,0,21.75,6.75Z"></path><path class="a" d="M11.25,6.75c-3.314,0-6.75-2.686-6.75-6"></path><path class="a" d="M4.5.75c3.314,0,6.75,2.686,6.75,6"></path><path class="a" d="M12.75,6.75c3.314,0,6.75-2.686,6.75-6"></path><path class="a" d="M19.5.75c-3.314,0-6.75,2.686-6.75,6"></path><rect class="a" x="9.75" y="6.75" width="4.5" height="16.5"></rect></svg>
               </a>
           </div>
@@ -115,7 +161,7 @@
           <h2
             class="magazines__gift-cards--heading rte inline-richtext h2 scroll-trigger"
           >
-            Selecciona tu tarjeta regalo
+            Select your gift card
           </h2>
           <!-- Slider main container -->
           <div class="swiper gift-cards-swiper">
@@ -143,7 +189,7 @@
                   <div
                     class="button button--secondary button-buy--gift-card-text full-unstyled-link"
                   >
-                    Seleccionar
+                    Select
                   </div>
                 </a>
               </div>
@@ -158,38 +204,59 @@
           
         </div>
         <div id="magazines__location" class="magazines__location" style="display: block;">
-          <h2
+          {% comment %} <h2
             class="magazines__gift-cards--heading section__heading rte inline-richtext h2 scroll-trigger"
           >
-            Localización
-          </h2>
+            Location
+          </h2> {% endcomment %}
           <div
             class="rich-text__buttons rich-text__buttons--multiple scroll-trigger"
           >
               <a
                 data-id="plans-national"
                 href="#"
-                class="button {% if localization.market.handle == "es"%}button--primary{% else %}button--secondary{% endif %} select-market active"
+                class="button {% if localization.market.handle == "in"%}button--primary{% else %}button--secondary{% endif %} select-market active"
               >
-                España
+                Print
               </a>
 
               <a
                 data-id="plans-international"
                 href="#"
-                class="button {% if localization.market.handle != "es"%}button--primary{% else %}button--secondary{% endif %} select-market"
+                class="button {% if localization.market.handle != "in"%}button--primary{% else %}button--secondary{% endif %} select-market"
               >
-                Internacional
+                Best Seller
+              </a>
+
+               <a
+                data-id="plans-international"
+                href="#"
+                class="button {% if localization.market.handle != "in"%}button--primary{% else %}button--secondary{% endif %} select-market"
+              >
+                Digital
               </a>
 
           </div>
         </div>
+       
+          {% comment %} <div id="magazines_product_collection" class="magazines_product_collection" style="display:block">
+            <div  class="rich-text__buttons rich-text__buttons--multiple scroll-trigger"
+          >
+            <a
+              data-id="print-subscription"
+              href="#"
+             class="button {% if localization.market.handle == "in"%}button--primary{% else %}button--secondary{% endif %} select-market active"
+              >
+              Print
+            </a>
+          </div> {% endcomment %}
+       
         <div id="magazines__plans" class="magazines__plans" style="display: block;">
           <hr>
           <h2
             class="magazines__plans--heading section__heading rte inline-richtext h2 scroll-trigger"
           >
-            Elige tu plan de suscripción
+            Choose your subscription plan
           </h2>
 
             <!-- Slider main container -->
@@ -216,16 +283,72 @@
                         <p class="magazines__plan--caption">{{ caption }}</p>
                         {% endif %}
                         <h3 {% if caption == blank %}style="margin-top: 0;"{% endif %}  class="magazines__plan--heading rte inline-richtext h3">{{ product.metafields.custom.featured }}</h3>
+                        {%- comment -%} Price Display with Discount Badge by susil {%- endcomment -%}
+                        {%- assign variant = product.selected_or_first_available_variant -%}
+                        {%- assign compare_at_price = variant.compare_at_price -%}
+                        {%- assign price = variant.price -%}
+                        {%- if compare_at_price > price -%}
+                          {%- assign discount_amount = compare_at_price | minus: price -%}
+                          {%- assign discount_percentage = discount_amount | times: 100.0 | divided_by: compare_at_price | round -%}
+                          <div class="magazines__plan--price-wrapper">
+                            <span class="magazines__plan--discount-badge">
+                              {{ discount_percentage }}% OFF
+                            </span>
+                          </div>
+                        {%- else -%}
+                          <div class="magazines__plan--price-wrapper">
+                            <div class="magazines__plan--price-container">
+                              <span class="magazines__plan--price-regular">
+                                {{ price | money }}
+                              </span>
+                            </div>
+                          </div>
+  {%- comment -%} Price Display with Discount Badge by susil {%- endcomment -%}
+                        {%- endif -%}
+                        <div>
+                           <div class="magazines__plan--image-container">
+                     
+                        <div class="magazines__plan--image">
+                          <img src="{{ product.featured_image | img_url: '200x' }}" alt="{{ product.featured_image.alt }}">
+                        </div>
+                        {% if product.metafields.custom.footer != blank %}<div class="magazines__plan--header magazines__plan--footer">{{ product.metafields.custom.footer }}</div>{% endif %}
+                      </div>
+                        </div>
                         <p class="magazines__plan--payment">{{ product.metafields.custom.payment }}</p>
-                        <a 
+                       
+                        <div class="magazines__plan--features">
+                          {{ product.description }}
+                        </div>
+                        
+                      </div>
+                      <div class="magazines__plan-bottom">
+                        {% comment %} by susil  {% endcomment %}
+                           {%- comment -%} Price Display in Footer {%- endcomment -%}
+                        {%- assign variant = product.selected_or_first_available_variant -%}
+                        {%- assign compare_at_price = variant.compare_at_price -%}
+                        {%- assign price = variant.price -%}
+                        {%- if compare_at_price > price -%}
+                          <div class="magazines__plan--price-wrapper">
+                            <div class="magazines__plan--price-container">
+                              <span class="magazines__plan--price-sale">
+                                {{ price | money }}
+                              </span>
+                              <span class="magazines__plan--price-compare">
+                                <s>{{ compare_at_price | money }}</s>
+                              </span>
+                            </div>
+                          </div>
+                        {%- else -%}
+                          <div class="magazines__plan--price-wrapper">
+                            <div class="magazines__plan--price-container">
+                              <span class="magazines__plan--price-regular">
+                                {{ price | money }}
+                              </span>
+                            </div>
+                          </div>
+                        {%- endif -%}
+                        <a
                           {% if product.selected_or_first_available_selling_plan_allocation %}
-                            {% comment %} 
-                              {% if product.metafields.custom.monthly == true %}
-                                data-selling-plan="{{ product.selected_or_first_available_selling_plan_allocation.selling_plan.id }}" data-price="{{ product.price | times: 12 | money }}"
-                              {% else %}
-                                data-selling-plan="{{ product.selected_or_first_available_selling_plan_allocation.selling_plan.id }}" data-price="{{ product.price | money }}" 
-                              {% endif %} 
-                            {% endcomment %}
                             data-selling-plan="{{ product.selected_or_first_available_selling_plan_allocation.selling_plan.id }}" data-price="{{ product.price | money }}"        
                           {% else %}
                             data-price="{{ product.price | money }}"
@@ -246,21 +369,14 @@
                             data-dl-product-variant="{{ product.title }}" 
                             data-dl-product-category="{{ product.type }}" >
                             {% if product.metafields.custom.selected_local %}
-                              Seleccionado
+                              Selected
                             {% else %}
-                              Seleccionar
+                              Select
                             {% endif %}
-                            </a>
-                        <div class="magazines__plan--features">
-                          {{ product.description }}
-                        </div>
+                        </a>
                       </div>
-                      <div class="magazines__plan-bottom">
-                        <div class="magazines__plan--image">
-                          <img src="{{ product.featured_image | img_url: '200x' }}" alt="{{ product.featured_image.alt }}">
-                        </div>
-                        {% if product.metafields.custom.footer != blank %}<div class="magazines__plan--header magazines__plan--footer">{{ product.metafields.custom.footer }}</div>{% endif %}
-                      </div>
+                         {% comment %} by susil  {% endcomment %}
+                     
                     </div>
                   </div>
                 {% endfor %}
@@ -298,12 +414,29 @@
 
                   <div class="swiper-slide">
                     <div class="magazines__plan {% if forloop.index == preselect %}active{% endif %}">
-                      <div class="magazines__plan--header">{% if product.metafields.custom.international_metatag != blank %}{{ product.metafields.custom.international_metatag }}{% else %}{{ product.title | split: " - " | last }}{% endif %}</div>
+                      <div class="magazines__plan--header">{% if product.metafields.custom.international_metatag != blank %}{{ product.metafields.custom.international_metatag }}{% else %}{{ product.title | split: " - " | last }}{% endif %}
+                        <div class="magazines__plan--image">
+                          <img src="{{ product.featured_image | img_url: '200x' }}" alt="{{ product.featured_image.alt }}">
+                        </div>
+                      </div>
                       <div class="magazines__plan--content">
                         {% if caption != blank %}
                         <p class="magazines__plan--caption">{{ caption }}</p>
                         {% endif %}
                         <h3 {% if caption == blank %}style="margin-top: 0;"{% endif %}  class="magazines__plan--heading rte inline-richtext h3">{{ product.metafields.custom.international_featured }}</h3>
+                       {% comment %} by susil  {% endcomment %}
+                          {%- comment -%} Discount Badge - Top Left Corner {%- endcomment -%}
+                        {%- assign variant = product.selected_or_first_available_variant -%}
+                        {%- assign compare_at_price = variant.compare_at_price -%}
+                        {%- assign price = variant.price -%}
+                        {%- if compare_at_price > price -%}
+                          {%- assign discount_amount = compare_at_price | minus: price -%}
+                          {%- assign discount_percentage = discount_amount | times: 100.0 | divided_by: compare_at_price | round -%}
+                          <span class="magazines__plan--discount-badge">
+                            {{ discount_percentage }}% Off
+                          </span>
+                        {%- endif -%}
+                        {% comment %} by susil  {% endcomment %}
                         <p class="magazines__plan--payment">{{ product.metafields.custom.international_payment }}</p>
                         <a 
                           {% if product.selected_or_first_available_selling_plan_allocation %}
@@ -331,9 +464,9 @@
                             data-dl-product-variant="{{ product.title }}" 
                             data-dl-product-category="{{ product.type }}" >
                             {% if product.metafields.custom.selected_international %}
-                              Seleccionado
+                              Selected
                             {% else %}
-                              Seleccionar
+                              Select
                             {% endif %}
                             </a>
                         <div class="magazines__plan--features">
@@ -341,9 +474,7 @@
                         </div>
                       </div>
                       <div class="magazines__plan-bottom">
-                        <div class="magazines__plan--image">
-                          <img src="{{ product.featured_image | img_url: '200x' }}" alt="{{ product.featured_image.alt }}">
-                        </div>
+                        
                         {% if product.metafields.custom.international_footer != blank %}<div class="magazines__plan--header magazines__plan--footer">{{ product.metafields.custom.international_footer }}</div>{% endif %}
                       </div>
                     </div>
@@ -360,16 +491,16 @@
             {% comment %} <div class="flex-container magazines__plans--container">
               <div class="flex-item">
                 <div class="magazines__plan">
-                  <div class="magazines__plan--header">SUSCRIPCION ANUAL HOME DELIVERY</div>
+                  <div class="magazines__plan--header">ANNUAL SUBSCRIPTION HOME DELIVERY</div>
                   <div class="magazines__plan--content">
-                    {% comment %} <p class="magazines__plan--caption">SUSCRIPCION ANUAL E-BONO</p> {% endcomment %}
-                    <h3 class="magazines__plan--heading rte inline-richtext h3">Suscripción Mensual</h3>
-                    <p class="magazines__plan--payment">(84€ en modalidad pago mensual)</p>
-                    <a href="" class="button">Seleccionar</a>
+                    {% comment %} <p class="magazines__plan--caption">ANNUAL SUBSCRIPTION E-BONO</p> {% endcomment %}
+                    <h3 class="magazines__plan--heading rte inline-richtext h3">Monthly Subscription</h3>
+                    <p class="magazines__plan--payment">(84€ in monthly payment mode)</p>
+                    <a href="" class="button">Select</a>
                     <ul class="magazines__plan--features">
-                      <li><b>Comodidad</b>: Recibe cada mes la edición impresa en la dirección que elijas.</li>
-                      <li><b>Ahorro</b>: Disfruta de un 10% de descuento al efectuar el pago único.</li>
-                      <li><b>Welcome Gift</b>: Consigue un regalo de bienvenida con tu suscripción. <span class="small">(gastos de envío no incluídos)</span>.</li>
+                      <li><b>Convenience</b>: Receive the print edition each month at the address you choose.</li>
+                      <li><b>Savings</b>: Enjoy a 10% discount when making a single payment.</li>
+                      <li><b>Welcome Gift</b>: Get a welcome gift with your subscription. <span class="small">(shipping costs not included)</span>.</li>
                     </ul>
                     <div class="magazines__plan--image">
                       <img src="https://cdn.shopify.com/s/files/1/0771/2387/9194/files/Portada_Vogue_411_Junio_Copy.png?v=1687516372" alt="">
@@ -381,14 +512,14 @@
                 <div class="magazines__plan">
                   <div class="magazines__plan--header">RECOMENDADO</div>
                   <div class="magazines__plan--content">
-                    <p class="magazines__plan--caption">SUSCRIPCION ANUAL E-BONO</p>
-                    <h3 class="magazines__plan--heading rte inline-richtext h3">1 año por 60€</h3>
-                    <p class="magazines__plan--payment">(Pago único, 66 € en modalidad pago mensual)</p>
-                    <a href="" class="button">Seleccionar</a>
+                    <p class="magazines__plan--caption">ANNUAL SUBSCRIPTION E-BONO</p>
+                    <h3 class="magazines__plan--heading rte inline-richtext h3">1 year for 60€</h3>
+                    <p class="magazines__plan--payment">(Single payment, 66 € in monthly payment mode)</p>
+                    <a href="" class="button">Select</a>
                     <ul class="magazines__plan--features">
-                      <li><b>Donde y cuando quieras</b>: Recoge tu revista en tu quiosco o punto de venta habitual.</li>
-                      <li>Disfruta de todos los regalos y extras que lleve la revista.</li>
-                      <li><b>Ahorro</b>: Disfruta de un 10 % de descuento al efectuar el pago único.</li>
+                      <li><b>Where and when you want</b>: Collect your magazine at your nearest newsstand or usual point of sale.</li>
+                      <li>Enjoy all the gifts and extras that the magazine carries.</li>
+                      <li><b>Savings</b>: Enjoy a 10% discount when making a single payment.</li>
                     </ul>
                     <div class="magazines__plan--image">
                       <img src="https://cdn.shopify.com/s/files/1/0771/2387/9194/files/Portada_Vogue_411_Junio_Copy.png?v=1687516372" alt="">
@@ -398,15 +529,15 @@
               </div>
               <div class="flex-item">
                 <div class="magazines__plan">
-                  <div class="magazines__plan--header">REVISTA DEL MES</div>
+                  <div class="magazines__plan--header">MAGAZINE OF THE MONTH</div>
                   <div class="magazines__plan--content">
-                    {% comment %} <p class="magazines__plan--caption">SUSCRIPCION ANUAL E-BONO</p> {% endcomment %}
+                    {% comment %} <p class="magazines__plan--caption">ANNUAL SUBSCRIPTION E-BONO</p> {% endcomment %}
                     <h3 class="magazines__plan--heading rte inline-richtext h3">10€</h3>
-                    <p class="magazines__plan--payment">(Pago único por el ejemplar)</p>
-                    <a href="" class="button">Seleccionar</a>
+                    <p class="magazines__plan--payment">(Single payment for the issue)</p>
+                    <a href="" class="button">Select</a>
                     <ul class="magazines__plan--features">
-                      <li>Consigue aquí el ejemplar del mes en curso.</li>
-                      <li>Si no encuentras o te quedaste sin el ejemplar del mes de Vogue, aquí lo puedes adquirir.</li>
+                      <li>Get the current month's issue here.</li>
+                      <li>If you can't find or have run out of the Vogue issue of the month, you can purchase it here.</li>
                     </ul>
                     <div class="magazines__plan--image">
                       <img src="https://cdn.shopify.com/s/files/1/0771/2387/9194/files/Portada_Vogue_411_Junio_Copy.png?v=1687516372" alt="">
@@ -442,7 +573,7 @@
   {% endfor %}
     {% if show_stores == true %}
     <div id="magazines__store-locator" class="magazines__store-locator">
-<a href="#" id="open-locator" class="button button--secondary button--locator{% if show_stores_default %} show{% endif %}">Consulta el quiosco más cercano</a>
+<a href="#" id="open-locator" class="button button--secondary button--locator{% if show_stores_default %} show{% endif %}">Find the nearest store</a>
 
   <div class="ebono-container" id="cabecera">
     <div id="formulario">
@@ -456,27 +587,27 @@
                 class="field__input"
                 id="valor"
                 type="text"
-                placeholder="Teclee cód.postal..."
+                placeholder="Enter postal code..."
                 name="valor"
               >
               <label class="field__label" for="valor">
-                <span class="recipient-email-label required">Cod.postal</span>
+                <span class="recipient-email-label required">Postal code</span>
               </label>
             </div>
           </div>
         </div>
       </div>
     <div>
-    {% comment %} <label for="tipo">Tipo de búsqueda</label><select name="tipo" id="tipo">
-    <option value="0">Cód. postal</option>
-    <option value="1">Dirección</option>
-    </select><label for="valor">Valor</label> 
-    <input type="text" name="valor" id="valor" placeholder="Teclee cód.postal..." size="45">  {% endcomment %}
-    <button type="submit" id="boton" class="button button--primary">Buscar</button>
+    {% comment %} <label for="tipo">Search type</label><select name="tipo" id="tipo">
+    <option value="0">Postal code</option>
+    <option value="1">Address</option>
+    </select><label for="valor">Value</label> 
+    <input type="text" name="valor" id="valor" placeholder="Enter postal code..." size="45">  {% endcomment %}
+    <button type="submit" id="boton" class="button button--primary">Search</button>
     </div>
     </form>
   </div>
-    <!-- div en el que se cargará el iframe con el mapa -->
+    <!-- div in which the iframe with the map will be loaded -->
   <div id="listado"></div>
     <script type="text/javascript" charset="utf-8">// <![CDATA[
             document.addEventListener('DOMContentLoaded', function() {
@@ -515,9 +646,9 @@
     
                 tipo.addEventListener('change', function() {
                     if (this.value === "0") {
-                        valor.setAttribute("placeholder", "Teclee cód. postal...");
+                        valor.setAttribute("placeholder", "Enter postal code...");
                     } else if (this.value === "1") {
-                        valor.setAttribute("placeholder", "Teclee dirección...");
+                        valor.setAttribute("placeholder", "Enter address...");
                     }
                 });
     
@@ -602,11 +733,11 @@
               {% endif%}
 
               <!-- Add to Cart Button -->
-              <input type="submit" class="button button--primary button--checkout" value="Confirmar">
+              <input type="submit" class="button button--primary button--checkout" value="Confirm">
 
               <!-- Placeholder for the error message -->
                 <div id="giftMessage" style="color: red; display: none; margin-top: 10px;">
-                    <small>Selecciona tu regalo</small>
+                    <small>Select your gift</small>
                 </div> 
           
           {% comment %} </form> {% endcomment %}
@@ -626,7 +757,7 @@
   </div>
 </div>
 
-{% if localization.market.handle == "es"%}
+{% if localization.market.handle == "in"%}
 
   {% assign index_mobile = 1 %}
   {% if section.settings.collection.products.count < 3 %}
@@ -763,7 +894,7 @@ let giftCards = document.querySelectorAll('.button-buy--gift-card');
 giftCards.forEach(function(giftCard) {
   let buttonTextElement = giftCard.querySelector('.button-buy--gift-card-text');
   if (buttonTextElement) {
-      buttonTextElement.innerText = 'seleccionar';
+      buttonTextElement.innerText = 'select';
   }
 });
 
@@ -774,18 +905,18 @@ giftCards.forEach(function(giftCard) {
     giftCard.addEventListener('click', function(event) {
         event.preventDefault();
         
-        // Remove 'active' class from all other cards and set their text to 'seleccionar'
+        // Remove 'active' class from all other cards and set their text to 'select'
         giftCards.forEach(function(otherCard) {
             let otherButtonTextElement = otherCard.querySelector('.button-buy--gift-card-text');
             if (otherButtonTextElement) {
-                otherButtonTextElement.innerText = 'seleccionar';
+                otherButtonTextElement.innerText = 'select';
             }
         });
 
          // Change the text of the clicked card's .button-buy--gift-card-text
          let buttonTextElement = giftCard.querySelector('.button-buy--gift-card-text');
          if (buttonTextElement) {
-             buttonTextElement.innerText = 'seleccionado';
+             buttonTextElement.innerText = 'selected';
          }
 
         // Add 'active' class to .gift-card-recipient-form-home
@@ -837,7 +968,7 @@ document.querySelector('.button__gift').addEventListener('click', function() {
     valor.value = ""; // Reset the value of #valor input
   }
   if (openLocator) {
-    openLocator.textContent = "Consulta el quiosco más cercano";
+    openLocator.textContent = "Find the nearest store";
   }
 
   // Select all elements with the class .magazines__plan
@@ -849,10 +980,10 @@ document.querySelector('.button__gift').addEventListener('click', function() {
       magazinesPlanItems[i].classList.remove('active');
   }
 
-  // Finding .magazines__plan--button and changing its text to 'seleccionar'
+  // Finding .magazines__plan--button and changing its text to 'select'
   var magazineButtons = document.querySelectorAll('.magazines__plan--button');
   magazineButtons.forEach(function(button) {
-      button.innerText = 'seleccionar';
+      button.innerText = 'select';
   });
 
   // Remove 'active' class to .gift-card-recipient-form-home
@@ -933,12 +1064,14 @@ document.querySelector('.button__gift').addEventListener('click', function() {
             // Deselect all buttons
             var buttons = document.querySelectorAll('.magazines__plan--button');
             buttons.forEach(function(button) {
-                button.innerText = 'seleccionar';
+                button.innerText = 'select';
             });
 
         });
     });
 });
+
+{% comment %} by susil  {% endcomment %}
 
 
 </script>
@@ -1026,7 +1159,7 @@ document.querySelector('.button__gift').addEventListener('click', function() {
           openLocator.classList.add('show');
         }
         if (openLocator) {
-          openLocator.textContent = "Consulta el quiosco más cercano";
+          openLocator.textContent = "Find the nearest store";
         }
       } else {
         if (openLocator && openLocator.classList) {
@@ -1042,7 +1175,7 @@ document.querySelector('.button__gift').addEventListener('click', function() {
           valor.value = ""; // Reset the value of #valor input
         }
         if (openLocator) { 
-          openLocator.textContent = "Consulta el quiosco más cercano";
+          openLocator.textContent = "Find the nearest store";
         }
       }
 
@@ -1234,10 +1367,10 @@ document.querySelector('.button__gift').addEventListener('click', function() {
           plan.classList.remove('active');
       });
 
-      // Finding .magazines__plan--button and changing its text to 'seleccionar'
+      // Finding .magazines__plan--button and changing its text to 'select'
       var buttons = document.querySelectorAll('.magazines__plan--button');
       buttons.forEach(function(button) {
-          button.innerText = 'seleccionar';
+          button.innerText = 'select';
       });
 
       // Get the closest .magazines__plan element
@@ -1249,7 +1382,7 @@ document.querySelector('.button__gift').addEventListener('click', function() {
           // Update button text
           var closestPlanButton = closestPlan.querySelector('.magazines__plan--button');
           if (closestPlanButton) {
-              closestPlanButton.innerText = 'seleccionado';
+              closestPlanButton.innerText = 'selected';
           }
 
           // Find the .magazines__plan--features child element
@@ -1392,7 +1525,7 @@ document.querySelector('.button__gift').addEventListener('click', function() {
           button.classList.remove('active');
           let buttonTextElement = giftCard.querySelector('.button-buy--gift-card-text');
           if (buttonTextElement) {
-              buttonTextElement.innerText = 'seleccionar';
+              buttonTextElement.innerText = 'select';
           }
       });
     }
@@ -1744,7 +1877,7 @@ document.addEventListener('DOMContentLoaded', function () {
           if (ebonoContainer.classList.contains('active')) {
               openLocator.textContent = "Cerrar";
           } else {
-              openLocator.textContent = "Consulta el quiosco más cercano";
+              openLocator.textContent = "Find the nearest newsstand";
               listado.innerHTML = ""; // Empty the content of #listado
               valor.value = ""; // Reset the value of #valor input
           }
@@ -1764,7 +1897,7 @@ window.addEventListener('load', function() {
 });
 </script>
 
-{% comment %}Activar tarjetas regalo por URL{% endcomment %}
+{% comment %}Activate gift cards by URL{% endcomment %}
 <script>
 document.addEventListener("DOMContentLoaded", function() {
     // Check if the URL contains the 'regalo' parameter
@@ -1780,8 +1913,19 @@ document.addEventListener("DOMContentLoaded", function() {
 </script>
 
 
+{% if request.design_mode %}
+  <script>
+    console.log('************************************************');
+    console.log('Design mode enabled');
+    console.log('Theme setting magazine:', '{{ settings.magazine }}');
+    console.log('Section domain:', '{{ section.settings.domain }}');
+    console.log('Request host:', '{{ request.host }}');
+    console.log('************************************************');
+  </script>
+{% endif %}
 
 {% endcapture %}
+
 {% if request.design_mode == true %}
   {% if settings.magazine == section.settings.domain %}
     {{ content }}
@@ -1820,17 +1964,17 @@ document.addEventListener("DOMContentLoaded", function() {
     {
       "type": "collection",
       "id": "collection",
-      "label": "Productos"
+      "label": "Products"
     },
     {
       "type": "text",
       "id": "title",
-      "label": "Título"
+      "label": "Title"
     },
     {
       "type": "text",
       "id": "domain",
-      "label": "Dominio"
+      "label": "Domain"
     },
     {
       "type": "select",
